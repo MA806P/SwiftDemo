@@ -16,6 +16,8 @@
 		184718531E6AADE50090E9E3 /* CalculatorBrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184718521E6AADE50090E9E3 /* CalculatorBrain.swift */; };
 		184718561E6AAE0A0090E9E3 /* CalculatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184718541E6AAE0A0090E9E3 /* CalculatorViewController.swift */; };
 		184718571E6AAE0A0090E9E3 /* CalculatorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 184718551E6AAE0A0090E9E3 /* CalculatorViewController.xib */; };
+		18EF6E4C1E6D9B0B009851EB /* FaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EF6E4A1E6D9B0B009851EB /* FaceViewController.swift */; };
+		18EF6E4D1E6D9B0B009851EB /* FaceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18EF6E4B1E6D9B0B009851EB /* FaceViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +31,8 @@
 		184718521E6AADE50090E9E3 /* CalculatorBrain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculatorBrain.swift; sourceTree = "<group>"; };
 		184718541E6AAE0A0090E9E3 /* CalculatorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculatorViewController.swift; sourceTree = "<group>"; };
 		184718551E6AAE0A0090E9E3 /* CalculatorViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CalculatorViewController.xib; sourceTree = "<group>"; };
+		18EF6E4A1E6D9B0B009851EB /* FaceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FaceViewController.swift; sourceTree = "<group>"; };
+		18EF6E4B1E6D9B0B009851EB /* FaceViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FaceViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +68,7 @@
 				184718331E6A62BC0090E9E3 /* AppDelegate.swift */,
 				184718351E6A62BC0090E9E3 /* ViewController.swift */,
 				184718511E6AADE50090E9E3 /* Calculator */,
+				18EF6E491E6D9ADA009851EB /* FaceIt */,
 				184718461E6A64AC0090E9E3 /* Supporting Files */,
 			);
 			path = SwiftDemo;
@@ -88,6 +93,15 @@
 				184718551E6AAE0A0090E9E3 /* CalculatorViewController.xib */,
 			);
 			path = Calculator;
+			sourceTree = "<group>";
+		};
+		18EF6E491E6D9ADA009851EB /* FaceIt */ = {
+			isa = PBXGroup;
+			children = (
+				18EF6E4A1E6D9B0B009851EB /* FaceViewController.swift */,
+				18EF6E4B1E6D9B0B009851EB /* FaceViewController.xib */,
+			);
+			path = FaceIt;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -154,6 +168,7 @@
 				1847184E1E6A64AC0090E9E3 /* LaunchScreen.storyboard in Resources */,
 				184718501E6A64AC0090E9E3 /* Info.plist in Resources */,
 				184718571E6AAE0A0090E9E3 /* CalculatorViewController.xib in Resources */,
+				18EF6E4D1E6D9B0B009851EB /* FaceViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -166,6 +181,7 @@
 			files = (
 				184718531E6AADE50090E9E3 /* CalculatorBrain.swift in Sources */,
 				184718361E6A62BC0090E9E3 /* ViewController.swift in Sources */,
+				18EF6E4C1E6D9B0B009851EB /* FaceViewController.swift in Sources */,
 				184718561E6AAE0A0090E9E3 /* CalculatorViewController.swift in Sources */,
 				184718341E6A62BC0090E9E3 /* AppDelegate.swift in Sources */,
 			);
