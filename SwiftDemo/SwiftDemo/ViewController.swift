@@ -17,13 +17,15 @@ class ViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell : UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "RowCellIdentifier", for: indexPath)
-        cell.textLabel?.text = indexPath.row == 0 ? "Calculator" : "Draw Pic"
+        cell.textLabel?.text = indexPath.row == 0 ? "Calculator" : "Face View"
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 0 {
             self.navigationController?.pushViewController(CalculatorViewController(), animated: true)
+        } else if indexPath.row == 1 {
+            self.navigationController?.pushViewController(FaceViewController(), animated: true)
         }
     }
 
