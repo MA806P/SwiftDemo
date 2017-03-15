@@ -23,7 +23,7 @@ class FaceView: UIView {
     
     
     private var skullCenter: CGPoint {
-        return CGPoint(x: bounds.midX, y: bounds.midY)
+        return CGPoint(x: bounds.midX, y: bounds.midY+20)
     }
     
     private var skullRadius: CGFloat {
@@ -45,13 +45,48 @@ class FaceView: UIView {
     }
     
     
-    override func draw(_ rect: CGRect) {
-        // Drawing code
-        color.set()
+    private func pathForSkull() -> UIBezierPath {
         let path = UIBezierPath(arcCenter: skullCenter, radius: skullRadius, startAngle: 0, endAngle: 2 * CGFloat.pi, clockwise: false)
         path.lineWidth = lineWidth
-        path.stroke()
+        return path
+    }
+    
+    private func pathForEye(_ eye: Eye) -> UIBezierPath {
         
+        func centerOfEye(_ eye: Eye) -> CGPoint {
+            let eyeOffset = skullRadius / Ratios.skullRadiusToEyeOffset
+            var eyeCenter = skullCenter
+            eyeCenter.y -= eyeOffset
+            eyeCenter.x += ((eye == .left) ? -1 : 1) * eyeOffset
+            return eyeCenter
+        }
+        
+        let eyeRadius = skullRadius / Ratios.skullRadiusToEyeRadius
+        let eyeCenter = centerOfEye(eye)
+        
+        let path: UIBezierPath
+        if eyesOpen {
+            path = UIBezierPath(
+                arcCenter: eyeCenter,
+                radius: eyeRadius,
+                startAngle: 0,
+                endAngle: CGFloat.pi * 2.0,
+                clockwise: true )
+        } else {
+            path = UIBezierPath()
+            path.move(to: CGPoint(x: eyeCenter.x - eyeRadius, y: eyeCenter.y))
+            path.addLine(to: CGPoint(x: eyeCenter.x + eyeRadius, y: eyeCenter.y))
+        }
+        path.lineWidth = lineWidth;
+        return path
+    }
+    
+    
+    override func draw(_ rect: CGRect) {
+        color.set()
+        pathForSkull().stroke()
+        pathForEye(.left).stroke()
+        pathForEye(.right).stroke()
         
     }
     
