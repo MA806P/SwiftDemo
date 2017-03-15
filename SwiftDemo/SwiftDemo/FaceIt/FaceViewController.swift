@@ -15,12 +15,7 @@ class FaceViewController: UIViewController {
 
         // Do any additional setup after loading the view.
     }
-
-    @IBOutlet var buttonCollect: [UIButton]! {
-        didSet {
-            //https://github.com/jinxiansen/JJHUD
-        }
-    }
+    
     
     
 

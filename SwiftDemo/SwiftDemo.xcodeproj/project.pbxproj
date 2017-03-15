@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		183B741C1E79323F0074A5C5 /* TestStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 183B741B1E79323F0074A5C5 /* TestStoryboard.storyboard */; };
+		183B741E1E7932650074A5C5 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183B741D1E7932650074A5C5 /* TestViewController.swift */; };
 		184718341E6A62BC0090E9E3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184718331E6A62BC0090E9E3 /* AppDelegate.swift */; };
 		184718361E6A62BC0090E9E3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184718351E6A62BC0090E9E3 /* ViewController.swift */; };
 		1847184D1E6A64AC0090E9E3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 184718471E6A64AC0090E9E3 /* Assets.xcassets */; };
@@ -22,6 +24,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		183B741B1E79323F0074A5C5 /* TestStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TestStoryboard.storyboard; sourceTree = "<group>"; };
+		183B741D1E7932650074A5C5 /* TestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		184718301E6A62BC0090E9E3 /* SwiftDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		184718331E6A62BC0090E9E3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		184718351E6A62BC0090E9E3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -48,6 +52,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		183B741A1E79322A0074A5C5 /* Test */ = {
+			isa = PBXGroup;
+			children = (
+				183B741B1E79323F0074A5C5 /* TestStoryboard.storyboard */,
+				183B741D1E7932650074A5C5 /* TestViewController.swift */,
+			);
+			path = Test;
+			sourceTree = "<group>";
+		};
 		184718271E6A62BC0090E9E3 = {
 			isa = PBXGroup;
 			children = (
@@ -71,6 +84,7 @@
 				184718351E6A62BC0090E9E3 /* ViewController.swift */,
 				184718511E6AADE50090E9E3 /* Calculator */,
 				18EF6E491E6D9ADA009851EB /* FaceIt */,
+				183B741A1E79322A0074A5C5 /* Test */,
 				184718461E6A64AC0090E9E3 /* Supporting Files */,
 			);
 			path = SwiftDemo;
@@ -170,6 +184,7 @@
 				1847184F1E6A64AC0090E9E3 /* Main.storyboard in Resources */,
 				1847184E1E6A64AC0090E9E3 /* LaunchScreen.storyboard in Resources */,
 				184718501E6A64AC0090E9E3 /* Info.plist in Resources */,
+				183B741C1E79323F0074A5C5 /* TestStoryboard.storyboard in Resources */,
 				184718571E6AAE0A0090E9E3 /* CalculatorViewController.xib in Resources */,
 				18EF6E4D1E6D9B0B009851EB /* FaceViewController.xib in Resources */,
 			);
@@ -182,6 +197,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				183B741E1E7932650074A5C5 /* TestViewController.swift in Sources */,
 				184718531E6AADE50090E9E3 /* CalculatorBrain.swift in Sources */,
 				184718361E6A62BC0090E9E3 /* ViewController.swift in Sources */,
 				18EF6E4C1E6D9B0B009851EB /* FaceViewController.swift in Sources */,

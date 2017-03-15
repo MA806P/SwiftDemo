@@ -10,14 +10,16 @@ import UIKit
 
 class ViewController: UITableViewController {
     
+    let dataArray = ["Calculator", "Face View", "Test View"]
+    
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return dataArray.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell : UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "RowCellIdentifier", for: indexPath)
-        cell.textLabel?.text = indexPath.row == 0 ? "Calculator" : "Face View"
+        cell.textLabel?.text = dataArray[indexPath.row]
         return cell
     }
     
@@ -26,6 +28,8 @@ class ViewController: UITableViewController {
             self.navigationController?.pushViewController(CalculatorViewController(), animated: true)
         } else if indexPath.row == 1 {
             self.navigationController?.pushViewController(FaceViewController(), animated: true)
+        } else if indexPath.row == 2 {
+            self.navigationController?.pushViewController(UIStoryboard.init(name: "TestStoryboard", bundle: nil).instantiateInitialViewController()!, animated: true)
         }
     }
 
