@@ -9,13 +9,31 @@
 import UIKit
 
 class FaceViewController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+    
+    private let mouthCurvature = [FacialExpression.Mouth.grin:0.5, .frown:-1.0, .smile:1.0, .neutral:0.0, .smirk:0.5]
+    
+    private func updateUI() {
+        switch expression.eyes {
+        case .open:
+            faceView?.eyesOpen = true
+        case .closed:
+            faceView?.eyesOpen = false
+        case .squinting:
+            faceView?.eyesOpen = false
+        }
+        
+        faceView?.mouthCurvature = mouthCurvature[expression.mouth] ?? 0.0
+        
     }
     
+    var expression = FacialExpression(eyes: .closed, mouth: .frown) {
+        didSet {
+            updateUI()
+        }
+    }
+    
+    
+    @IBOutlet weak var faceView: FaceView!
     
     
 

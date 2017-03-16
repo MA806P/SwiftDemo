@@ -20,6 +20,7 @@
 		184718571E6AAE0A0090E9E3 /* CalculatorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 184718551E6AAE0A0090E9E3 /* CalculatorViewController.xib */; };
 		18EF6E4C1E6D9B0B009851EB /* FaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EF6E4A1E6D9B0B009851EB /* FaceViewController.swift */; };
 		18EF6E4D1E6D9B0B009851EB /* FaceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18EF6E4B1E6D9B0B009851EB /* FaceViewController.xib */; };
+		DA91F9771E7B587A00FEF20A /* FacialExpression.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA91F9761E7B587A00FEF20A /* FacialExpression.swift */; };
 		DAC2AD7C1E6EE14600437808 /* FaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC2AD7B1E6EE14600437808 /* FaceView.swift */; };
 /* End PBXBuildFile section */
 
@@ -38,6 +39,7 @@
 		184718551E6AAE0A0090E9E3 /* CalculatorViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CalculatorViewController.xib; sourceTree = "<group>"; };
 		18EF6E4A1E6D9B0B009851EB /* FaceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FaceViewController.swift; sourceTree = "<group>"; };
 		18EF6E4B1E6D9B0B009851EB /* FaceViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FaceViewController.xib; sourceTree = "<group>"; };
+		DA91F9761E7B587A00FEF20A /* FacialExpression.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacialExpression.swift; sourceTree = "<group>"; };
 		DAC2AD7B1E6EE14600437808 /* FaceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FaceView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -117,6 +119,7 @@
 				18EF6E4A1E6D9B0B009851EB /* FaceViewController.swift */,
 				18EF6E4B1E6D9B0B009851EB /* FaceViewController.xib */,
 				DAC2AD7B1E6EE14600437808 /* FaceView.swift */,
+				DA91F9761E7B587A00FEF20A /* FacialExpression.swift */,
 			);
 			path = FaceIt;
 			sourceTree = "<group>";
@@ -198,6 +201,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				183B741E1E7932650074A5C5 /* TestViewController.swift in Sources */,
+				DA91F9771E7B587A00FEF20A /* FacialExpression.swift in Sources */,
 				184718531E6AADE50090E9E3 /* CalculatorBrain.swift in Sources */,
 				184718361E6A62BC0090E9E3 /* ViewController.swift in Sources */,
 				18EF6E4C1E6D9B0B009851EB /* FaceViewController.swift in Sources */,

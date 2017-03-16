@@ -8,17 +8,22 @@
 
 import UIKit
 
+@IBDesignable
 class FaceView: UIView {
 
-    
+    @IBInspectable
     var scale: CGFloat = 0.9
     
+    @IBInspectable
     var lineWidth: CGFloat = 5.0
     
+    @IBInspectable
     var color: UIColor = UIColor.blue
     
+    @IBInspectable
     var eyesOpen: Bool = true
     
+    @IBInspectable
     var mouthCurvature: Double = 0.5
     
     
@@ -81,13 +86,41 @@ class FaceView: UIView {
         return path
     }
     
+    private func pathForMouth() -> UIBezierPath {
+        
+        let mouthWidth = skullRadius / Ratios.skullRadiusToMouthWith
+        let mouthHeight = skullRadius / Ratios.skullRadiusToMouthHeight
+        let mouthOffset = skullRadius / Ratios.skullRadiusToMouthOffset
+        
+        let mouthRect = CGRect(
+            x: skullCenter.x - mouthWidth * 0.5,
+            y: skullCenter.y + mouthOffset,
+            width: mouthWidth,
+            height: mouthHeight
+        )
+        
+        let smileOffset = CGFloat(max(-1, min(mouthCurvature, 1))) * mouthHeight
+        
+        let start = CGPoint(x: mouthRect.minX, y: mouthRect.midY)
+        let end = CGPoint(x: mouthRect.maxX, y: mouthRect.midY)
+        let cp1 = CGPoint(x: start.x + mouthRect.width / 3, y: start.y + smileOffset)
+        let cp2 = CGPoint(x: end.x - mouthRect.width / 3, y: start.y + smileOffset)
+        
+        let path = UIBezierPath()
+        path.move(to: start)
+        path.addCurve(to: end, controlPoint1: cp1, controlPoint2: cp2)
+        path.lineWidth = lineWidth
+        return path
+        
+    }
+    
     
     override func draw(_ rect: CGRect) {
         color.set()
         pathForSkull().stroke()
         pathForEye(.left).stroke()
         pathForEye(.right).stroke()
-        
+        pathForMouth().stroke()
     }
     
 
