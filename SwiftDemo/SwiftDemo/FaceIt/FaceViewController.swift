@@ -58,11 +58,11 @@ class FaceViewController: UIViewController {
             tapRecognizer.numberOfTapsRequired = 1
             faceView.addGestureRecognizer(tapRecognizer)
             
-            let swipeUpRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(increaseHappiness))
+            let swipeUpRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(decreaseHappiness))
             swipeUpRecognizer.direction = .up
             faceView.addGestureRecognizer(swipeUpRecognizer)
             
-            let swipeDownRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(decreaseHappiness))
+            let swipeDownRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(increaseHappiness))
             swipeDownRecognizer.direction = .down
             faceView.addGestureRecognizer(swipeDownRecognizer)
             
