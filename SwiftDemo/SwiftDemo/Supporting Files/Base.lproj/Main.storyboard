@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Root View Controller-->
+        <!--Main-->
         <scene sceneID="aWC-2k-1Qt">
             <objects>
                 <tableViewController id="94N-jN-dXl" customClass="ViewController" customModule="SwiftDemo" customModuleProvider="target" sceneMemberID="viewController">
@@ -33,7 +33,7 @@
                             <outlet property="delegate" destination="94N-jN-dXl" id="0e5-Oj-E4Z"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="MZQ-A3-xS9"/>
+                    <navigationItem key="navigationItem" title="Main" id="MZQ-A3-xS9"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tON-dd-e50" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

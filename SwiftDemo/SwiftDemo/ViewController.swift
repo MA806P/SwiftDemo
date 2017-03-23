@@ -27,7 +27,8 @@ class ViewController: UITableViewController {
         if indexPath.row == 0 {
             self.navigationController?.pushViewController(CalculatorViewController(), animated: true)
         } else if indexPath.row == 1 {
-            self.navigationController?.pushViewController(FaceViewController(), animated: true)
+            let splitViewController = UIStoryboard.init(name: "FaceIt", bundle: nil).instantiateInitialViewController()!
+            self.navigationController?.present(splitViewController, animated: true, completion: nil)
         } else if indexPath.row == 2 {
             self.navigationController?.pushViewController(UIStoryboard.init(name: "TestStoryboard", bundle: nil).instantiateInitialViewController()!, animated: true)
         }
