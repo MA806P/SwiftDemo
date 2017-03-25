@@ -23,6 +23,7 @@
 		18EF6E4C1E6D9B0B009851EB /* FaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EF6E4A1E6D9B0B009851EB /* FaceViewController.swift */; };
 		DA91F9771E7B587A00FEF20A /* FacialExpression.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA91F9761E7B587A00FEF20A /* FacialExpression.swift */; };
 		DAC2AD7C1E6EE14600437808 /* FaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC2AD7B1E6EE14600437808 /* FaceView.swift */; };
+		DAEF62C61E85EE8500CF6F83 /* VCLLoggingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAEF62C51E85EE8500CF6F83 /* VCLLoggingViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +44,7 @@
 		18EF6E4A1E6D9B0B009851EB /* FaceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FaceViewController.swift; sourceTree = "<group>"; };
 		DA91F9761E7B587A00FEF20A /* FacialExpression.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacialExpression.swift; sourceTree = "<group>"; };
 		DAC2AD7B1E6EE14600437808 /* FaceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FaceView.swift; sourceTree = "<group>"; };
+		DAEF62C51E85EE8500CF6F83 /* VCLLoggingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCLLoggingViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +120,7 @@
 		18EF6E491E6D9ADA009851EB /* FaceIt */ = {
 			isa = PBXGroup;
 			children = (
+				DAEF62C51E85EE8500CF6F83 /* VCLLoggingViewController.swift */,
 				18EF6E4A1E6D9B0B009851EB /* FaceViewController.swift */,
 				DAC2AD7B1E6EE14600437808 /* FaceView.swift */,
 				DA91F9761E7B587A00FEF20A /* FacialExpression.swift */,
@@ -211,6 +214,7 @@
 				183A6AC31E839E59004BB0DA /* EmotionsViewController.swift in Sources */,
 				184718561E6AAE0A0090E9E3 /* CalculatorViewController.swift in Sources */,
 				184718341E6A62BC0090E9E3 /* AppDelegate.swift in Sources */,
+				DAEF62C61E85EE8500CF6F83 /* VCLLoggingViewController.swift in Sources */,
 				DAC2AD7C1E6EE14600437808 /* FaceView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
