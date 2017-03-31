@@ -25,6 +25,7 @@
 		DA6EE8371E8BFCE200EAF540 /* Cassini.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA6EE8361E8BFCE200EAF540 /* Cassini.storyboard */; };
 		DA6EE8391E8BFDC200EAF540 /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6EE8381E8BFDC200EAF540 /* ImageViewController.swift */; };
 		DA91F9771E7B587A00FEF20A /* FacialExpression.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA91F9761E7B587A00FEF20A /* FacialExpression.swift */; };
+		DAB65AAE1E8E9E4C007F25F1 /* CassiniViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB65AAD1E8E9E4C007F25F1 /* CassiniViewController.swift */; };
 		DAC2AD7C1E6EE14600437808 /* FaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC2AD7B1E6EE14600437808 /* FaceView.swift */; };
 		DAEF62C61E85EE8500CF6F83 /* VCLLoggingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAEF62C51E85EE8500CF6F83 /* VCLLoggingViewController.swift */; };
 /* End PBXBuildFile section */
@@ -49,6 +50,7 @@
 		DA6EE8361E8BFCE200EAF540 /* Cassini.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Cassini.storyboard; sourceTree = "<group>"; };
 		DA6EE8381E8BFDC200EAF540 /* ImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
 		DA91F9761E7B587A00FEF20A /* FacialExpression.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacialExpression.swift; sourceTree = "<group>"; };
+		DAB65AAD1E8E9E4C007F25F1 /* CassiniViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CassiniViewController.swift; sourceTree = "<group>"; };
 		DAC2AD7B1E6EE14600437808 /* FaceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FaceView.swift; sourceTree = "<group>"; };
 		DAEF62C51E85EE8500CF6F83 /* VCLLoggingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCLLoggingViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -142,6 +144,7 @@
 			children = (
 				DA6EE8341E8BFCCB00EAF540 /* DemoURL.swift */,
 				DA6EE8381E8BFDC200EAF540 /* ImageViewController.swift */,
+				DAB65AAD1E8E9E4C007F25F1 /* CassiniViewController.swift */,
 				DA6EE8361E8BFCE200EAF540 /* Cassini.storyboard */,
 			);
 			path = Cassini;
@@ -226,6 +229,7 @@
 			files = (
 				183B741E1E7932650074A5C5 /* TestViewController.swift in Sources */,
 				DA91F9771E7B587A00FEF20A /* FacialExpression.swift in Sources */,
+				DAB65AAE1E8E9E4C007F25F1 /* CassiniViewController.swift in Sources */,
 				184718531E6AADE50090E9E3 /* CalculatorBrain.swift in Sources */,
 				184718361E6A62BC0090E9E3 /* ViewController.swift in Sources */,
 				18EF6E4C1E6D9B0B009851EB /* FaceViewController.swift in Sources */,
