@@ -27,11 +27,12 @@ class ViewController: UITableViewController {
         if indexPath.row == 0 {
             self.navigationController?.pushViewController(CalculatorViewController(), animated: true)
         } else if indexPath.row == 1 {
-            let splitViewController = UIStoryboard.init(name: "FaceIt", bundle: nil).instantiateInitialViewController()!
-            self.navigationController?.present(splitViewController, animated: true, completion: nil)
+            let faceItSplitViewController = UIStoryboard.init(name: "FaceIt", bundle: nil).instantiateInitialViewController()!
+            self.navigationController?.present(faceItSplitViewController, animated: true, completion: nil)
         } else if indexPath.row == 2 {
-            let splitViewController = UIStoryboard.init(name: "Cassini", bundle: nil).instantiateInitialViewController()!
-            self.navigationController?.pushViewController(splitViewController, animated: true)
+            let cassiniSplitViewController = UIStoryboard.init(name: "Cassini", bundle: nil).instantiateInitialViewController()!
+            //self.navigationController?.pushViewController(splitViewController, animated: true)
+            self.navigationController?.present(cassiniSplitViewController, animated: true, completion: nil)
         } else if indexPath.row == 3 {
             self.navigationController?.pushViewController(UIStoryboard.init(name: "TestStoryboard", bundle: nil).instantiateInitialViewController()!, animated: true)
         }

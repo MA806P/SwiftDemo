@@ -61,7 +61,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="40"/>
                                         <state key="normal" title="Earth"/>
                                         <connections>
-                                            <segue destination="ktJ-Di-cln" kind="showDetail" identifier="earth" id="21Q-vC-koM"/>
+                                            <segue destination="ktJ-Di-cln" kind="showDetail" identifier="Earth" id="21Q-vC-koM"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GoB-eJ-9ZA">
@@ -69,7 +69,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="40"/>
                                         <state key="normal" title="Cassini"/>
                                         <connections>
-                                            <segue destination="ktJ-Di-cln" kind="showDetail" identifier="cassini" id="l8X-EA-h1i"/>
+                                            <segue destination="ktJ-Di-cln" kind="showDetail" identifier="Cassini" id="l8X-EA-h1i"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X6s-J3-dbt">
@@ -77,7 +77,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="40"/>
                                         <state key="normal" title="Saturn"/>
                                         <connections>
-                                            <segue destination="ktJ-Di-cln" kind="showDetail" identifier="saturn" id="NSc-kr-9gw"/>
+                                            <segue destination="ktJ-Di-cln" kind="showDetail" identifier="Saturn" id="NSc-kr-9gw"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -89,7 +89,13 @@
                             <constraint firstItem="D49-6G-U6P" firstAttribute="centerY" secondItem="3CB-qW-Kdu" secondAttribute="centerY" id="SaE-Ez-yAd"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="FRP-mv-5pU"/>
+                    <navigationItem key="navigationItem" id="FRP-mv-5pU">
+                        <barButtonItem key="leftBarButtonItem" title="&lt;" id="rMG-cr-PED">
+                            <connections>
+                                <action selector="back:" destination="vjW-s0-mco" id="9nh-cN-Wky"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="imL-VT-jxa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
