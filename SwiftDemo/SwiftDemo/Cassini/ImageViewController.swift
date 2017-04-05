@@ -22,19 +22,40 @@ class ImageViewController: UIViewController {
     
     }
     
+    @IBOutlet weak var spinner: UIActivityIndicatorView!
+    
     
     //MARK: Private Implementation
     
     private func fetchImage() {
         if let url = imageURL {
-            // this next line of code can throw an error
-            // and it also will block the UI entirely while access the network
-            // we really should be doing it in a separate thread
-            let urlContents = try? Data(contentsOf: url)
-            if let imageData = urlContents {
-                image = UIImage(data: imageData)
-            }
             
+            // we're going to start something on another queue soon
+            // so let's start a spinner going in the UI to let the user know
+            // we'll stop this any time an image actually gets set
+            // (we'd never want the spinner and an image appearing at the same time!)
+            spinner.startAnimating()
+            
+            // try? Data(contentsOf:) blocks the thread it is on
+            // we are currently on the main thread
+            // so we must dispatch that call off to a background queue
+            // we'll use one of the shared, global, concurrent background queues
+            DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+                
+                let urlContents = try? Data(contentsOf: url)
+                // now that we're back from blocking
+                // are we still even interested in this url
+                if let imageData = urlContents, url == self?.imageURL {
+                    
+                    // now we want to set the image in the UI
+                    // but we are not on the main thread right now
+                    // so we are not allowed to do UI
+                    // no problem: just dispatch the UI stuff back to the main queue
+                    DispatchQueue.main.async {
+                        self?.image = UIImage(data: imageData)
+                    }
+                }
+            }
         }
     }
     
@@ -44,7 +65,7 @@ class ImageViewController: UIViewController {
 //        super.viewDidLoad()
 //        imageURL = DemoURL.stanford
 //    }
-//    
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if image == nil {
@@ -66,7 +87,9 @@ class ImageViewController: UIViewController {
 
     //使用 fileprivate 来暴露内部接口, 用 private 来进行内部实现
     /*
-     在swift 3中，新增加了一个 fileprivate来显式的表明，这个元素的访问权限为文件内私有。过去的private对应现在的fileprivate。现在的private则是真正的私有，离开了这个类或者结构体的作用域外面就无法访问。
+     在swift 3中，新增加了一个 fileprivate来显式的表明，这个元素的访问权限为文件内私有。
+     过去的private对应现在的fileprivate。
+     现在的private则是真正的私有，离开了这个类或者结构体的作用域外面就无法访问。
      */
     fileprivate var imageView = UIImageView()
     
@@ -77,11 +100,15 @@ class ImageViewController: UIViewController {
         set {
             imageView.image = newValue
             imageView.sizeToFit()
+            // careful here because scrollView might be nil
             scrollView?.contentSize = imageView.frame.size
+            
+            // now that we've set an image
+            // stop any spinner that exists from spinning
+            spinner?.stopAnimating()
         }
         
     }
-
 }
 
 
