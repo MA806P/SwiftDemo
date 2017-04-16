@@ -10,7 +10,7 @@ import UIKit
 
 class ViewController: UITableViewController {
     
-    let dataArray = ["Calculator", "Face View", "Cassini", "Test View"]
+    let dataArray = ["Calculator", "Face View", "Cassini", "Smashtag", "Test View"]
     
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -34,6 +34,10 @@ class ViewController: UITableViewController {
             //self.navigationController?.pushViewController(splitViewController, animated: true)
             self.navigationController?.present(cassiniSplitViewController, animated: true, completion: nil)
         } else if indexPath.row == 3 {
+            let smashtagViewController = UIStoryboard.init(name: "Smashtag", bundle:nil).instantiateInitialViewController()!
+            self.navigationController?.pushViewController(smashtagViewController, animated: true)
+            
+        }else if indexPath.row == 4 {
             self.navigationController?.pushViewController(UIStoryboard.init(name: "TestStoryboard", bundle: nil).instantiateInitialViewController()!, animated: true)
         }
     }
