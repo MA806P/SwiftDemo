@@ -11,7 +11,6 @@
 		183A6AC31E839E59004BB0DA /* EmotionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183A6AC21E839E59004BB0DA /* EmotionsViewController.swift */; };
 		183B741C1E79323F0074A5C5 /* TestStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 183B741B1E79323F0074A5C5 /* TestStoryboard.storyboard */; };
 		183B741E1E7932650074A5C5 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183B741D1E7932650074A5C5 /* TestViewController.swift */; };
-		184202ED1EA60C5F00DD3F9F /* Twitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184202EC1EA60C5F00DD3F9F /* Twitter.swift */; };
 		184718341E6A62BC0090E9E3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184718331E6A62BC0090E9E3 /* AppDelegate.swift */; };
 		184718361E6A62BC0090E9E3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184718351E6A62BC0090E9E3 /* ViewController.swift */; };
 		1847184D1E6A64AC0090E9E3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 184718471E6A64AC0090E9E3 /* Assets.xcassets */; };
@@ -39,7 +38,6 @@
 		183A6AC21E839E59004BB0DA /* EmotionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmotionsViewController.swift; sourceTree = "<group>"; };
 		183B741B1E79323F0074A5C5 /* TestStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TestStoryboard.storyboard; sourceTree = "<group>"; };
 		183B741D1E7932650074A5C5 /* TestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
-		184202EC1EA60C5F00DD3F9F /* Twitter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Twitter.swift; sourceTree = "<group>"; };
 		184718301E6A62BC0090E9E3 /* SwiftDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		184718331E6A62BC0090E9E3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		184718351E6A62BC0090E9E3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -165,7 +163,6 @@
 				DAEB96881EA43679006F0084 /* Smashtag.storyboard */,
 				DAEB968A1EA436D4006F0084 /* TweetTableViewController.swift */,
 				DAEB968C1EA43704006F0084 /* TweetTableViewCell.swift */,
-				184202EC1EA60C5F00DD3F9F /* Twitter.swift */,
 			);
 			path = Smashtag;
 			sourceTree = "<group>";
@@ -259,7 +256,6 @@
 				DAEB968D1EA43704006F0084 /* TweetTableViewCell.swift in Sources */,
 				184718561E6AAE0A0090E9E3 /* CalculatorViewController.swift in Sources */,
 				DA6EE8351E8BFCCB00EAF540 /* DemoURL.swift in Sources */,
-				184202ED1EA60C5F00DD3F9F /* Twitter.swift in Sources */,
 				184718341E6A62BC0090E9E3 /* AppDelegate.swift in Sources */,
 				DAEF62C61E85EE8500CF6F83 /* VCLLoggingViewController.swift in Sources */,
 				DA6EE8391E8BFDC200EAF540 /* ImageViewController.swift in Sources */,
