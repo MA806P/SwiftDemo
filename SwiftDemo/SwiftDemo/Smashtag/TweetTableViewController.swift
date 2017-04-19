@@ -7,12 +7,12 @@
 //
 
 import UIKit
-//import Twitter
+import Twitter
 
 class TweetTableViewController: UITableViewController {
     
     
-    //private var tweets = [Array<Twitter.tweet>]()
+    private var tweets = [Array<Twitter.Tweet>]()
 
     override func viewDidLoad() {
         super.viewDidLoad()

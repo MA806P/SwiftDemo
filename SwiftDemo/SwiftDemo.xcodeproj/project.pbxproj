@@ -20,6 +20,8 @@
 		184718531E6AADE50090E9E3 /* CalculatorBrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184718521E6AADE50090E9E3 /* CalculatorBrain.swift */; };
 		184718561E6AAE0A0090E9E3 /* CalculatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184718541E6AAE0A0090E9E3 /* CalculatorViewController.swift */; };
 		184718571E6AAE0A0090E9E3 /* CalculatorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 184718551E6AAE0A0090E9E3 /* CalculatorViewController.xib */; };
+		18CA65461EA76B3A009EEFF4 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18CA65451EA76B3A009EEFF4 /* Twitter.framework */; };
+		18CA65471EA76B3A009EEFF4 /* Twitter.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 18CA65451EA76B3A009EEFF4 /* Twitter.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		18EF6E4C1E6D9B0B009851EB /* FaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EF6E4A1E6D9B0B009851EB /* FaceViewController.swift */; };
 		DA6EE8351E8BFCCB00EAF540 /* DemoURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6EE8341E8BFCCB00EAF540 /* DemoURL.swift */; };
 		DA6EE8371E8BFCE200EAF540 /* Cassini.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA6EE8361E8BFCE200EAF540 /* Cassini.storyboard */; };
@@ -32,6 +34,20 @@
 		DAEB968D1EA43704006F0084 /* TweetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAEB968C1EA43704006F0084 /* TweetTableViewCell.swift */; };
 		DAEF62C61E85EE8500CF6F83 /* VCLLoggingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAEF62C51E85EE8500CF6F83 /* VCLLoggingViewController.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		18CA65481EA76B3A009EEFF4 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				18CA65471EA76B3A009EEFF4 /* Twitter.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		183A6AC01E8360C5004BB0DA /* FaceIt.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = FaceIt.storyboard; sourceTree = "<group>"; };
@@ -48,6 +64,7 @@
 		184718521E6AADE50090E9E3 /* CalculatorBrain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculatorBrain.swift; sourceTree = "<group>"; };
 		184718541E6AAE0A0090E9E3 /* CalculatorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculatorViewController.swift; sourceTree = "<group>"; };
 		184718551E6AAE0A0090E9E3 /* CalculatorViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CalculatorViewController.xib; sourceTree = "<group>"; };
+		18CA65451EA76B3A009EEFF4 /* Twitter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Twitter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		18EF6E4A1E6D9B0B009851EB /* FaceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FaceViewController.swift; sourceTree = "<group>"; };
 		DA6EE8341E8BFCCB00EAF540 /* DemoURL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoURL.swift; sourceTree = "<group>"; };
 		DA6EE8361E8BFCE200EAF540 /* Cassini.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Cassini.storyboard; sourceTree = "<group>"; };
@@ -66,6 +83,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18CA65461EA76B3A009EEFF4 /* Twitter.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -84,6 +102,7 @@
 		184718271E6A62BC0090E9E3 = {
 			isa = PBXGroup;
 			children = (
+				18CA65451EA76B3A009EEFF4 /* Twitter.framework */,
 				184718321E6A62BC0090E9E3 /* SwiftDemo */,
 				184718311E6A62BC0090E9E3 /* Products */,
 			);
@@ -177,6 +196,7 @@
 				1847182C1E6A62BC0090E9E3 /* Sources */,
 				1847182D1E6A62BC0090E9E3 /* Frameworks */,
 				1847182E1E6A62BC0090E9E3 /* Resources */,
+				18CA65481EA76B3A009EEFF4 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
