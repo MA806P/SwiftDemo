@@ -9,47 +9,103 @@
 import UIKit
 import Twitter
 
-class TweetTableViewController: UITableViewController {
+class TweetTableViewController: UITableViewController, UITextFieldDelegate {
     
     
     private var tweets = [Array<Twitter.Tweet>]()
+    
+    var searchText: String? {
+        didSet {
+            searchTextField?.text = searchText
+            searchTextField?.resignFirstResponder()
+            lastTwitterRequest = nil
+            tweets.removeAll()
+            tableView.reloadData()
+            searchForTweets()
+            title = searchText
+        }
+    
+    }
+    
+    
+    private var lastTwitterRequest: Twitter.Request?
+    
+    private func twitterRequest() -> Twitter.Request? {
+        if let query = searchText, !query.isEmpty {
+            return Twitter.Request(search: query, count: 100)
+        }
+        return nil
+    }
+    
+    private func searchForTweets() {
+    
+        if let request = lastTwitterRequest?.newer ?? twitterRequest() {
+            lastTwitterRequest = request
+            request.fetchTweets { [weak self] newTweets in
+                DispatchQueue.main.async {
+                    if request == self?.lastTwitterRequest {
+                        self?.tweets.insert(newTweets, at: 0)
+                        self?.tableView.insertSections([0], with: .fade)
+                    }
+                }
+                
+            }
+        }
+    }
+    
+    
+    // MARK: View Controller Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        //we use the row height in the storyboard as an "estimate"
+        tableView.estimatedRowHeight = tableView.rowHeight
+        //but use whatever autolayout says the height should be as the actual row height
+        tableView.rowHeight = UITableViewAutomaticDimension
+        // the row height could alternatively be set
+        // using the UITableViewDelegate method heightForRowAt
+        
+        
+        searchForTweets()
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    // MARK: Search Text Field
+    
+    @IBOutlet weak var searchTextField: UITextField! {
+        didSet {
+            searchTextField.delegate = self
+        }
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == searchTextField {
+            searchText = searchTextField.text
+        }
+        return true
     }
 
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return 30
     }
 
-    /*
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "TweetIdentifier", for: indexPath)
 
         // Configure the cell...
 
         return cell
     }
-    */
+    
 
     /*
     // Override to support conditional editing of the table view.

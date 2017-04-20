@@ -134,9 +134,11 @@ public class Request: NSObject
     // handler is not necessarily called on the main queue
     
     func performTwitterRequest(_ method: SLRequestMethod, handler: @escaping (PropertyList?) -> Void) {
-        let jsonExtension = (self.requestType.range(of: Constants.JSONExtension) == nil) ? Constants.JSONExtension : ""
-        let url = URL(string: "\(Constants.twitterURLPrefix)\(self.requestType)\(jsonExtension)")
-        if let request = SLRequest(forServiceType: SLServiceTypeTwitter, requestMethod: method, url: url, parameters: parameters) {
+        //let jsonExtension = (self.requestType.range(of: Constants.JSONExtension) == nil) ? Constants.JSONExtension : ""
+        //let url = URL(string: "\(Constants.twitterURLPrefix)\(self.requestType)\(jsonExtension)")
+        let url = URL(string: "https://api.weibo.com/2/statuses/home_timeline.json")
+        
+        if let request = SLRequest(forServiceType: SLServiceTypeSinaWeibo, requestMethod: method, url: url, parameters: nil) {
             performTwitterSLRequest(request, handler: handler)
         }
     }
@@ -169,7 +171,7 @@ public class Request: NSObject
             }
         } else {
             let accountStore = ACAccountStore()
-            let twitterAccountType = accountStore.accountType(withAccountTypeIdentifier: ACAccountTypeIdentifierTwitter)
+            let twitterAccountType = accountStore.accountType(withAccountTypeIdentifier: ACAccountTypeIdentifierSinaWeibo)
             accountStore.requestAccessToAccounts(with: twitterAccountType, options: nil) { (granted, _) in
                 if granted {
                     if let account = accountStore.accounts(with: twitterAccountType)?.last as? ACAccount {
