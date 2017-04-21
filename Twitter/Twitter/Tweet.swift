@@ -20,12 +20,14 @@ public struct Tweet : CustomStringConvertible
     public let user: User
     public let created: Date
     public let identifier: String
-    public let media: [MediaItem]
-    public let hashtags: [Mention]
-    public let urls: [Mention]
-    public let userMentions: [Mention]
+    //public let media: [MediaItem]
+    //public let hashtags: [Mention]
+    //public let urls: [Mention]
+    //public let userMentions: [Mention]
     
-    public var description: String { return "\(user) - \(created)\n\(text)\nhashtags: \(hashtags)\nurls: \(urls)\nuser_mentions: \(userMentions)" + "\nid: \(identifier)" }
+    //public var description: String { return "\(user) - \(created)\n\(text)\nhashtags: \(hashtags)\nurls: \(urls)\nuser_mentions: \(userMentions)" + "\nid: \(identifier)" }
+    
+    public var description: String { return "\(user) - \(created)\n\(text)" }
     
     // MARK: - Internal Implementation
     
@@ -45,37 +47,37 @@ public struct Tweet : CustomStringConvertible
         self.created = created
         self.identifier = identifier
 
-        self.media = Tweet.mediaItems(from: data?.array(forKeyPath: TwitterKey.media))
-        self.hashtags = Tweet.mentions(from: data?.array(forKeyPath: TwitterKey.Entities.hashtags), in: text, with: "#")
-        self.urls = Tweet.mentions(from: data?.array(forKeyPath: TwitterKey.Entities.urls), in: text, with: "http")
-        self.userMentions = Tweet.mentions(from: data?.array(forKeyPath: TwitterKey.Entities.userMentions), in: text, with: "@")
+//        self.media = Tweet.mediaItems(from: data?.array(forKeyPath: TwitterKey.media))
+//        self.hashtags = Tweet.mentions(from: data?.array(forKeyPath: TwitterKey.Entities.hashtags), in: text, with: "#")
+//        self.urls = Tweet.mentions(from: data?.array(forKeyPath: TwitterKey.Entities.urls), in: text, with: "http")
+//        self.userMentions = Tweet.mentions(from: data?.array(forKeyPath: TwitterKey.Entities.userMentions), in: text, with: "@")
     }
     
-    private static func mediaItems(from twitterData: NSArray?) -> [MediaItem] {
-        var mediaItems = [MediaItem]()
-        for mediaItemData in twitterData ?? [] {
-            if let mediaItem = MediaItem(data: mediaItemData as? NSDictionary) {
-                mediaItems.append(mediaItem)
-            }
-        }
-        return mediaItems
-    }
+//    private static func mediaItems(from twitterData: NSArray?) -> [MediaItem] {
+//        var mediaItems = [MediaItem]()
+//        for mediaItemData in twitterData ?? [] {
+//            if let mediaItem = MediaItem(data: mediaItemData as? NSDictionary) {
+//                mediaItems.append(mediaItem)
+//            }
+//        }
+//        return mediaItems
+//    }
     
-    private static func mentions(from twitterData: NSArray?, in text: String, with prefix: String) -> [Mention] {
-        var mentions = [Mention]()
-        for mentionData in twitterData ?? [] {
-            if let mention = Mention(from: mentionData as? NSDictionary, in: text as NSString, with: prefix) {
-                mentions.append(mention)
-            }
-        }
-        return mentions
-    }
+//    private static func mentions(from twitterData: NSArray?, in text: String, with prefix: String) -> [Mention] {
+//        var mentions = [Mention]()
+//        for mentionData in twitterData ?? [] {
+//            if let mention = Mention(from: mentionData as? NSDictionary, in: text as NSString, with: prefix) {
+//                mentions.append(mention)
+//            }
+//        }
+//        return mentions
+//    }
     
     struct TwitterKey {
         static let user = "user"
         static let text = "text"
         static let created = "created_at"
-        static let identifier = "id_str"
+        static let identifier = "idstr"
         static let media = "entities.media"
         struct Entities {
             static let hashtags = "entities.hashtags"

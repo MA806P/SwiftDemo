@@ -45,10 +45,17 @@ public class Request: NSObject
     
     // convenience initializer for creating a TwitterRequest that is a search for Tweets
     public convenience init(search: String, count: Int = 0) { // , resultType resultType: SearchResultType = .Mixed, region region: CLCircularRegion? = nil) {
-        var parameters = [TwitterKey.query : search]
+        
+        
+        var parameters = [String : String]()
         if count > 0 {
             parameters[TwitterKey.count] = "\(count)"
         }
+        
+//        var parameters = [TwitterKey.query : search]
+//        if count > 0 {
+//            parameters[TwitterKey.count] = "\(count)"
+//        }
 //        switch resultType {
 //        case .Recent: parameters[TwitterKey.ResultType] = TwitterKey.ResultTypeRecent
 //        case .Popular: parameters[TwitterKey.ResultType] = TwitterKey.ResultTypePopular
@@ -102,6 +109,7 @@ public class Request: NSObject
     // only makes sense for requests for Tweets
     
     public var older: Request? {
+        
         if min_id == nil {
             if parameters[TwitterKey.maxID] != nil {
                 return self
@@ -117,6 +125,7 @@ public class Request: NSObject
     // only makes sense for requests for Tweets
     
     public var newer: Request? {
+        
         if max_id == nil {
             if parameters[TwitterKey.sinceID] != nil {
                 return self
@@ -138,7 +147,7 @@ public class Request: NSObject
         //let url = URL(string: "\(Constants.twitterURLPrefix)\(self.requestType)\(jsonExtension)")
         let url = URL(string: "https://api.weibo.com/2/statuses/home_timeline.json")
         
-        if let request = SLRequest(forServiceType: SLServiceTypeSinaWeibo, requestMethod: method, url: url, parameters: nil) {
+        if let request = SLRequest(forServiceType: SLServiceTypeSinaWeibo, requestMethod: method, url: url, parameters: parameters) {
             performTwitterSLRequest(request, handler: handler)
         }
     }
@@ -210,17 +219,21 @@ public class Request: NSObject
     
     private func captureFollowonRequestInfo(_ propertyListResponse: PropertyList?) {
         if let responseDictionary = propertyListResponse as? NSDictionary {
-            self.max_id = responseDictionary.value(forKeyPath: TwitterKey.SearchMetadata.maxID) as? String
-            if let next_results = responseDictionary.value(forKeyPath: TwitterKey.SearchMetadata.nextResults) as? String {
-                for queryTerm in next_results.components(separatedBy: TwitterKey.SearchMetadata.separator) {
-                    if queryTerm.hasPrefix("?\(TwitterKey.maxID)=") {
-                        let next_id = queryTerm.components(separatedBy: "=")
-                        if next_id.count == 2 {
-                            self.min_id = next_id[1]
-                        }
-                    }
-                }
-            }
+            
+            self.max_id = "\(responseDictionary.value(forKeyPath: TwitterKey.sinceID))"
+            
+//            if let next_results = responseDictionary.value(forKeyPath: TwitterKey.SearchMetadata.nextResults) as? String {
+//                
+//                for queryTerm in next_results.components(separatedBy: TwitterKey.SearchMetadata.separator) {
+//                    if queryTerm.hasPrefix("?\(TwitterKey.maxID)=") {
+//                        let next_id = queryTerm.components(separatedBy: "=")
+//                        if next_id.count == 2 {
+//                            self.min_id = next_id[1]
+//                        }
+//                    }
+//                }
+//            }
+
         }
     }
     

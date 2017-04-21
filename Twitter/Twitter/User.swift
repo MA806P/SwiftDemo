@@ -18,7 +18,7 @@ public struct User: CustomStringConvertible
     public let verified: Bool
     public let profileImageURL: URL?
     
-    public var description: String { return "@\(screenName) (\(name))\(verified ? " ✅" : "")" }
+    public var description: String { return "@\(screenName) \(verified ? " ✅" : "")" }
     
     // MARK: - Internal Implementation
     
@@ -51,7 +51,7 @@ public struct User: CustomStringConvertible
     struct TwitterKey {
         static let name = "name"
         static let screenName = "screen_name"
-        static let identifier = "id_str"
+        static let identifier = "idstr"
         static let verified = "verified"
         static let profileImageURL = "profile_image_url"
     }
