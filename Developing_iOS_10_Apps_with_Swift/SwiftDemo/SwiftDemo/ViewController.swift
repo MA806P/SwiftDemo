@@ -50,13 +50,5 @@ class ViewController: UITableViewController {
         self.tableView.register(UITableViewCell.classForCoder(), forCellReuseIdentifier: "RowCellIdentifier")
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-        
-        self.title = "SwiftDemo"
-    }
-
-
 }
 
