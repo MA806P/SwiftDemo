@@ -9,6 +9,9 @@
 import UIKit
 
 class ConcentrationController: UIViewController {
+    
+    var navigationItem: Concentration = Concentration()
+    
 
     var flipCount = 0 {
         didSet {

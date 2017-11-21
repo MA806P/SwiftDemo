@@ -14,6 +14,8 @@
 		184B82251FC02D0A00C11AB3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 184B82231FC02D0A00C11AB3 /* LaunchScreen.storyboard */; };
 		184B82301FC0322200C11AB3 /* ConcentrationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184B822E1FC0322200C11AB3 /* ConcentrationController.swift */; };
 		184B82311FC0322200C11AB3 /* ConcentrationController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 184B822F1FC0322200C11AB3 /* ConcentrationController.xib */; };
+		DA29C33F1FC39DD800E240F0 /* Concentration.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA29C33E1FC39DD800E240F0 /* Concentration.swift */; };
+		DA29C3411FC39DE200E240F0 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA29C3401FC39DE200E240F0 /* Card.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,8 @@
 		184B82261FC02D0A00C11AB3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		184B822E1FC0322200C11AB3 /* ConcentrationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcentrationController.swift; sourceTree = "<group>"; };
 		184B822F1FC0322200C11AB3 /* ConcentrationController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConcentrationController.xib; sourceTree = "<group>"; };
+		DA29C33E1FC39DD800E240F0 /* Concentration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Concentration.swift; sourceTree = "<group>"; };
+		DA29C3401FC39DE200E240F0 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +86,8 @@
 			children = (
 				184B822E1FC0322200C11AB3 /* ConcentrationController.swift */,
 				184B822F1FC0322200C11AB3 /* ConcentrationController.xib */,
+				DA29C33E1FC39DD800E240F0 /* Concentration.swift */,
+				DA29C3401FC39DE200E240F0 /* Card.swift */,
 			);
 			path = Concentration;
 			sourceTree = "<group>";
@@ -160,6 +166,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				184B82301FC0322200C11AB3 /* ConcentrationController.swift in Sources */,
+				DA29C33F1FC39DD800E240F0 /* Concentration.swift in Sources */,
+				DA29C3411FC39DE200E240F0 /* Card.swift in Sources */,
 				184B821D1FC02D0A00C11AB3 /* ViewController.swift in Sources */,
 				184B821B1FC02D0A00C11AB3 /* AppDelegate.swift in Sources */,
 			);
