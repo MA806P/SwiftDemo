@@ -1,0 +1,10 @@
+Developing iOS 11 Apps with Swift, Stanford CS193p
+
+Concentration Demo
+1. rename @IBOutlet name of var
+2. use Outlet Collections
+3. static func xxx()->Int {..} ,
+    A static function is a function, even though it's in the class, you can't send it to a instance class. A instance class not understand 		 this message. What understand message is a type class
+4. var game = Concentration(numberOfPairsOfCards: (cardButtons.count + 1) / 2)
+	Cannot use instance member 'cardButtons' within property initializer; property initializers run before 'self' is available.
+	lazy , if you make a var lazy that means it doesn't actually initialize until someone grabs.
