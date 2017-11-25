@@ -56,7 +56,7 @@ class ConcentrationController: UIViewController {
     }
     
     
-    var emojiChoices = ["🐶", "🐱", "🦊", "🐷"]
+    var emojiChoices = ["🐶", "🐱", "🦊", "🐷", "🙊", "🐔", "🐙", "🐡"]
     
     //var emoji = Dictionary<Int, String>()
     var emoji = [Int: String]()
