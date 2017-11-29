@@ -10,7 +10,11 @@ import UIKit
 
 class ConcentrationController: UIViewController {
     
-    lazy var game = Concentration(numberOfPairsOfCards: (cardButtons.count + 1) / 2)
+    lazy var game = Concentration(numberOfPairsOfCards: numberOfPairsOfCards)
+    
+    var numberOfPairsOfCards: Int {
+        return (cardButtons.count + 1) / 2
+    }
     
 
     var flipCount = 0 {
@@ -63,14 +67,10 @@ class ConcentrationController: UIViewController {
     
     func emoji(for card: Card) -> String {
         
-        print(" \(card.identifier)  \(emojiChoices)")
-        
         if emoji[card.identifier] == nil , emojiChoices.count > 0 {
             let randomIndex = Int(arc4random_uniform(UInt32(emojiChoices.count)))
             emoji[card.identifier] = emojiChoices.remove(at: randomIndex)
         }
-        
-        print("\(emojiChoices)")
         
         return emoji[card.identifier] ?? "?"
     }

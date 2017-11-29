@@ -15,22 +15,18 @@
             <connections>
                 <outlet property="flipCountLabel" destination="ob8-jj-s47" id="Ccc-GB-6T9"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
-                <outletCollection property="cardButtons" destination="f6T-0O-YWx" collectionClass="NSMutableArray" id="Nb2-GY-GDi"/>
-                <outletCollection property="cardButtons" destination="qqp-sP-uP2" collectionClass="NSMutableArray" id="1nD-qh-13Z"/>
-                <outletCollection property="cardButtons" destination="vC1-ID-bU9" collectionClass="NSMutableArray" id="9Tv-sX-fPg"/>
-                <outletCollection property="cardButtons" destination="SaJ-xJ-YDT" collectionClass="NSMutableArray" id="yjc-0S-0og"/>
-                <outletCollection property="cardButtons" destination="2qU-rh-itN" collectionClass="NSMutableArray" id="Wht-3k-pTD"/>
-                <outletCollection property="cardButtons" destination="Dwp-2C-Zfh" collectionClass="NSMutableArray" id="adr-J0-CXR"/>
-                <outletCollection property="cardButtons" destination="4hX-Cr-MV5" collectionClass="NSMutableArray" id="NZq-ZC-tRW"/>
-                <outletCollection property="cardButtons" destination="qm6-6f-uM3" collectionClass="NSMutableArray" id="YfV-tH-syj"/>
-                <outletCollection property="cardButtons" destination="2Kl-v1-kzb" collectionClass="NSMutableArray" id="J0i-aq-Gjg"/>
-                <outletCollection property="cardButtons" destination="Sdf-us-4Dj" collectionClass="NSMutableArray" id="5xm-3a-y5P"/>
-                <outletCollection property="cardButtons" destination="fOQ-1K-aia" collectionClass="NSMutableArray" id="weD-BD-cau"/>
-                <outletCollection property="cardButtons" destination="YsQ-f2-H2j" collectionClass="NSMutableArray" id="QWb-Xe-aeH"/>
-                <outletCollection property="cardButtons" destination="ZBQ-qZ-wA7" collectionClass="NSMutableArray" id="ONM-hB-ytx"/>
-                <outletCollection property="cardButtons" destination="dQ2-k6-FRG" collectionClass="NSMutableArray" id="poI-nl-S9U"/>
-                <outletCollection property="cardButtons" destination="JSg-Cx-wSN" collectionClass="NSMutableArray" id="zic-9b-dwc"/>
-                <outletCollection property="cardButtons" destination="leP-gf-knT" collectionClass="NSMutableArray" id="dnr-sn-W7l"/>
+                <outletCollection property="cardButtons" destination="f6T-0O-YWx" collectionClass="NSMutableArray" id="uqI-wO-94H"/>
+                <outletCollection property="cardButtons" destination="SaJ-xJ-YDT" collectionClass="NSMutableArray" id="p3o-dP-k9s"/>
+                <outletCollection property="cardButtons" destination="qqp-sP-uP2" collectionClass="NSMutableArray" id="qRT-RB-uqW"/>
+                <outletCollection property="cardButtons" destination="vC1-ID-bU9" collectionClass="NSMutableArray" id="dze-5r-SbB"/>
+                <outletCollection property="cardButtons" destination="qm6-6f-uM3" collectionClass="NSMutableArray" id="2Cm-M0-4Co"/>
+                <outletCollection property="cardButtons" destination="2qU-rh-itN" collectionClass="NSMutableArray" id="Wcz-9z-2Gc"/>
+                <outletCollection property="cardButtons" destination="Dwp-2C-Zfh" collectionClass="NSMutableArray" id="E1u-Nb-tiV"/>
+                <outletCollection property="cardButtons" destination="4hX-Cr-MV5" collectionClass="NSMutableArray" id="WEf-4F-hDm"/>
+                <outletCollection property="cardButtons" destination="2Kl-v1-kzb" collectionClass="NSMutableArray" id="CEX-iB-3GD"/>
+                <outletCollection property="cardButtons" destination="YsQ-f2-H2j" collectionClass="NSMutableArray" id="Rfv-KE-tVs"/>
+                <outletCollection property="cardButtons" destination="Sdf-us-4Dj" collectionClass="NSMutableArray" id="DaT-BN-kuC"/>
+                <outletCollection property="cardButtons" destination="fOQ-1K-aia" collectionClass="NSMutableArray" id="TZr-CP-BR2"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -39,7 +35,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Wr0-lG-25s">
-                    <rect key="frame" x="16" y="97" width="343" height="312"/>
+                    <rect key="frame" x="16" y="97" width="343" height="232"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="29T-qh-SaF">
                             <rect key="frame" x="0.0" y="0.0" width="343" height="72"/>
@@ -152,43 +148,6 @@
                                 </button>
                             </subviews>
                         </stackView>
-                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="nKa-VS-M8e">
-                            <rect key="frame" x="0.0" y="240" width="343" height="72"/>
-                            <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JSg-Cx-wSN">
-                                    <rect key="frame" x="0.0" y="0.0" width="79.666666666666671" height="72"/>
-                                    <color key="backgroundColor" red="1" green="0.47058823529999999" blue="0.1843137255" alpha="1" colorSpace="calibratedRGB"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="50"/>
-                                    <connections>
-                                        <action selector="touchCard:" destination="-1" eventType="touchUpInside" id="QQB-hB-igT"/>
-                                    </connections>
-                                </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dQ2-k6-FRG">
-                                    <rect key="frame" x="87.666666666666671" y="0.0" width="80.000000000000014" height="72"/>
-                                    <color key="backgroundColor" red="1" green="0.47058823529999999" blue="0.1843137255" alpha="1" colorSpace="calibratedRGB"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="50"/>
-                                    <connections>
-                                        <action selector="touchCard:" destination="-1" eventType="touchUpInside" id="ZbK-ei-Qdu"/>
-                                    </connections>
-                                </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="leP-gf-knT">
-                                    <rect key="frame" x="175.66666666666666" y="0.0" width="79.666666666666657" height="72"/>
-                                    <color key="backgroundColor" red="1" green="0.47058823529999999" blue="0.1843137255" alpha="1" colorSpace="calibratedRGB"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="50"/>
-                                    <connections>
-                                        <action selector="touchCard:" destination="-1" eventType="touchUpInside" id="eE9-TW-jdG"/>
-                                    </connections>
-                                </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZBQ-qZ-wA7">
-                                    <rect key="frame" x="263.33333333333331" y="0.0" width="79.666666666666686" height="72"/>
-                                    <color key="backgroundColor" red="1" green="0.47058823529999999" blue="0.1843137255" alpha="1" colorSpace="calibratedRGB"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="50"/>
-                                    <connections>
-                                        <action selector="touchCard:" destination="-1" eventType="touchUpInside" id="iXl-c1-g6t"/>
-                                    </connections>
-                                </button>
-                            </subviews>
-                        </stackView>
                     </subviews>
                 </stackView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MJL-x9-aiU">
@@ -206,7 +165,7 @@
                     </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Flips: 0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ob8-jj-s47">
-                    <rect key="frame" x="145" y="745.66666666666663" width="84.333333333333314" height="32.333333333333371"/>
+                    <rect key="frame" x="145.33333333333334" y="745.66666666666663" width="84.333333333333343" height="32.333333333333371"/>
                     <fontDescription key="fontDescription" type="system" pointSize="27"/>
                     <color key="textColor" red="1" green="0.47058823529999999" blue="0.1843137255" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
@@ -217,14 +176,14 @@
                 <constraint firstItem="Wr0-lG-25s" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="Cpv-10-dv7"/>
                 <constraint firstItem="Wr0-lG-25s" firstAttribute="top" secondItem="MJL-x9-aiU" secondAttribute="bottom" constant="23" id="LPE-m5-yTh"/>
                 <constraint firstItem="MJL-x9-aiU" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="Xbj-ei-ppU"/>
-                <constraint firstItem="ob8-jj-s47" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="alL-Zz-Uyc"/>
+                <constraint firstItem="ob8-jj-s47" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="bgd-ce-tMx"/>
                 <constraint firstItem="MJL-x9-aiU" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="eI6-fq-omn"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="ob8-jj-s47" secondAttribute="bottom" id="k4U-aW-4Gc"/>
+                <constraint firstItem="ob8-jj-s47" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Wr0-lG-25s" secondAttribute="bottom" constant="5" id="iqs-SP-ZFB"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Wr0-lG-25s" secondAttribute="trailing" constant="16" id="nvj-XR-mPw"/>
-                <constraint firstItem="ob8-jj-s47" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Wr0-lG-25s" secondAttribute="bottom" id="uoN-KT-IXX"/>
+                <constraint firstAttribute="bottom" secondItem="ob8-jj-s47" secondAttribute="bottom" constant="34" id="zZC-N4-xsi"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
-            <point key="canvasLocation" x="-389.5" y="-362"/>
+            <point key="canvasLocation" x="-2508" y="-420"/>
         </view>
     </objects>
 </document>
