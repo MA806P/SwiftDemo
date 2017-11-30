@@ -40,3 +40,9 @@ If type information can be inferred, you can write an empty array as [] and an e
 shoppingList = []
 occupations = [:]
 ```
+
+
+#### Control Flow
+Use if and switch to make conditionals, and use for-in, while, and repeat-while to make loops. 
+
+
