@@ -44,5 +44,31 @@ occupations = [:]
 
 #### Control Flow
 Use if and switch to make conditionals, and use for-in, while, and repeat-while to make loops. 
+```
+let interestingNumbers = [
+    "Prime": [2, 3, 5, 7, 11, 13],
+    "Fibonacci": [1, 1, 2, 3, 5, 8],
+    "Square": [1, 4, 9, 16, 25],
+]
+var largest = 0
+for (kind, numbers) in interestingNumbers {
+    for number in numbers {
+        if number > largest {
+            largest = number
+        }
+    }
+}
+print(largest)
+```
+```
+var total = 0
+for i in 0..<4 {
+    total += i
+}
+print(total)
+```
+Use ..< to make a range that omits its upper value, and use ... to make a range that includes both values.
+
+
 
 
