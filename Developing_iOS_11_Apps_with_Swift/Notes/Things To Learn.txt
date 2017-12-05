@@ -8,3 +8,84 @@ Concentration Demo
 4. var game = Concentration(numberOfPairsOfCards: (cardButtons.count + 1) / 2)
 	Cannot use instance member 'cardButtons' within property initializer; property initializers run before 'self' is available.
 	lazy , if you make a var lazy that means it doesn't actually initialize until someone grabs.
+
+
+
+*********************************
+
+enum
+enum FastFoodMenuItem {    case hamburger    case fries    case drink    case cookie }
+An enum is a value type (like struct), so it is copied as it is passed around.
+Each state can (but does not have to) have its own “associated data” ...enum FastFoodMenuItem {    case hamburger(numberOfPatties: Int)    case fries(size: FryOrderSize)    case drink(String, ounces: Int) // the unnamed String is the brand, e.g. “Coke”    case cookie }
+In the example above, FryOrderSize would also probably be an enum, for example ...enum FryOrderSize {    case large    case small }
+
+Setting the value of an enum
+Just use the name of the type along with the case you want, separated by dot ... 
+let menuItem: FastFoodMenuItem = FastFoodMenuItem.hamburger(patties: 2) 
+var otherItem = FastFoodMenuItem.cookie
+var otherItem: FastFoodMenuItem = .cookie
+
+Checking an enum’s state
+switch menuItem {
+    case FastFoodMenuItem.hamburger: print(“burger”)
+    case .fries: print(“fries”) //It is not necessary to use the fully-expressed FastFoodMenuItem.fries inside the switch 					(since Swift can infer the FastFoodMenuItem part of that)
+    //If you don’t want to do anything in a given case, use break ...
+    case .drink: break  
+    //Associated data is accessed through a switch statement using this let syntax ...
+    //retrieves the associated data can have a different name
+    case .drink(let brand, let ounces): print(“a \(ounces)oz \(brand)”)
+    default: print(“other”)  //You must handle ALL POSSIBLE CASES (although you can default uninteresting cases) ...
+    ...
+}
+
+
+
+An enum can have methods (and computed properties) but no stored properties ...
+enum FastFoodMenuItem {      case hamburger(numberOfPatties: Int)      case fries(size: FryOrderSize)      case drink(String, ounces: Int)      case cookie
+      func isIncludedInSpecialOrder(number: Int) -> Bool {
+		switch self {		    case .hamburger(let pattyCount): return pattyCount == number		    case .fries, .cookie: return true // a drink and cookie in every special order 
+		    case .drink(_, let ounces): return ounces == 16 // & 16oz drink of any kind }
+	}      var calories: Int { // calculate and return caloric value here } 
+
+      mutating func switchToBeingACookie() {		self = .cookie // this works even if self is a .hamburger, .fries or .drink	} }	//Note that mutating is required because enum is a VALUE TYPE.
+}
+
+
+
+
+*********************************
+
+optional
+So an Optional is just an enum
+It essentially looks like this:
+enum Optional<T> { // a generic type, like Array<Element> or Dictionary<Key,Value> 
+case nonecase some(<T>) // the some case has associated data of type T }But this type is so important that it has a lot of special syntax that other types don’t have ...
+
+
+*********************************
+
+Four Essential Data Structure-building Concepts in Swift  class  struct  enum  protocol
+
+
+
+
+classSupports object-oriented designSingle inheritance of both functionality and data (i.e. instance variables)Reference type (classes are stored in the heap and are passed around via pointers)Heap is automatically “kept clean” by Swift (via reference counting, not garbage collection) Examples: ViewController, UIButton, Concentration
+
+
+strongstrong is “normal” reference countingAs long as anyone, anywhere has a strong pointer to an instance, it will stay in the heapweakweak means “if no one else is interested in this, then neither am I, set me to nil in that case” Because it has to be nil-able, weak only applies to Optional pointers to reference typesA weak pointer will NEVER keep an object in the heapGreat example: outlets (strongly held by the view hierarchy, so outlets can be weak)   unownedunowned means “don’t reference count this; crash if I’m wrong”This is very rarely usedUsually only to break memory cycles between objects (more on that in a little while)
+
+
+
+
+structValue type (structs don’t live in the heap and are passed around by copying them) Very efficient “copy on write” is automatic in SwiftThis copy on write behavior requires you to mark mutating methodsNo inheritance (of data)Mutability controlled via let (e.g. you can’t add elements to an Array assigned by let) Supports functional programming designExamples: Card, Array, Dictionary, String, Character, Int, Double, UInt32
+
+
+
+
+enumUsed for variables that have one of a discrete set of valuesEach option for that discrete value can have “associated data” with itThe associated data is the only storage that an enum can have (no instance variables) Value type (i.e. passed around by copying)Can have methods and computed (only) propertiesExample: we’ll create a PlayingCard struct that uses Rank and Suit enums
+
+
+
+protocolA type which is a declaration of functionality onlyNo data storage of any kind (so it doesn’t make sense to say it’s a “value” or “reference” type) Essentially provides multiple inheritance (of functionality only, not storage) in SwiftWe’ll “ease into” learning about protocols since it’s new to most of youLet’s dive a little deeper into protocols ...
+
+
