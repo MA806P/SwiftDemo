@@ -74,5 +74,11 @@ Use ..< to make a range that omits its upper value, and use ... to make a range 
 Use func to declare a function. Call a function by following its name with a list of arguments in parentheses. Use -> to separate the parameter names and types from the function’s return type.
 
 
+#### Objects and Classes
+
+Use class followed by the class’s name to create a class. A property declaration in a class is written the same way as a constant or variable declaration, except that it is in the context of a class. Likewise, method and function declarations are written the same way.
+
+
+
 
 
