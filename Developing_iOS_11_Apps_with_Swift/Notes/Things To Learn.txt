@@ -1,5 +1,9 @@
 Developing iOS 11 Apps with Swift, Stanford CS193p
 
+
+
+Lecture 1, 2
+
 Concentration Demo
 1. rename @IBOutlet name of var
 2. use Outlet Collections
@@ -11,6 +15,10 @@ Concentration Demo
 
 
 
+
+
+
+Lecture 3
 *********************************
 
 enum
@@ -86,6 +94,22 @@ enumUsed for variables that have one of a discrete set of valuesEach option fo
 
 
 
-protocolA type which is a declaration of functionality onlyNo data storage of any kind (so it doesn’t make sense to say it’s a “value” or “reference” type) Essentially provides multiple inheritance (of functionality only, not storage) in SwiftWe’ll “ease into” learning about protocols since it’s new to most of youLet’s dive a little deeper into protocols ...
+protocolA type which is a declaration of functionality onlyNo data storage of any kind (so it doesn’t make sense to say it’s a “value” or “reference” type) Essentially provides multiple inheritance (of functionality only, not storage) in Swift
+
+Any protocol that has optional methods must be marked @objc.And any class that implements an optional protocol must inherit from NSObject. These sorts of protocols are used often in iOS for delegation (more later on this). Except for delegation, a protocol with optional methods is rarely (if ever) used. As you can tell from the @objc designation, it’s mostly for backwards compatibility.
+
+
+protocol SomeProtocol : InheritedProtocol1, InheritedProtocol2 {      var someProperty: Int { get set }      func aMethod(arg1: Double, anotherArgument: String) -> SomeType      mutating func changeIt()      init(arg: Type)}Anyone that implements SomeProtocol must also implement InheritedProtocol1 and 2 You must specify whether a property is get only or both get and setAny functions that are expected to mutate the receiver should be marked mutating(unless you are going to restrict your protocol to class implementers only with class keyword) You can even specify that implementers must implement a given initializer
+
+
+extension Something : SomeProtocol {// implementation of SomeProtocol here// no stored properties though }
+You are allowed to add protocol conformance via an extension
+
+
+
+
+
+
+
 
 
