@@ -94,6 +94,10 @@ enumUsed for variables that have one of a discrete set of valuesEach option fo
 
 
 
+
+Lecture 4
+*********************************
+
 protocolA type which is a declaration of functionality onlyNo data storage of any kind (so it doesn’t make sense to say it’s a “value” or “reference” type) Essentially provides multiple inheritance (of functionality only, not storage) in Swift
 
 Any protocol that has optional methods must be marked @objc.And any class that implements an optional protocol must inherit from NSObject. These sorts of protocols are used often in iOS for delegation (more later on this). Except for delegation, a protocol with optional methods is rarely (if ever) used. As you can tell from the @objc designation, it’s mostly for backwards compatibility.
@@ -102,13 +106,40 @@ Any protocol that has optional methods must be marked @objc.And any class that 
 protocol SomeProtocol : InheritedProtocol1, InheritedProtocol2 {      var someProperty: Int { get set }      func aMethod(arg1: Double, anotherArgument: String) -> SomeType      mutating func changeIt()      init(arg: Type)}Anyone that implements SomeProtocol must also implement InheritedProtocol1 and 2 You must specify whether a property is get only or both get and setAny functions that are expected to mutate the receiver should be marked mutating(unless you are going to restrict your protocol to class implementers only with class keyword) You can even specify that implementers must implement a given initializer
 
 
+Claims of conformance to protocols are listed after the superclass for a class (obviously, enums and structs would not have the superclass part)Any number of protocols can be implemented by a given class, struct or enum
+
+class SomeClass : SuperclassOfSomeClass, SomeProtocol, AnotherProtocol {// implementation of SomeClass here, including ...      required init(...)}In a class, inits must be marked required (or otherwise a subclass might not conform)
+
 extension Something : SomeProtocol {// implementation of SomeProtocol here// no stored properties though }
 You are allowed to add protocol conformance via an extension
 
 
 
 
+string
+The characters in a StringA String is made up of Unicodes, but there’s also the concept of a Character. A Character is what a human would perceive to be a single lexical character. This is true even if a single Character is made up of multiple Unicodes.
 
+
+Function Types
+Functions are people* too! (* er, types)You can declare a variable (or parameter to a method or whatever) to be of type “function” You’ll declare it with the types of the functions arguments (and return type) includedYou can do this anywhere any other type is allowed
+
+Closures
+Often you want to create the function “on the fly” (rather than already-existing like sqrt). You can do this “in line” using a closure.Imagine we had a function that changed the sign of its argument ...func changeSign(operand: Double) -> Double { return -operand }We could use it instead of sqrt ...var operation: (Double) -> Doubleoperation = changeSignlet result = operation(4.0) // result will be -4.0
+
+
+operation = (operand: Double) -> Double { return -operand }
+operation = { (operand: Double) -> Double in return -operand }
+operation = { (operand: Double) in return -operand }
+operation = { (operand) in return -operand }
+operation = { (operand) in -operand }
+operation = { -$0 }
+
+
+Where do we use closures?Array has a method called map which takes a function as an argument.It applies that function to each element of the Array to create and return a new Array.let primes = [2.0, 3.0, 5.0, 7.0, 11.0]let negativePrimes = primes.map({ -$0 }) // [-2.0, -3.0, -5.0, -7.0, -11.0]let invertedPrimes = primes.map() { 1.0/$0 } // [0.5, 0.333, 0.2, etc.]let primeStrings = primes.map { String($0) } // [“2.0”,”3.0”,”5.0”,”7.0”,”11.0”]
+
+
+
+Closures are regular types, so they can be put in Arrays, Dictionarys, etc. When this happens, they are stored in the heap (i.e. they are reference types).What is more, they “capture” variables they use from the surrounding code into the heap too. Those captured variables need to stay in the heap as long as the closure stays in the heap.var ltuae = 42operation = { ltuae * $0 } // “captures” the ltuae var because it’s needed for this closure arrayOfOperations.append(operation)// if we later change ltuae, then the next time we evaluate operation it will reflect that// even if we leave the scope (function or whatever) that this code is in!
 
 
 
