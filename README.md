@@ -78,6 +78,8 @@ Use func to declare a function. Call a function by following its name with a lis
 
 Use class followed by the class’s name to create a class. A property declaration in a class is written the same way as a constant or variable declaration, except that it is in the context of a class. Likewise, method and function declarations are written the same way.
 
+#### Protocols and Extensions
+
 
 
 
