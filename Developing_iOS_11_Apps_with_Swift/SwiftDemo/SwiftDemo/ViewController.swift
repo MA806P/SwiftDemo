@@ -10,7 +10,7 @@ import UIKit
 
 class ViewController: UITableViewController {
 
-    let dataArray = ["Concentration"]
+    let dataArray = ["Concentration", "PlayingCard"]
     
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -25,8 +25,9 @@ class ViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 0 {
-            
             self.navigationController?.present(ConcentrationController(), animated: true, completion: nil)
+        } else if indexPath.row == 1 {
+            self.navigationController?.present(PlayingCardController(), animated: true, completion: nil)
         }
     }
     
