@@ -9,7 +9,15 @@
 import Foundation
 
 struct PlayingCard {
+    var suit: Suit
+    var rank: Rank
     
+    enum Suit: Int {
+        case spades
+    }
     
+    enum Rank {
+        
+    }
     
 }
