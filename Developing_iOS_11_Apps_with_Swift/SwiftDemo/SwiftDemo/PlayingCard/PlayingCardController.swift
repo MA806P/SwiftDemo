@@ -16,6 +16,13 @@ class PlayingCardController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.white
         
+        let closeBtn = UIButton(frame: CGRect(x:20, y:20, width:40, height:40))
+        closeBtn.setTitle("X", for: .normal)
+        closeBtn.setTitleColor(UIColor.black, for: .normal)
+        closeBtn.addTarget(self, action: #selector(PlayingCardController.closeBtnAction), for: .touchUpInside)
+        self.view.addSubview(closeBtn)
+        
+        
         for _ in 1...10 {
             if let card = deck.draw() {
                 print("\(card)")
@@ -26,7 +33,12 @@ class PlayingCardController: UIViewController {
         
         
     }
+    
+    @objc func closeBtnAction() {
+        self.dismiss(animated: true, completion: nil)
+    }
 
     
 
 }
+
