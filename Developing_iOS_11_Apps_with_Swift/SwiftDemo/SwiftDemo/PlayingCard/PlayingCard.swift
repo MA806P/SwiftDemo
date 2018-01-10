@@ -8,24 +8,32 @@
 
 import Foundation
 
-struct PlayingCard {
+struct PlayingCard: CustomStringConvertible {
     
-    //: CustomStringConvertible
-    //var description: String { return "\(suit)\(rank)"}
+    var description: String { return "\(suit)\(rank)" }
     
     var suit: Suit
     var rank: Rank
     
-    enum Suit: String {
+    enum Suit: String, CustomStringConvertible {
         case spades = "♠️"
         case hearts = "♥️"
         case clubs = "♣️"
         case diamonds = "♦️"
         
         static var all = [Suit.spades, .hearts, .clubs, .diamonds]
+        
+        var description: String {
+            switch self {
+            case .spades: return "♠️"
+            case .hearts: return "♥️"
+            case .clubs: return "♣️"
+            case .diamonds: return "♦️"
+            }
+        }
     }
     
-    enum Rank {
+    enum Rank: CustomStringConvertible {
         case ace
         case face(String)
         case numeric(Int)
@@ -51,6 +59,19 @@ struct PlayingCard {
             return allRanks
         }
         
+        
+        var description: String {
+            switch self {
+            case .ace: return "A"
+            case .numeric(let pips): return String(pips)
+            case .face(let kind): return kind
+            }
+            
+        }
+        
     }
+    
+    
+    
     
 }
