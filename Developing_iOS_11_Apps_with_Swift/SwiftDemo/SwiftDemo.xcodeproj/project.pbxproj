@@ -19,6 +19,7 @@
 		18769A161FFF968300F88C6F /* PlayingCardDeck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18769A151FFF968300F88C6F /* PlayingCardDeck.swift */; };
 		DA29C33F1FC39DD800E240F0 /* Concentration.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA29C33E1FC39DD800E240F0 /* Concentration.swift */; };
 		DA29C3411FC39DE200E240F0 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA29C3401FC39DE200E240F0 /* Card.swift */; };
+		DA95A7F82007780A001D6B23 /* PlayingCard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA95A7F72007780A001D6B23 /* PlayingCard.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		18769A151FFF968300F88C6F /* PlayingCardDeck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayingCardDeck.swift; sourceTree = "<group>"; };
 		DA29C33E1FC39DD800E240F0 /* Concentration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Concentration.swift; sourceTree = "<group>"; };
 		DA29C3401FC39DE200E240F0 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
+		DA95A7F72007780A001D6B23 /* PlayingCard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PlayingCard.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +57,7 @@
 				182311B21FFCE19300A8C0F1 /* PlayingCardController.swift */,
 				182311B41FFCE20900A8C0F1 /* PlayingCard.swift */,
 				18769A151FFF968300F88C6F /* PlayingCardDeck.swift */,
+				DA95A7F72007780A001D6B23 /* PlayingCard.storyboard */,
 			);
 			path = PlayingCard;
 			sourceTree = "<group>";
@@ -172,6 +175,7 @@
 				184B82221FC02D0A00C11AB3 /* Assets.xcassets in Resources */,
 				184B82201FC02D0A00C11AB3 /* Main.storyboard in Resources */,
 				184B82311FC0322200C11AB3 /* ConcentrationController.xib in Resources */,
+				DA95A7F82007780A001D6B23 /* PlayingCard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
