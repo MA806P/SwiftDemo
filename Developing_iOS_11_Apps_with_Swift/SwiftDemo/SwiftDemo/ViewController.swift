@@ -27,7 +27,10 @@ class ViewController: UITableViewController {
         if indexPath.row == 0 {
             self.navigationController?.present(ConcentrationController(), animated: true, completion: nil)
         } else if indexPath.row == 1 {
-            self.navigationController?.present(PlayingCardController(), animated: true, completion: nil)
+            //self.navigationController?.present(PlayingCardController(), animated: true, completion: nil)
+            
+            let playingCardController = UIStoryboard.init(name: "PlayingCard", bundle:nil).instantiateInitialViewController()!
+            self.navigationController?.pushViewController(playingCardController, animated: true)
         }
     }
     
