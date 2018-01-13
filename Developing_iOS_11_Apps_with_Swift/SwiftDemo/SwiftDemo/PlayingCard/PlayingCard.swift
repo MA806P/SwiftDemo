@@ -10,7 +10,7 @@ import Foundation
 
 struct PlayingCard: CustomStringConvertible {
     
-    var description: String { return "\(suit)\(rank)" }
+    var description: String { return "\(rank)\(suit)" }
     
     var suit: Suit
     var rank: Rank

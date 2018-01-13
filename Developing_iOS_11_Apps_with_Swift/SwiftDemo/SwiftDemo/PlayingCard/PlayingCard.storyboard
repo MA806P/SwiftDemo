@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="TIS-tY-o3l">
-    <device id="retina4_7" orientation="portrait">
+    <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -15,15 +16,51 @@
             <objects>
                 <viewController id="TIS-tY-o3l" customClass="PlayingCardController" customModule="SwiftDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="R5y-bC-PrG">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <subviews>
+                            <view opaque="NO" contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="Ljg-uD-7W2" customClass="PlayingCardView" customModule="SwiftDemo" customModuleProvider="target">
+                                <rect key="frame" x="16" y="136.33333333333331" width="343" height="549.33333333333348"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <gestureRecognizers/>
+                                <constraints>
+                                    <constraint firstAttribute="width" priority="750" constant="800" id="No6-VV-G4j"/>
+                                    <constraint firstAttribute="width" secondItem="Ljg-uD-7W2" secondAttribute="height" multiplier="5:8" id="vwC-RM-fh2"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="rank">
+                                        <integer key="value" value="13"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isFaceUp" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="iGw-7q-Ffm" appends="YES" id="UJW-Uy-G6A"/>
+                                </connections>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="FuI-up-NcE" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Ljg-uD-7W2" secondAttribute="trailing" constant="16" id="1s2-EV-ZJH"/>
+                            <constraint firstItem="Ljg-uD-7W2" firstAttribute="centerX" secondItem="FuI-up-NcE" secondAttribute="centerX" id="UDC-8d-1OB"/>
+                            <constraint firstItem="FuI-up-NcE" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Ljg-uD-7W2" secondAttribute="bottom" constant="16" id="kza-0J-03z"/>
+                            <constraint firstItem="Ljg-uD-7W2" firstAttribute="top" relation="greaterThanOrEqual" secondItem="FuI-up-NcE" secondAttribute="top" constant="16" id="xMe-Q2-Fhh"/>
+                            <constraint firstItem="Ljg-uD-7W2" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="FuI-up-NcE" secondAttribute="leading" constant="16" id="y2k-3g-Ilt"/>
+                            <constraint firstItem="Ljg-uD-7W2" firstAttribute="centerY" secondItem="FuI-up-NcE" secondAttribute="centerY" id="yVs-Uh-Pyn"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="FuI-up-NcE"/>
                     </view>
+                    <connections>
+                        <outlet property="playingCardView" destination="Ljg-uD-7W2" id="IrV-pN-ggg"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wVo-gn-A5e" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="iGw-7q-Ffm">
+                    <connections>
+                        <action selector="flipCard:" destination="TIS-tY-o3l" id="q6r-ok-Gfy"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-202" y="214"/>
+            <point key="canvasLocation" x="-231.19999999999999" y="231.2807881773399"/>
         </scene>
     </scenes>
 </document>

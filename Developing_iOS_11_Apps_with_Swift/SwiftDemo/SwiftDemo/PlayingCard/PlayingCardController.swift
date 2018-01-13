@@ -12,33 +12,52 @@ class PlayingCardController: UIViewController {
 
     var deck = PlayingCardDeck()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.view.backgroundColor = UIColor.white
+    @IBOutlet weak var playingCardView: PlayingCardView! {
         
-        let closeBtn = UIButton(frame: CGRect(x:20, y:20, width:40, height:40))
-        closeBtn.setTitle("X", for: .normal)
-        closeBtn.setTitleColor(UIColor.black, for: .normal)
-        closeBtn.addTarget(self, action: #selector(PlayingCardController.closeBtnAction), for: .touchUpInside)
-        self.view.addSubview(closeBtn)
-        
-        
-        for _ in 1...10 {
-            if let card = deck.draw() {
-                print("\(card)")
-            }
+        didSet {
+            let swipe = UISwipeGestureRecognizer(target: self, action: #selector(nextCard))
+            swipe.direction = [.left, .right];
+            playingCardView.addGestureRecognizer(swipe)
+            
+            let pinch = UIPinchGestureRecognizer(target: playingCardView, action: #selector(PlayingCardView.adjustFaceCardScale(byHandlingGestureRecognizedBy:)))
+            playingCardView.addGestureRecognizer(pinch)
+            
         }
         
+    }
+    
+    
+    @IBAction func flipCard(_ sender: UITapGestureRecognizer) {
         
-        
+        switch sender.state {
+        case .ended:
+            playingCardView.isFaceUp = !playingCardView.isFaceUp
+        default:
+            break
+        }
         
     }
     
-    @objc func closeBtnAction() {
-        self.dismiss(animated: true, completion: nil)
+    @objc func nextCard() {
+        if let card = deck.draw() {
+            playingCardView.rank = card.rank.order
+            playingCardView.suit = card.suit.rawValue
+        }
+        
     }
-
     
-
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        //self.view.backgroundColor = UIColor.white
+        
+//        for _ in 1...10 {
+//            if let card = deck.draw() {
+//                print("\(card)")
+//            }
+//        }
+        self.navigationController?.navigationBar.isHidden = true
+        
+    }
+    
 }
 

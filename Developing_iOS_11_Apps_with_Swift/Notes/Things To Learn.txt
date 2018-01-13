@@ -144,3 +144,84 @@ Closures are regular types, so they can be put in Arrays, Dictionarys, etc. When
 
 
 
+
+
+Lecture 6
+*********************************
+
+
+在自定义的View中画图，draw()
+下面两种方法画圆：
+override func draw(_ rect: CGRect) {
+//        if let context = UIGraphicsGetCurrentContext() {
+//            context.addArc(center: CGPoint(x: bounds.midX, y: bounds.midY), radius: 100, startAngle: 0, endAngle: 2*CGFloat.pi, clockwise: true)
+//            context.setLineWidth(5.0)
+//            UIColor.lightGray.setFill()
+//            UIColor.cyan.setStroke()
+//            context.strokePath()
+//            context.fillPath()
+//        }
+        
+        let path = UIBezierPath()
+        path.addArc(withCenter: CGPoint(x: bounds.midX, y: bounds.midY), radius: 100, startAngle: 0, endAngle: 2*CGFloat.pi, clockwise: true)
+        path.lineWidth = 5.0;
+        UIColor.lightGray.setFill()
+        UIColor.cyan.setStroke()
+        path.stroke()
+        path.fill()
+    }
+画好之后，如果是竖屏切换为横屏，圆就会压缩，在设置 View的content mode为Redraw后，切换横竖屏就会重新绘制还是圆的。
+
+
+在设置字体的时候，想要根据手机系统设置的字体大小来改变应用的字体大小的时候需要按照下面来写：
+var font = UIFont.preferredFont(forTextStyle: .body).withSize(fontSize)
+font = UIFontMetrics(forTextStyle: .body).scaledFont(for: font) 
+
+
+在画出纸牌后，竖屏切换为横屏，然后再切换回来竖屏，重置label的宽度时有个问题：
+private func configureCornerLabel(_ label: UILabel) {
+
+        print("111 - \(label.frame.size)")
+
+        label.attributedText = cornerString
+        label.frame.size = CGSize.zero
+        label.sizeToFit()
+        label.isHidden = !isFaceUp
+	
+	print("222 - \(label.frame.size)")
+}
+切换横竖屏时会调用layoutSubviews()，然后调用上面的方法，因为横竖的label的宽度不一样，如果不写 label.frame.size = CGSize.zero  前后打印的size为 111 - (31.0, 64.5)  222 - (31.0, 112.5)，不知为何宽度没变，高度变了
+
+
+
+在改变系统的字体大小后立即打开之前运行的应用，字体不会相应改变，可通过下面的系统方法监听重新布局
+override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        setNeedsDisplay()
+        setNeedsLayout()
+    }
+
+
+
+这是一个神技能，在xib中直接显示代码的视图 @IBDesignable，在变量上加上@IBInspectable右边栏中就会显示出输入框 修改后就直接体现在视图上，好神奇
+@IBDesignable
+class PlayingCardView: UIView {
+    
+    @IBInspectable
+    var rank: Int = 12
+    @IBInspectable
+    var suit: String = "♥️"
+    @IBInspectable
+    var isFaceUp: Bool = false
+。。。。
+}
+
+
+
+在处理View的手势事件
+let pinch = UIPinchGestureRecognizer(target: playingCardView, action: #selector(PlayingCardView.adjustFaceCardScale(byHandlingGestureRecognizedBy:)))
+playingCardView.addGestureRecognizer(pinch)
+
+
+
+
+

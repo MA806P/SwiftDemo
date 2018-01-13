@@ -20,6 +20,7 @@
 		DA29C33F1FC39DD800E240F0 /* Concentration.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA29C33E1FC39DD800E240F0 /* Concentration.swift */; };
 		DA29C3411FC39DE200E240F0 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA29C3401FC39DE200E240F0 /* Card.swift */; };
 		DA95A7F82007780A001D6B23 /* PlayingCard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA95A7F72007780A001D6B23 /* PlayingCard.storyboard */; };
+		DAF827C02009AD1100F91C63 /* PlayingCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF827BF2009AD1100F91C63 /* PlayingCardView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		DA29C33E1FC39DD800E240F0 /* Concentration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Concentration.swift; sourceTree = "<group>"; };
 		DA29C3401FC39DE200E240F0 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		DA95A7F72007780A001D6B23 /* PlayingCard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PlayingCard.storyboard; sourceTree = "<group>"; };
+		DAF827BF2009AD1100F91C63 /* PlayingCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayingCardView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,9 +57,10 @@
 			isa = PBXGroup;
 			children = (
 				182311B21FFCE19300A8C0F1 /* PlayingCardController.swift */,
+				DA95A7F72007780A001D6B23 /* PlayingCard.storyboard */,
 				182311B41FFCE20900A8C0F1 /* PlayingCard.swift */,
 				18769A151FFF968300F88C6F /* PlayingCardDeck.swift */,
-				DA95A7F72007780A001D6B23 /* PlayingCard.storyboard */,
+				DAF827BF2009AD1100F91C63 /* PlayingCardView.swift */,
 			);
 			path = PlayingCard;
 			sourceTree = "<group>";
@@ -187,6 +190,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				184B82301FC0322200C11AB3 /* ConcentrationController.swift in Sources */,
+				DAF827C02009AD1100F91C63 /* PlayingCardView.swift in Sources */,
 				DA29C33F1FC39DD800E240F0 /* Concentration.swift in Sources */,
 				182311B31FFCE19300A8C0F1 /* PlayingCardController.swift in Sources */,
 				DA29C3411FC39DE200E240F0 /* Card.swift in Sources */,
