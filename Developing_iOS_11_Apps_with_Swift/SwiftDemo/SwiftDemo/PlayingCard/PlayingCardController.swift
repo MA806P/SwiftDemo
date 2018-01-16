@@ -21,7 +21,6 @@ class PlayingCardController: UIViewController {
             
             let pinch = UIPinchGestureRecognizer(target: playingCardView, action: #selector(PlayingCardView.adjustFaceCardScale(byHandlingGestureRecognizedBy:)))
             playingCardView.addGestureRecognizer(pinch)
-            
         }
         
     }
@@ -48,7 +47,7 @@ class PlayingCardController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //self.view.backgroundColor = UIColor.white
+        
         
 //        for _ in 1...10 {
 //            if let card = deck.draw() {
