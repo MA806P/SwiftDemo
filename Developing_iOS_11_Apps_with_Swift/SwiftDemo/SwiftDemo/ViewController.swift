@@ -25,9 +25,12 @@ class ViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 0 {
-            self.navigationController?.present(ConcentrationController(), animated: true, completion: nil)
+            //self.navigationController?.present(ConcentrationController(), animated: true, completion: nil)
+            
+            let concentrationController = UIStoryboard.init(name: "Concentration", bundle: nil).instantiateInitialViewController()!
+            self.navigationController?.pushViewController(concentrationController, animated: true)
+            
         } else if indexPath.row == 1 {
-            //self.navigationController?.present(PlayingCardController(), animated: true, completion: nil)
             
             let playingCardController = UIStoryboard.init(name: "PlayingCard", bundle:nil).instantiateInitialViewController()!
             self.navigationController?.pushViewController(playingCardController, animated: true)
@@ -40,6 +43,10 @@ class ViewController: UITableViewController {
         
         //self.tableView.register(UINib.init(nibName: "RowCell", bundle: nil), forCellReuseIdentifier: "RowCellIdentifier")
         self.tableView.register(UITableViewCell.classForCoder(), forCellReuseIdentifier: "RowCellIdentifier")
+        
+        //self.navigationController?.navigationBar.isHidden = true
+        //isNavigationBarHidden, if set true can not slide back 
+        //self.navigationController?.isNavigationBarHidden = true;
     }
 
     

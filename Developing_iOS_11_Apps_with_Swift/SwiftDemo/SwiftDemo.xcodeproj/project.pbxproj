@@ -15,10 +15,11 @@
 		184B82221FC02D0A00C11AB3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 184B82211FC02D0A00C11AB3 /* Assets.xcassets */; };
 		184B82251FC02D0A00C11AB3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 184B82231FC02D0A00C11AB3 /* LaunchScreen.storyboard */; };
 		184B82301FC0322200C11AB3 /* ConcentrationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184B822E1FC0322200C11AB3 /* ConcentrationController.swift */; };
-		184B82311FC0322200C11AB3 /* ConcentrationController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 184B822F1FC0322200C11AB3 /* ConcentrationController.xib */; };
 		18769A161FFF968300F88C6F /* PlayingCardDeck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18769A151FFF968300F88C6F /* PlayingCardDeck.swift */; };
 		DA29C33F1FC39DD800E240F0 /* Concentration.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA29C33E1FC39DD800E240F0 /* Concentration.swift */; };
 		DA29C3411FC39DE200E240F0 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA29C3401FC39DE200E240F0 /* Card.swift */; };
+		DA56478E2013219F00CB887F /* Concentration.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA56478D2013219F00CB887F /* Concentration.storyboard */; };
+		DA564790201327C800CB887F /* ConcentrationThemeChooseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA56478F201327C800CB887F /* ConcentrationThemeChooseController.swift */; };
 		DA95A7F82007780A001D6B23 /* PlayingCard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA95A7F72007780A001D6B23 /* PlayingCard.storyboard */; };
 		DAF827C02009AD1100F91C63 /* PlayingCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF827BF2009AD1100F91C63 /* PlayingCardView.swift */; };
 /* End PBXBuildFile section */
@@ -34,10 +35,11 @@
 		184B82241FC02D0A00C11AB3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		184B82261FC02D0A00C11AB3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		184B822E1FC0322200C11AB3 /* ConcentrationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcentrationController.swift; sourceTree = "<group>"; };
-		184B822F1FC0322200C11AB3 /* ConcentrationController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConcentrationController.xib; sourceTree = "<group>"; };
 		18769A151FFF968300F88C6F /* PlayingCardDeck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayingCardDeck.swift; sourceTree = "<group>"; };
 		DA29C33E1FC39DD800E240F0 /* Concentration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Concentration.swift; sourceTree = "<group>"; };
 		DA29C3401FC39DE200E240F0 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
+		DA56478D2013219F00CB887F /* Concentration.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Concentration.storyboard; sourceTree = "<group>"; };
+		DA56478F201327C800CB887F /* ConcentrationThemeChooseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcentrationThemeChooseController.swift; sourceTree = "<group>"; };
 		DA95A7F72007780A001D6B23 /* PlayingCard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PlayingCard.storyboard; sourceTree = "<group>"; };
 		DAF827BF2009AD1100F91C63 /* PlayingCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayingCardView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -108,7 +110,8 @@
 			isa = PBXGroup;
 			children = (
 				184B822E1FC0322200C11AB3 /* ConcentrationController.swift */,
-				184B822F1FC0322200C11AB3 /* ConcentrationController.xib */,
+				DA56478D2013219F00CB887F /* Concentration.storyboard */,
+				DA56478F201327C800CB887F /* ConcentrationThemeChooseController.swift */,
 				DA29C33E1FC39DD800E240F0 /* Concentration.swift */,
 				DA29C3401FC39DE200E240F0 /* Card.swift */,
 			);
@@ -177,7 +180,7 @@
 				184B82251FC02D0A00C11AB3 /* LaunchScreen.storyboard in Resources */,
 				184B82221FC02D0A00C11AB3 /* Assets.xcassets in Resources */,
 				184B82201FC02D0A00C11AB3 /* Main.storyboard in Resources */,
-				184B82311FC0322200C11AB3 /* ConcentrationController.xib in Resources */,
+				DA56478E2013219F00CB887F /* Concentration.storyboard in Resources */,
 				DA95A7F82007780A001D6B23 /* PlayingCard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -197,6 +200,7 @@
 				184B821D1FC02D0A00C11AB3 /* ViewController.swift in Sources */,
 				18769A161FFF968300F88C6F /* PlayingCardDeck.swift in Sources */,
 				182311B51FFCE20900A8C0F1 /* PlayingCard.swift in Sources */,
+				DA564790201327C800CB887F /* ConcentrationThemeChooseController.swift in Sources */,
 				184B821B1FC02D0A00C11AB3 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

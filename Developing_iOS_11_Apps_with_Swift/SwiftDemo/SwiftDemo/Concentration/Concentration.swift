@@ -64,6 +64,16 @@ struct Concentration
             let card = Card()
             cards += [card, card]
         }
+        
+        
+        for index in 0..<cards.count {
+            let newIndex = Int(arc4random_uniform(UInt32(cards.count - index))) + index
+            if index != newIndex {
+                cards.swapAt(index, newIndex)
+            }
+            
+        }
+        
     }
     
 }

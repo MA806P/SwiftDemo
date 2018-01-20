@@ -54,8 +54,6 @@ class PlayingCardController: UIViewController {
 //                print("\(card)")
 //            }
 //        }
-        self.navigationController?.navigationBar.isHidden = true
-        
     }
     
 }
