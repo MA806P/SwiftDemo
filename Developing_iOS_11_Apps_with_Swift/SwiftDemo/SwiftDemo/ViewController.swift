@@ -27,9 +27,9 @@ class ViewController: UITableViewController {
         if indexPath.row == 0 {
             //self.navigationController?.present(ConcentrationController(), animated: true, completion: nil)
             
-            let concentrationController = UIStoryboard.init(name: "Concentration", bundle: nil).instantiateInitialViewController()!
+            let concentrationSplitViewController = UIStoryboard.init(name: "Concentration", bundle: nil).instantiateInitialViewController()!
             //self.navigationController?.pushViewController(concentrationController, animated: true)
-            self.navigationController?.present(concentrationController, animated: true, completion: nil)
+            self.navigationController?.present(concentrationSplitViewController, animated: true, completion: nil)
             
         } else if indexPath.row == 1 {
             

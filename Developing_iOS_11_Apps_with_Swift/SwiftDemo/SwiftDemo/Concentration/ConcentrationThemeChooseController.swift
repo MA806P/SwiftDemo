@@ -21,12 +21,20 @@ class ConcentrationThemeChooseController: UIViewController, UISplitViewControlle
         splitViewController?.delegate = self;
     }
     
+    
+    // This method is called when a split view controller is collapsing its children for a transition to a compact-width size class. Override this
+    // method to perform custom adjustments to the view controller hierarchy of the target controller.  When you return from this method, you're
+    // expected to have modified the `primaryViewController` so as to be suitable for display in a compact-width split view controller, potentially
+    // using `secondaryViewController` to do so.  Return YES to prevent UIKit from applying its default behavior; return NO to request that UIKit
+    // perform its default collapsing behavior.
     func splitViewController(
         _ splitViewController: UISplitViewController,
         collapseSecondary secondaryViewController: UIViewController,
         onto primaryViewController: UIViewController
         ) -> Bool {
         
+        //this small size iPhone, first come in show theme choose view
+        //if return true, system will not push secondaryViewController onto primaryViewController
         if let cvc = secondaryViewController as? ConcentrationController {
             if cvc.theme == nil {
                 return true
