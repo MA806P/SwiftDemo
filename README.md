@@ -144,5 +144,8 @@ let sortedNumbers = numbers.sorted { $0 > $1 }
 
 #### Objects and Classes
 
+ an initializer to set up the class when an instance is created. Use init to create one.
+ 
+ 
 
 
