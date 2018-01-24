@@ -144,7 +144,24 @@ let sortedNumbers = numbers.sorted { $0 > $1 }
 
 #### Objects and Classes
 
- an initializer to set up the class when an instance is created. Use init to create one.
+ An initializer to set up the class when an instance is created. Use init to create one.
+ Every property needs a value assigned—either in its declaration or in the initializer.
+
+ Use deinit to create a deinitializer if you need to perform some cleanup before the object is deallocated.
+ 
+ Subclasses include their superclass name after their class name, separated by a colon.
+ 
+ Methods on a subclass that override the superclass’s implementation are marked with override—overriding a method by accident, without  override, is detected by the compiler as an error. The compiler also detects methods with override that don’t actually override any     method in the superclass.
+ 
+ In addition to simple properties that are stored, properties can have a getter and a setter.
+ 
+ 
+ #### Enumerations and Structures
+ 
+ 
+ 
+ 
+ 
  
  
 
