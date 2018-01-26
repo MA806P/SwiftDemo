@@ -158,6 +158,8 @@ let sortedNumbers = numbers.sorted { $0 > $1 }
  
  #### Enumerations and Structures
  
+ Use enum to create an enumeration. Like classes and all other named types, enumerations can have methods associated with them.
+ 
  
  
  
