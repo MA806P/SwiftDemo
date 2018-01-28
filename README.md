@@ -136,9 +136,10 @@ numbers.map({ (number: Int) -> Int in
 ```
 
 You have several options for writing closures more concisely. 
+```
 let mappedNumbers = numbers.map({ number in 3 * number })
 let sortedNumbers = numbers.sorted { $0 > $1 }
-
+```
 
 
 
@@ -154,7 +155,7 @@ let sortedNumbers = numbers.sorted { $0 > $1 }
  Methods on a subclass that override the superclass’s implementation are marked with override—overriding a method by accident, without  override, is detected by the compiler as an error. The compiler also detects methods with override that don’t actually override any     method in the superclass.
  
  In addition to simple properties that are stored, properties can have a getter and a setter.
- 
+
  
  #### Enumerations and Structures
  
