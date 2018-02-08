@@ -231,5 +231,23 @@ Notice the use of the mutating keyword in the declaration of SimpleStructure to 
 Use extension to add functionality to an existing type, such as new methods and computed properties. You can use an extension to add protocol conformance to a type that is declared elsewhere, or even to a type that you imported from a library or framework.
  
  
+#### Error Handling
+You represent errors using any type that adopts the Error protocol.
+```
+enum PrinterError: Error {
+    case outOfPaper
+    case noToner
+    case onFire
+}
+```
+Use throw to throw an error and throws to mark a function that can throw an error. If you throw an error in a function, the function returns immediately and the code that called the function handles the error.
+```
+func send(job: Int, toPrinter printerName: String) throws -> String {
+    if printerName == "Never Has Toner" {
+        throw PrinterError.noToner
+    }
+    return "Job sent"
+}
+ ```
 
 
