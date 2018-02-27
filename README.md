@@ -269,7 +269,21 @@ do {
 
 #### Generics
 Write a name inside angle brackets to make a generic function or type.
+```
+func makeArray<Item>(repeating item: Item, numberOfTimes: Int) -> [Item] {
+    var result = [Item]()
+    for _ in 0..<numberOfTimes {
+        result.append(item)
+    }
+    return result
+}
+makeArray(repeating: "knock", numberOfTimes: 4)
+```
 You can make generic forms of functions and methods, as well as classes, enumerations, and structures.
+
+
+
+
 
 
 
