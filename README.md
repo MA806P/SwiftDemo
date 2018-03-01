@@ -281,7 +281,7 @@ makeArray(repeating: "knock", numberOfTimes: 4)
 ```
 You can make generic forms of functions and methods, as well as classes, enumerations, and structures.
 
-
+Use where right before the body to specify a list of requirements—for example, to require the type to implement a protocol, to require two types to be the same, or to require a class to have a particular superclass.
 
 
 
