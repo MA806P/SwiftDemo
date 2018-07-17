@@ -146,6 +146,17 @@ import Foundation
 //let newString = String(beginning)
 
 
+
+
+//--------------- Collection Types -----------------
+
+//array set dictionary
+
+
+
+
+
+
 //--------------- Functions and Closures -----------------
 
 //func greet(_ person: String, day: String) -> String {
