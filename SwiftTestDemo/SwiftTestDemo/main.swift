@@ -153,8 +153,54 @@ import Foundation
 //array set dictionary
 
 
+//var a = Array(repeating: 1, count: 3)
+//var b = Array(repeating: 2, count: 3)
+////b += a;
+//print(a+b) //[1, 1, 1, 2, 2, 2]
+//
+//var c = ["1", "2", "3", "4", "5", "6", "7"]
+//c[4...6] = ["e", "f"]
+//print(c) //["1", "2", "3", "4", "e", "f"]
+//
+//for (index, value) in c.enumerated() {
+//    print("item \(index + 1) = \(value)")
+//}
 
 
+
+//var d : Set = ["x", "z", "y"]
+//for i in d.sorted() {
+//    print(i)
+//} // x y z
+
+
+
+//var airports = ["YYZ": "Toronto Pearson", "DUB": "Dublin"]
+//for (airportCode, airportName) in airports {
+//    print("\(airportCode): \(airportName)")
+//}
+//let airportCodes = [String](airports.keys)
+//print(airportCodes)
+//let airportNames = [String](airports.values)
+//print(airportNames)
+
+
+
+
+//--------------- Control Flow -----------------
+
+let base = 3
+let power = 10
+var answer = 1
+for _ in 1...power {
+    answer *= base
+}
+
+
+let minuteInterval = 5
+for tickMark in stride(from: 0, to: 60, by: minuteInterval) {
+    // render the tick mark every 5 minutes (0, 5, 10, 15 ... 45, 50, 55)
+}
 
 
 //--------------- Functions and Closures -----------------
