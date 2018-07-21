@@ -189,18 +189,117 @@ import Foundation
 
 //--------------- Control Flow -----------------
 
-let base = 3
-let power = 10
-var answer = 1
-for _ in 1...power {
-    answer *= base
-}
+//let base = 3
+//let power = 10
+//var answer = 1
+//for _ in 1...power {
+//    answer *= base
+//}
+
+//let minuteInterval = 5
+//for tickMark in stride(from: 0, to: 60, by: minuteInterval) {
+//    // render the tick mark every 5 minutes (0, 5, 10, 15 ... 45, 50, 55)
+//    print(tickMark)
+//}
 
 
-let minuteInterval = 5
-for tickMark in stride(from: 0, to: 60, by: minuteInterval) {
-    // render the tick mark every 5 minutes (0, 5, 10, 15 ... 45, 50, 55)
-}
+//let c: Character = "h"
+//switch c {
+//case "a":
+//    print("a")
+//case "b":
+//    print("b")
+//case "c":
+//    print("c")
+//case "d","e","f":
+//    print("def")
+//case "g"..<"l":
+//    print("g..<l")
+//default:
+//    print("NO")
+//}
+/*
+ the entire switch statement finishes its execution as soon as the first matching switch case is completed, without requiring an explicit break statement.
+ */
+
+
+//let somePoint = (6, 1)
+//switch somePoint {
+//case (0,0):
+//    print("origin")
+//case (_, 0):
+//    print("x-axis")
+//case (0, _):
+//    print("y-axis")
+//case (-2...2, -2...2):
+//    print("inside the box")
+//
+//case (let x, 1):
+//    print(" x value of \(x)")
+//case (1, let y):
+//    print(" y value of \(y)")
+//case let (x, y):
+//    print("somewhere else at (\(x), \(y))")
+////default:
+////    print("outside")
+//
+//}
+
+
+//let a = (1, 1)
+//switch a {
+//case let(x,y) where x == y:
+//    print("x==y")
+//case let(x,y) where x == -y:
+//    print("x==-y")
+//case let(x,y):
+//    print("x=\(x), y=\(y)")
+//}
+
+
+
+//gameLoop: while square != finalSquare {
+//    diceRoll += 1
+//    if diceRoll == 7 { diceRoll = 1 }
+//    switch square + diceRoll {
+//    case finalSquare:
+//        // diceRoll will move us to the final square, so the game is over
+//        break gameLoop
+//    case let newSquare where newSquare > finalSquare:
+//        // diceRoll will move us beyond the final square, so roll again
+//        continue gameLoop
+//    default:
+//        // this is a valid move, so find out its effect
+//        square += diceRoll
+//        square += board[square]
+//    }
+//}
+//print("Game over!")
+
+
+/*A guard statement, like an if statement, executes statements depending on the Boolean value of an expression. You use a guard statement to require that a condition must be true in order for the code after the guard statement to be executed. Unlike an if statement, a guard statement always has an else clause—the code inside the else clause is executed if the condition is not true.*/
+//func greet(person: [String: String]) {
+//    guard let name = person["name"] else {
+//        return
+//    }
+//    print("Hello \(name)!")
+//    guard let location = person["location"] else {
+//        print("I hope the weather is nice near you.")
+//        return
+//    }
+//    print("I hope the weather is nice in \(location).")
+//}
+//greet(person: ["name": "John"])
+//// Prints "Hello John!"
+//// Prints "I hope the weather is nice near you."
+//greet(person: ["name": "Jane", "location": "Cupertino"])
+//// Prints "Hello Jane!"
+//// Prints "I hope the weather is nice in Cupertino."
+//greet(person: ["a":"b"])
+
+
+//Checking API Availability
+//if #available(iOS 10, macOS 10.12, *) {}
 
 
 //--------------- Functions and Closures -----------------
