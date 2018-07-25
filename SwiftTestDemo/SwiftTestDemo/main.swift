@@ -369,32 +369,46 @@ import Foundation
 
 
 
-//In-Out Parameters
-//If you want a function to modify a parameter’s value,
-//and you want those changes to persist after the function call has ended,
-//define that parameter as an in-out parameter instead.
-func swapTwoInts(_ a: inout Int, _ b: inout Int) {
-    let temporaryA = a
-    a = b
-    b = temporaryA
+////In-Out Parameters
+////If you want a function to modify a parameter’s value,
+////and you want those changes to persist after the function call has ended,
+////define that parameter as an in-out parameter instead.
+//func swapTwoInts(_ a: inout Int, _ b: inout Int) {
+//    let temporaryA = a
+//    a = b
+//    b = temporaryA
+//}
+//var a = 1
+//var b = 2
+//swap(&a, &b)
+//print("\(a), \(b)")//2, 1
+
+
+////Function Types
+//// () -> void
+//// (Int, Int) -> Int
+//func addTwoInts(_ a: Int, _ b: Int) -> Int {
+//    return a + b
+//}
+//var mathFunction: (Int, Int) -> Int = addTwoInts
+//print("Result: \(mathFunction(2, 3))")
+
+
+
+//--------------- Closures -----------------
+
+func backward(_ s1: String, _ s2: String) -> Bool {
+    return s1 > s2
 }
-var a = 1
-var b = 2
-swap(&a, &b)
-print("\(a), \(b)")//2, 1
+let names = ["Chris", "Alex", "Ewa", "Barry", "Daniella"]
+var reNames = names.sorted(by: backward)
+print(reNames)
 
-
-//Function Types
-// () -> void
-// (Int, Int) -> Int
-func addTwoInts(_ a: Int, _ b: Int) -> Int {
-    return a + b
-}
-var mathFunction: (Int, Int) -> Int = addTwoInts
-print("Result: \(mathFunction(2, 3))")
-
-
-
+reNames = names.sorted(by: { (s1: String, s2: String) -> Bool in return s1 > s2 })
+reNames = names.sorted(by: { s1, s2 in return s1 > s2 })
+reNames = names.sorted(by: { s1, s2 in s1 > s2 } )
+reNames = names.sorted(by: { $0 > $1 } )
+reNames = names.sorted(by: >)
 
 //--------------- Objects and Classes -----------------
 
