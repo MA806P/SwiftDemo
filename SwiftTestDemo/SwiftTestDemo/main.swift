@@ -397,12 +397,12 @@ import Foundation
 
 //--------------- Closures -----------------
 
-//func backward(_ s1: String, _ s2: String) -> Bool {
-//    return s1 > s2
-//}
-//let names = ["Chris", "Alex", "Ewa", "Barry", "Daniella"]
-//var reNames = names.sorted(by: backward)
-//print(reNames)
+func backward(_ s1: String, _ s2: String) -> Bool {
+    return s1 > s2
+}
+let names = ["Chris", "Alex", "Ewa", "Barry", "Daniella"]
+var reNames = names.sorted(by: backward)
+print(reNames)
 //
 //reNames = names.sorted(by: { (s1: String, s2: String) -> Bool in return s1 > s2 })
 //reNames = names.sorted(by: { s1, s2 in return s1 > s2 })
@@ -411,6 +411,31 @@ import Foundation
 //reNames = names.sorted(by: >)
 
 
+
+//Trailing Closures
+func someFuncThatTakesAClosure(closure: () -> Void) {
+    //func body goes here
+    print("func call")
+}
+//Here's how you call this function without using a trailing closure
+someFuncThatTakesAClosure (closure: {
+    //closure's body goes here
+    print("closure")
+})
+//Here's how you call this function with a trailing closure instead
+someFuncThatTakesAClosure() {
+    //trailing closure's body goes here
+    print("call func")
+}
+
+//If a closure expression is provided as the function or method’s only argument
+//and you provide that expression as a trailing closure,
+//you do not need to write a pair of parentheses ()
+//after the function or method’s name when you call the function
+someFuncThatTakesAClosure {
+    
+}
+reNames = names.sorted { $0 > $1 }
 
 
 
