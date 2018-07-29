@@ -9,8 +9,10 @@
 import Foundation
 
 
+
 //var obj = OCObject()
 //obj.startTimerRunWithGCD()
+
 
 //class Person: NSObject {
 //    var name: String
@@ -18,9 +20,6 @@ import Foundation
 //        self.name = "adsf";
 //    }
 //}
-
-
-
 
 
 
@@ -302,234 +301,9 @@ import Foundation
 //if #available(iOS 10, macOS 10.12, *) {}
 
 
-//--------------- Functions and Closures -----------------
-
-//func greet(_ person: String, day: String) -> String {
-//    return "hello \(person) , today is \(day)"
-//}
-//greet("123", day: "1")
-
-
-//func makeIncrementer() -> ((Int) -> Int) {
-//    func addOne(number: Int) -> Int {
-//        return 1+number
-//    }
-//    return addOne
-//}
-//var increment = makeIncrementer()
-//var test = increment(2)
-
-
-//var numberArray = [1, 2, 3]
-//numberArray.map ({ (number: Int) -> Int in
-//    return number + 1
-//})
-
-////let mappedNumberArray = numberArray.map{number in 3 * number}
-//let mappedNumberArray = numberArray.map{$0 * 3}
-//print(mappedNumberArray) //3, 6, 9
-
-//let sortedNumberArray = numberArray.sorted { $0 > $1 }
-//print(sortedNumberArray) //3, 2, 1
-
-
-//Specifying Argument Labels
-//You write an argument label before the parameter name, separated by a space
-//The use of argument labels can allow a function to be called in an expressive, sentence-like manner,
-//while still providing a function body that is readable and clear in intent.
-//func greet(person: String, from hometown: String) -> String {
-//    return "Hello \(person)!  Glad you could visit from \(hometown)."
-//}
-//print(greet(person: "Bill", from: "Cupertino"))
-//// Prints "Hello Bill!  Glad you could visit from Cupertino."
-
-
-//Default Parameter Values
-//func someFunction(parameterWithoutDefault: Int, parameterWithDefault: Int = 12) {
-//    // If you omit the second argument when calling this function, then
-//    // the value of parameterWithDefault is 12 inside the function body.
-//}
-//someFunction(parameterWithoutDefault: 3, parameterWithDefault: 6) // parameterWithDefault is 6
-//someFunction(parameterWithoutDefault: 4) // parameterWithDefault is 12
-
-
-//Variadic Parameters
-//func arithmeticMean(_ numbers: Double...) -> Double {
-//    var total: Double = 0
-//    for number in numbers {
-//        total += number
-//    }
-//    return total / Double(numbers.count)
-//}
-//arithmeticMean(1, 2, 3, 4, 5)
-// returns 3.0, which is the arithmetic mean of these five numbers
-//arithmeticMean(3, 8.25, 18.75)
-// returns 10.0, which is the arithmetic mean of these three numbers
 
 
 
-
-////In-Out Parameters
-////If you want a function to modify a parameter’s value,
-////and you want those changes to persist after the function call has ended,
-////define that parameter as an in-out parameter instead.
-//func swapTwoInts(_ a: inout Int, _ b: inout Int) {
-//    let temporaryA = a
-//    a = b
-//    b = temporaryA
-//}
-//var a = 1
-//var b = 2
-//swap(&a, &b)
-//print("\(a), \(b)")//2, 1
-
-
-////Function Types
-//// () -> void
-//// (Int, Int) -> Int
-//func addTwoInts(_ a: Int, _ b: Int) -> Int {
-//    return a + b
-//}
-//var mathFunction: (Int, Int) -> Int = addTwoInts
-//print("Result: \(mathFunction(2, 3))")
-
-
-
-
-//--------------- Closures -----------------
-
-//func backward(_ s1: String, _ s2: String) -> Bool {
-//    return s1 > s2
-//}
-//let names = ["Chris", "Alex", "Ewa", "Barry", "Daniella"]
-//var reNames = names.sorted(by: backward)
-//print(reNames)
-////
-////reNames = names.sorted(by: { (s1: String, s2: String) -> Bool in return s1 > s2 })
-////reNames = names.sorted(by: { s1, s2 in return s1 > s2 })
-////reNames = names.sorted(by: { s1, s2 in s1 > s2 } )
-////reNames = names.sorted(by: { $0 > $1 } )
-////reNames = names.sorted(by: >)
-
-
-////----------------------------
-////Trailing Closures
-//func someFuncThatTakesAClosure(closure: () -> Void) {
-//    //func body goes here
-//    print("func call")
-//}
-////Here's how you call this function without using a trailing closure
-//someFuncThatTakesAClosure (closure: {
-//    //closure's body goes here
-//    print("closure")
-//})
-////Here's how you call this function with a trailing closure instead
-//someFuncThatTakesAClosure() {
-//    //trailing closure's body goes here
-//    print("call func")
-//}
-//
-////If a closure expression is provided as the function or method’s only argument
-////and you provide that expression as a trailing closure,
-////you do not need to write a pair of parentheses ()
-////after the function or method’s name when you call the function
-//someFuncThatTakesAClosure {
-//
-//}
-//reNames = names.sorted { $0 > $1 }
-
-
-
-////----------------------------
-////Capturing Values
-//func makeIncrementer(forIncrement amount: Int) -> () -> Int {
-//    var runningTotal = 0
-//    func incrementer() -> Int {
-//        runningTotal += amount
-//        return runningTotal
-//    }
-//    return incrementer
-//}
-//
-//let incrementByTen = makeIncrementer(forIncrement: 10)
-//print("---\(incrementByTen())") //10
-//print("---\(incrementByTen())") //20
-//
-//let alsoIncrementByten = incrementByTen;
-//print("---\(alsoIncrementByten())") //30
-
-
-//Closures Are Reference Types
-//the closures these constants refer to are able to increment the runningTotal variables
-//that they have captured. This is because functions and closures are reference types.
-
-//----------------------------
-//Escaping Closures
-//When you declare a function that takes a closure as one of its parameters,
-//you can write @escaping before the parameter’s type to indicate that the closure is allowed to escape.
-
-////Marking a closure with @escaping means you have to refer to self explicitly within the closure
-//var completionHandlers: [() -> Void] = []
-//func someFunctionWithEscapingClosure(completionHandler: @escaping () -> Void) {
-//    completionHandlers.append(completionHandler)
-//}
-//func someFunctionWithNonescapingClosure(closure: () -> Void) {
-//    closure()
-//}
-//class SomeClass {
-//    var x = 10
-//    func doSomething() {
-//        someFunctionWithEscapingClosure { self.x = 100 }
-//        someFunctionWithNonescapingClosure { x = 200 }
-//    }
-//}
-//let instance = SomeClass()
-//instance.doSomething()
-//print(instance.x)
-//// Prints "200"
-//
-//completionHandlers.first?()
-//print(instance.x)
-//// Prints "100"
-
-
-//----------------------------
-//Autoclosures
-//An autoclosure is a closure that is automatically created to wrap an expression
-//that’s being passed as an argument to a function.
-
-//var customersInLine = ["Chris", "Alex", "Ewa", "Barry", "Daniella"]
-//// customersInLine is ["Alex", "Ewa", "Barry", "Daniella"]
-//func serve(customer customerProvider: () -> String) {
-//    print("Now serving \(customerProvider())!")
-//}
-//serve(customer: { customersInLine.remove(at: 0) } )
-//// Prints "Now serving Chris!"
-//
-//
-//// customersInLine is ["Ewa", "Barry", "Daniella"]
-//func serve(customer customerProvider: @autoclosure () -> String) {
-//    print("Now serving \(customerProvider())!")
-//}
-//serve(customer: customersInLine.remove(at: 0))
-//// Prints "Now serving Alex!"
-//
-//
-//// customersInLine is ["Barry", "Daniella"]
-//var customerProviders: [() -> String] = []
-//func collectCustomerProviders(_ customerProvider: @autoclosure @escaping () -> String) {
-//    customerProviders.append(customerProvider)
-//}
-//collectCustomerProviders(customersInLine.remove(at: 0))
-//collectCustomerProviders(customersInLine.remove(at: 0))
-//print("Collected \(customerProviders.count) closures.")
-//// Prints "Collected 2 closures."
-//for customerProvider in customerProviders {
-//    print("Now serving \(customerProvider())!")
-//}
-//The array is declared outside the scope of the function,
-//which means the closures in the array can be executed after the function returns.
-//As a result, the value of the customerProvider argument must be allowed to escape the function’s scope.
 
 
 //--------------- Objects and Classes -----------------
@@ -567,46 +341,6 @@ import Foundation
 
 
 
-//--------------- Enumerations and Structures -----------------
-
-//enum Rank: Int {
-//    case ace = 1
-//    case two, three, four, five, six, seven, eight, nine, ten
-//    case jack, queen, king
-//    func simpleDescription() -> String {
-//        switch self {
-//        case .ace:
-//            return "ace"
-//        case .jack:
-//            return "jack"
-//        case .queen:
-//            return "queen"
-//        case .king:
-//            return "king"
-//        default:
-//            return String(self.rawValue)
-//        }
-//    }
-//}
-//let ace = Rank.ace
-//let aceRawValue = ace.rawValue
-//print("\(ace), \(aceRawValue), \(ace.simpleDescription()), \(Rank(rawValue: 3) ?? Rank.king)")
-////ace, 1, ace, three
-
-
-//One of the most important differences between structures and classes
-//is that structures are always copied when they are passed around in your code,
-//but classes are passed by reference.
-//struct Card {
-//    var rank: Int
-//    var suit: String
-//    func simpleDescription() -> String {
-//        return "The \(rank) of \(suit)"
-//    }
-//}
-//let threeOfSpades = Card(rank: 1, suit: "aa")
-//let threeOfSpadesDescription = threeOfSpades.simpleDescription()
-//print(threeOfSpadesDescription) //The 1 of aa
 
 
 

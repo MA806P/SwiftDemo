@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		DA5EFF1B20F5CC6600040E13 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5EFF1A20F5CC6600040E13 /* main.swift */; };
 		DA5EFF2420F5CCB200040E13 /* OCObject.m in Sources */ = {isa = PBXBuildFile; fileRef = DA5EFF2320F5CCB200040E13 /* OCObject.m */; };
+		DAABCE4A210D5C4300F98F5A /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAABCE49210D5C4300F98F5A /* Functions.swift */; };
+		DAABCE4C210D5C6300F98F5A /* Closures.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAABCE4B210D5C6300F98F5A /* Closures.swift */; };
+		DAABCE4E210D5C8500F98F5A /* Enumerations.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAABCE4D210D5C8500F98F5A /* Enumerations.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -29,6 +32,9 @@
 		DA5EFF2120F5CCB200040E13 /* SwiftTestDemo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SwiftTestDemo-Bridging-Header.h"; sourceTree = "<group>"; };
 		DA5EFF2220F5CCB200040E13 /* OCObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OCObject.h; sourceTree = "<group>"; };
 		DA5EFF2320F5CCB200040E13 /* OCObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OCObject.m; sourceTree = "<group>"; };
+		DAABCE49210D5C4300F98F5A /* Functions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Functions.swift; sourceTree = "<group>"; };
+		DAABCE4B210D5C6300F98F5A /* Closures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Closures.swift; sourceTree = "<group>"; };
+		DAABCE4D210D5C8500F98F5A /* Enumerations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enumerations.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +68,9 @@
 			isa = PBXGroup;
 			children = (
 				DA5EFF1A20F5CC6600040E13 /* main.swift */,
+				DAABCE49210D5C4300F98F5A /* Functions.swift */,
+				DAABCE4B210D5C6300F98F5A /* Closures.swift */,
+				DAABCE4D210D5C8500F98F5A /* Enumerations.swift */,
 				DA5EFF2220F5CCB200040E13 /* OCObject.h */,
 				DA5EFF2320F5CCB200040E13 /* OCObject.m */,
 				DA5EFF2120F5CCB200040E13 /* SwiftTestDemo-Bridging-Header.h */,
@@ -128,7 +137,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				DA5EFF2420F5CCB200040E13 /* OCObject.m in Sources */,
+				DAABCE4C210D5C6300F98F5A /* Closures.swift in Sources */,
 				DA5EFF1B20F5CC6600040E13 /* main.swift in Sources */,
+				DAABCE4E210D5C8500F98F5A /* Enumerations.swift in Sources */,
+				DAABCE4A210D5C4300F98F5A /* Functions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
