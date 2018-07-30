@@ -9,6 +9,14 @@
 import Foundation
 
 
+var enumerationTest = EnumerationsTestObject()
+enumerationTest.enmerationsDemo()
+
+
+
+
+
+
 
 //var obj = OCObject()
 //obj.startTimerRunWithGCD()
@@ -341,7 +349,19 @@ import Foundation
 
 
 
-
+////One of the most important differences between structures and classes
+////is that structures are always copied when they are passed around in your code,
+////but classes are passed by reference.
+//struct Card {
+//    var rank: Int
+//    var suit: String
+//    func simpleDescription() -> String {
+//        return "The \(rank) of \(suit)"
+//    }
+//}
+//let threeOfSpades = Card(rank: 1, suit: "aa")
+//let threeOfSpadesDescription = threeOfSpades.simpleDescription()
+//print(threeOfSpadesDescription) //The 1 of aa
 
 
 
