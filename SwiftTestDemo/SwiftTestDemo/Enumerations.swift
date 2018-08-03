@@ -67,6 +67,74 @@ class EnumerationsTestObject {
         }
         // Prints "QR code: ABCDEFGHIJKLMNOP."
         
+        
+        //Raw Values
+        //Raw values can be strings, characters, or any of the integer or floating-point number types.
+        //Each raw value must be unique within its enumeration declaration.
+        //Raw values are not the same as associated values.
+        //Raw values are set to prepopulated values when you first define the enumeration in your code
+        
+        //you don’t have to explicitly assign a raw value for each case. When you don’t,
+        //Swift will automatically assign the values for you.
+        
+        enum Planet: Int {
+            case mercury = 1, venus, earth, mars, jupiter, saturn, uranus, neptune
+        }
+        print("\(Planet.earth.rawValue)") //3
+        
+        if let possiblePlanet = Planet(rawValue: 7) {
+            //// possiblePlanet is of type Planet? and equals Planet.uranus
+            switch possiblePlanet {
+            case .uranus:
+                print("uranus")
+            default:
+                print("nil")
+            }
+        }
+        
+        //When strings are used for raw values, the implicit value for each case is the text of that case’s name.
+        enum CompassPoint: String {
+            case north, south, east, west
+        }
+        print("\(CompassPoint.south.rawValue)")//south
+        
+        
+        
+        
+        
+        //Recursive Enumerations 递归
+        //has another instance of the enumeration as the associated value for one or more of the enumeration cases.
+        //You indicate that an enumeration case is recursive by writing indirect before it
+        /*
+        enum ArithmeticExpression {
+            case number(Int)
+            indirect case addition(ArithmeticExpression, ArithmeticExpression)
+            indirect case multiplication(ArithmeticExpression, ArithmeticExpression)
+        }
+        */
+        indirect enum ArithmeticExpression {
+            case number(Int)
+            case addition(ArithmeticExpression, ArithmeticExpression)
+            case multiplication(ArithmeticExpression, ArithmeticExpression)
+        }
+        let five = ArithmeticExpression.number(5)
+        let four = ArithmeticExpression.number(4)
+        let sum = ArithmeticExpression.addition(five, four)
+        let product = ArithmeticExpression.multiplication(sum, ArithmeticExpression.number(2))
+        
+        func evaluate(_ expression: ArithmeticExpression) -> Int {
+            switch expression {
+            case let .number(value):
+                return value
+            case let .addition(left, right):
+                return evaluate(left) + evaluate(right)
+            case let .multiplication(left, right):
+                return evaluate(left) * evaluate(right)
+            }
+        }
+        print(evaluate(product))
+        //// Prints "18"
+        
     }
     
 }
