@@ -9,9 +9,11 @@
 import Foundation
 
 
-var enumerationTest = EnumerationsTestObject()
-enumerationTest.enmerationsDemo()
+//var enumerationTest = EnumerationsTestObject()
+//enumerationTest.enmerationsDemo()
 
+var structClassTest = StructClassTest()
+structClassTest.structClassFuncTest()
 
 
 
