@@ -42,13 +42,23 @@ import Foundation
  
 */
 
+/*
+ 属性
+ 
+ 结构体是 值类型。当值类型的实例声明为常量时，其所有属性也都会被标记为常量。
+ 类的行为却并非如此，这是因为类是引用类型 。如果将引用类型的实例声明为常量时，你仍可以修改该实例的变量属性。
+ 
+ 
+ 全局常量和变量总是被延迟计算，与 延迟存储属性 类似。与延迟存储属性不同的是，全局常量和变量不需要使用 lazy 修饰符进行标记。
+ 局部常量和变量永远不会被延迟计算。
+ 
+ */
+
 
 class StructClassTest {
     
     let someResolution = Resolution()
     let someVideoMode = VideoMode()
-    
-    
     
     func structClassFuncTest() {
         
@@ -58,7 +68,6 @@ class StructClassTest {
         
         //copy 指向不同的地址
         //var aaa = vga
-        
         
         
         
@@ -102,3 +111,99 @@ class VideoMode {
     var frameRate = 0.0
     var name: String?
 }
+
+
+
+
+//lazy stored properties
+class DataImporter {
+    /*
+     DataImporter is a class to import data from an external file.
+     The class is assumed to take a nontrivial amount of time to initialize.
+     */
+    var filename = "data.txt"
+    // the DataImporter class would provide data importing functionality here
+}
+
+class DataManager {
+    lazy var importer = DataImporter()
+    var data = [String]()
+    // the DataManager class would provide data management functionality here
+}
+
+
+
+
+
+
+
+struct Point {
+    var x = 0.0, y = 0.0
+}
+struct Size {
+    var width = 0.0, height = 0.0
+}
+struct Rect {
+    var origin = Point()
+    var size = Size()
+    var center: Point {
+        get {
+            let centerX = origin.x + (size.width / 2)
+            let centerY = origin.y + (size.height / 2)
+            return Point(x: centerX, y: centerY)
+        }
+        set(newCenter) {
+            origin.x = newCenter.x - (size.width / 2)
+            origin.y = newCenter.y - (size.height / 2)
+        }
+    }
+}
+//var square = Rect(origin: Point(x: 0.0, y: 0.0),
+//                  size: Size(width: 10.0, height: 10.0))
+//let initialSquareCenter = square.center
+//square.center = Point(x: 15.0, y: 15.0)
+//print("square.origin is now at (\(square.origin.x), \(square.origin.y))")
+//// "square.origin is now at (10.0, 10.0)"
+
+
+
+
+
+//Read-Only Computed Properties
+struct Cuboid {
+    var width = 0.0, height = 0.0, depth = 0.0
+    var volume: Double {
+        return width * height * depth
+    }
+}
+//let fourByFiveByTwo = Cuboid(width: 4.0, height: 5.0, depth: 2.0)
+//print("the volume of fourByFiveByTwo is \(fourByFiveByTwo.volume)")
+//// Prints "the volume of fourByFiveByTwo is 40.0"
+
+
+
+
+//Property Observers
+class SetpCounter {
+    var totalSteps: Int = 0 {
+        willSet(newTotalSteps) {
+            print("About to set totalSteps to \(newTotalSteps)")
+        }
+        didSet {
+            if totalSteps > oldValue {
+                print("Added \(totalSteps - oldValue) steps")
+            }
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
