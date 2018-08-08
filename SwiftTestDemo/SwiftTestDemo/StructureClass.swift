@@ -42,6 +42,8 @@ import Foundation
  
 */
 
+
+
 /*
  属性
  
@@ -51,6 +53,13 @@ import Foundation
  
  全局常量和变量总是被延迟计算，与 延迟存储属性 类似。与延迟存储属性不同的是，全局常量和变量不需要使用 lazy 修饰符进行标记。
  局部常量和变量永远不会被延迟计算。
+ 
+ */
+
+
+/*
+ 方法
+ 
  
  */
 
@@ -95,9 +104,8 @@ class StructClassTest {
         }
         // Prints "tenEighty and alsoTenEighty refer to the same VideoMode instance."
         
+        
     }
-    
-    
 }
 
 
@@ -114,6 +122,8 @@ class VideoMode {
 
 
 
+
+/*-------------------------- Properties ------------------------*/
 
 //lazy stored properties
 class DataImporter {
@@ -199,11 +209,144 @@ class SetpCounter {
 
 
 
+//Type Property Syntax
+/*
+ 在 Swift 中，类型属性是写在类型定义的花括号内，作为类型定义的一部分，
+ 并且每个类型属性都明确地显示它支持的类型。
+ */
+struct SomeStructure {
+    static var storedTypeProperty = "Some value."
+    static var computedTypeProperty: Int {
+        return 1
+    }
+}
+enum SomeEnumeration {
+    static var storedTypeProperty = "Some value."
+    static var computedTypeProperty: Int {
+        return 6
+    }
+}
+class SomeClass {
+    static var storedTypeProperty = "Some value."
+    static var computedTypeProperty: Int {
+        return 27
+    }
+    //可以使用 static 关键字定义类型属性。
+    //对于类类型的计算类型属性，可以使用 class 关键字来允许子类覆盖超类的实现
+    class var overrideableComputedTypeProperty: Int {
+        return 107
+    }
+    
+    //类型属性是基于 类型 来进行检索和设置，而不是基于该类型的实例
+    func test() {
+        print("\(SomeStructure.storedTypeProperty)  \(SomeClass.overrideableComputedTypeProperty)")
+    }
+}
+class ChildOfSomeClass: SomeClass {
+    //Cannot override static var
+    //static override var computedTypeProperty :Int { return 200 }
+    static override var overrideableComputedTypeProperty: Int {
+        return 200
+    }
+}
+//print("\(ChildOfSomeClass.overrideableComputedTypeProperty)") //200
+
+
+
+struct AudioChannel {
+    static let thresholdLevel = 10
+    static var maxInputLevelForAllChannels = 0
+    var currentLevel: Int = 0 {
+        didSet {
+            if currentLevel > AudioChannel.thresholdLevel {
+                // 将新音频电平值限制在阈值之内
+                currentLevel = AudioChannel.thresholdLevel
+            }
+            if currentLevel > AudioChannel.maxInputLevelForAllChannels {
+                // 将此存储为新的目前最大的电平值
+                AudioChannel.maxInputLevelForAllChannels = currentLevel
+            }
+        }
+    }
+}
+//第一个检查中，即使 didSet 观察器将 currentLevel 设置为不同的值，也不会导致再次调用观察器。
 
 
 
 
+/*---------------------------- Methods ------------------------*/
 
+//Instance methods
+//Type methods
+
+
+//结构体和枚举是 值类型 。默认情况下，无法在其实例方法中修改值类型的属性。
+//如果需要在特定方法中修改结构体或枚举的属性，可以选择将这个方法 异变 。
+//然后，该方法就可以异变（即更改）其属性，并且当方法结束时，它所做的任何更改都将写回原始的结构体中。
+//该方法还可以为隐式的 self 属性分配一个全新的实例，并且该新实例将在方法结束时替换现有实例。
+//你可以通过在方法的 func 关键字前放置 mutating 关键字来选择开启此行为
+struct Point123 {
+    var x = 0.0, y = 0.0
+    mutating func moveBy(x deltaX: Double, y deltaY: Double) {
+        x += deltaX
+        y += deltaY
+    }
+}
+//var somePoint = Point123(x: 1.0, y: 1.0)
+//somePoint.moveBy(x: 2.0, y: 3.0)
+//print("The point is now at (\(somePoint.x), \(somePoint.y))")
+//// Prints "The point is now at (3.0, 4.0)"
+//你不能在常量结构体类型上调用异变方法，因为它的属性不能更改，即使它们是变量属性
+//let somePoint = Point123(x: 1.0, y: 1.0)
+
+
+//在可变方法中给 self 赋值
+struct Point456 {
+    var x = 0.0, y = 0.0
+    mutating func moveBy(x deltaX: Double, y deltaY: Double) {
+        self = Point456(x: x + deltaX, y: y + deltaY)
+    }
+}
+
+
+
+//Type methods
+//可以直接在类型本身上定义方法
+//为了明确一个方法是类型方法，你可以在这个方法的 func 关键词前加上 static 关键词。
+//在类中，也可以使用 class 关键词来声明一个类型方法。与 static 关键词不同的是，
+//用 class 关键词声明的类型方法允许它的子类重写其父类对类型方法的实现。
+class SomeClass123 {
+    class func someTypeMethod() {
+        // type method implementation goes here
+    }
+}
+//SomeClass123.someTypeMethod()
+
+//在一个方法的函数体中，隐性属性 self 指代其类型本身，而非指代类型的实例
+
+struct LevelTracker {
+    static var highestUnlockedLevel = 1
+    var currentLevel = 1
+    
+    static func unlock(_ level: Int) {
+        if level > highestUnlockedLevel { highestUnlockedLevel = level }
+    }
+    
+    static func isUnlocked(_ level: Int) -> Bool {
+        return level <= highestUnlockedLevel
+    }
+    
+    @discardableResult
+    mutating func advance(to level: Int) -> Bool {
+        if LevelTracker.isUnlocked(level) {
+            currentLevel = level
+            return true
+        } else {
+            return false
+        }
+    }
+}
+//因为调用 advance(to:) 方法时我们有时候可能会需要忽略返回值，所以这个函数用 @ discardableResult 特性标记。
 
 
 
