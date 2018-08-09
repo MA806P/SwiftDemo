@@ -350,3 +350,92 @@ struct LevelTracker {
 
 
 
+
+
+
+/*---------------------------- Subscripts ------------------------*/
+
+/*
+ 使用下标, 让你可以通过在实例名称后面的方括号中写入一个或多个值来查询类的实例。
+ 它们的语法类似于实例方法和计算属性语法。使用 subscript 关键字定义下标，并且和实例方法类似，
+ 可以指定一个或多个输入参数和返回类型。与实例方法不同，下标可以是读写或只读。
+ 和计算属性类似, 读写是由 getter 和 setter 方法实现的：
+ 
+ subscript(index: Int) -> Int {
+ get { // return an appropriate subscript value here }
+ set(newValue) { // perform a suitable setting action here }
+ }
+ */
+
+struct TimesTable {
+    let multiplier: Int
+    subscript(index: Int) -> Int {
+        return multiplier * index
+    }
+}
+//let threeTimesTable = TimesTable(multiplier: 3)
+//print("six times three is \(threeTimesTable[6])")
+// Prints "six times three is 18"
+
+
+// The Dictionary type uses an optional subscript type to model the fact
+//that not every key will have a value, and to give a way to
+//delete a value for a key by assigning a nil value for that key.
+
+
+
+
+
+//一个矩阵，rows多少行，colums多少列，grid是一个一维叔祖保存矩阵里的值
+//设置下标，方便取值或设置值
+struct Matrix {
+    let rows: Int, columns: Int
+    var grid: [Double]
+    init(rows: Int, columns: Int) {
+        self.rows = rows
+        self.columns = columns
+        grid = Array(repeating: 0.0, count: rows * columns)
+    }
+    func indexIsValid(row: Int, column: Int) -> Bool {
+        return row >= 0 && row < rows && column >= 0 && column < columns
+    }
+    subscript(row: Int, column: Int) -> Double {
+        get {
+            assert(indexIsValid(row: row, column: column), "Index out of range")
+            return grid[(row * columns) + column]
+        }
+        set {
+            assert(indexIsValid(row: row, column: column), "Index out of range")
+            grid[(row * columns) + column] = newValue
+        }
+    }
+}
+//var matrix = Matrix(rows: 2, columns: 2)
+//matrix[0, 1] = 1.5
+//matrix[1, 0] = 3.2
+
+
+
+
+
+
+/*---------------------------- Inheritance ------------------------*/
+
+//重写从父类继承的特性，你需要在定义重写时添加 override 前缀。
+//这表明你打算重写一个特性并且没有使用错误的匹配定义。
+//意外的重写会导致不可预料的行为，且任何没有使用 override 关键词修饰的重写声明在编译代码时会被标记为错误。
+
+/*
+通过在子类属性中重写 getter 和 setter，可以将继承的只读属性重写为读写属性，但是，你不能将继承的读写属性重写为只读属性。
+如果你重写属性的 setter 就必须同时重写属性的 getter。
+ 如果你不想在重写 getter 中修改继承属性的值，你可以简单地在 getter 中返回
+ super.someProperty，其中 someProperty 是你想要重写的属性名称。
+ 
+ 防止重写
+ 你可以通过标记方法、属性或下标为 final 来防止它被重写。
+ 通过在方法、属性或下标前添加关键字 final （比如 final var、 final func、 final class func 和  final subscript）来完成此操作。
+ */
+
+
+
+
