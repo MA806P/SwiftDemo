@@ -448,6 +448,73 @@ struct Matrix {
 
 
 
+//内部参数名和外部参数名
+//与函数和方法的参数一样，构造参数有一个在构造器中使用的内部参数名和一个调用构造器时使用的外部参数名。
+struct Color {
+    let red, green, blue: Double
+    init(red: Double, green: Double, blue: Double) {
+        self.red   = red
+        self.green = green
+        self.blue  = blue
+    }
+    init(white: Double) {
+        red   = white
+        green = white
+        blue  = white
+    }
+}
+
+//let magenta = Color(red: 1.0, green: 0.0, blue: 1.0)
+//let halfGray = Color(white: 0.5)
+
+//如果在构造器中定义了外部参数名就必须使用，忽略它将会触发编译错误。
+//let veryGreen = Color(0.0, 1.0, 0.0)
+// 这会报编译错误 - 必须使用外部参数名
+
+
+//无需外部参数名的构造参数
+//如果你不想对构造参数使用外部参数名，写一个下划线（_）来代替显式外部参数名以重写其默认行为。
+struct Celsius {
+    var temperatureInCelsius: Double
+    init(fromFahrenheit fahrenheit: Double) {
+        temperatureInCelsius = (fahrenheit - 32.0) / 1.8
+    }
+    init(fromKelvin kelvin: Double) {
+        temperatureInCelsius = kelvin - 273.15
+    }
+    init(_ celsius: Double) {
+        temperatureInCelsius = celsius
+    }
+}
+//let bodyTemperature = Celsius(37.0)
+// bodyTemperature.temperatureInCelsius is 37.0
+
+
+
+
+//在构造过程期间给常量赋值
+//构造过程期间你可以在任何时间点给常量属性赋值，只要构造完成时设置了确定值即可。一旦常量属性被赋值，就不能再次修改。
+class SurveyQuestion {
+    let text: String
+    var response: String?
+    init(text: String) {
+        self.text = text
+    }
+    func ask() {
+        print(text)
+    }
+}
+//let beetsQuestion = SurveyQuestion(text: "How about beets?")
+//beetsQuestion.ask()
+//// 打印 "How about beets?"
+//beetsQuestion.response = "I also like beets. (But not with cheese.)"
+
+
+
+
+//结构体类型的成员构造器
+//如果结构体没有任何自定义构造器，那么结构体类型会自动接收一个 成员构造器。
+//不同于默认构造器，即使结构体的存储属性没有默认值，它也会接收成员构造器。
 
 
 
