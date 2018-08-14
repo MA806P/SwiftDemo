@@ -72,7 +72,7 @@ class StructClassTest {
     func structClassFuncTest() {
         
         //所有结构体都有一个用于初始化结构体实例的成员属性，并且是自动生成的成员构造器。
-        let vga = Resolution(width: 640, height: 480)
+        //let vga = Resolution(width: 640, height: 480)
         //与结构体不同，类没有默认的成员构造器
         
         //copy 指向不同的地址
@@ -80,17 +80,17 @@ class StructClassTest {
         
         
         
-        let tenEighty = VideoMode()
-        tenEighty.resolution = vga
-        tenEighty.interlaced = true
-        tenEighty.name = "1080i"
-        tenEighty.frameRate = 25.0
-        
-        let alsoTenEighty = tenEighty
-        alsoTenEighty.frameRate = 30.0
-        
-        print("The frameRate property of tenEighty is now \(tenEighty.frameRate)")
-        // "The frameRate property of tenEighty is now 30.0"
+//        let tenEighty = VideoMode()
+//        tenEighty.resolution = vga
+//        tenEighty.interlaced = true
+//        tenEighty.name = "1080i"
+//        tenEighty.frameRate = 25.0
+//
+//        let alsoTenEighty = tenEighty
+//        alsoTenEighty.frameRate = 30.0
+//
+//        print("The frameRate property of tenEighty is now \(tenEighty.frameRate)")
+//        // "The frameRate property of tenEighty is now 30.0"
         
         /*
          注意 tenEighty 和 alsoTenEighty 声明的是常量而不是变量。但是仍然可以改变 tenEighty.frameRate 和 alsoTenEighty.frameRate，因为常量 tenEighty 和 alsoTenEighty 的值自身实际上没有改变
@@ -98,11 +98,12 @@ class StructClassTest {
          */
         
         
-        //恒等运算符，来检查两个常量或变量是否引用同一个实例
-        if tenEighty === alsoTenEighty {
-            print("tenEighty and alsoTenEighty refer to the same VideoMode instance.")
-        }
-        // Prints "tenEighty and alsoTenEighty refer to the same VideoMode instance."
+//        //恒等运算符，来检查两个常量或变量是否引用同一个实例
+//        if tenEighty === alsoTenEighty {
+//            print("tenEighty and alsoTenEighty refer to the same VideoMode instance.")
+//        }
+//        // Prints "tenEighty and alsoTenEighty refer to the same VideoMode instance."
+        
         
         
     }
@@ -511,10 +512,158 @@ class SurveyQuestion {
 
 
 
+//默认构造器
+//Swift 为属性均有默认值和没有构造器的结构体或类提供了一个 默认构造器 。
+//默认构造器创建了一个所有属性都有默认值的新实例。
+class ShoppingListItem {
+    var name: String?
+    var quantity = 1
+    var purchased = false
+}
+//var item = ShoppingListItem()
+//print("\(item.name) + \(item.quantity) + \(item.purchased)")
+//nil + 1 + false
+/*
+ var quantity: Int
+ 如果类的属性有一个没有默认值，也没有自定义构造函数，会报错，Class has no initializers
+ 如果写了构造函数 init(){} 但是init里没有赋值给没有默认值的属性，
+ 也会报错 Return from initializer without initializing all stored properties
+ */
+
+
 
 //结构体类型的成员构造器
 //如果结构体没有任何自定义构造器，那么结构体类型会自动接收一个 成员构造器。
 //不同于默认构造器，即使结构体的存储属性没有默认值，它也会接收成员构造器。
+struct MySize {
+    var width: Float
+    var height: Float
+}
+//var mysize = MySize(width: 1, height: 2)
+//print("\(mysize.width) + \(mysize.height)") //1.0 + 2.0
+//如果这样 var mysize = MySize() 创建结构体，不带参数会报错，下面
+//Missing argument for parameter "width" in call
+
+
+
+//值类型的构造器代理
+//构造器可以调用其他构造器来执行实例的部分构造过程。这个过程称之为 构造器代理 ，以避免多个构造器之间的重复代码。
+struct TestSize {
+    var width = 0.0, height = 0.0
+}
+struct TestPoint {
+    var x = 0.0, y = 0.0
+}
+struct TestRect {
+    var origin = TestPoint()
+    var size = TestSize()
+    init() {}
+    init(origin: TestPoint, size: TestSize) {
+        self.origin = origin
+        self.size = size
+    }
+    init(center: TestPoint, size: TestSize) {
+        let originX = center.x - (size.width / 2)
+        let originY = center.y - (size.height / 2)
+        self.init(origin: TestPoint(x: originX, y: originY), size: size)
+    }
+}
+
+
+
+/*
+ 类的所有存储属性 --- 包括任何从父类继承而来的属性 --- 必须 在构造过程期间赋值。
+ 
+ 指定构造器和便利构造器
+ 指定构造器 是类的主要构造器。一个指定构造器初始化该类引入的所有属性，并调用合适的父类构造器以继续父类链上的构造过程。
+ 类往往只有很少的指定构造器，通常一个类只有一个指定构造器。
+ 每个类至少要有一个指定构造器。
+ 类的指定构造器和值类型的简单构造器写法相同：
+ init(parameters) { }
+ 
+ 便利构造器，类的辅助构造器。你可以定义便利构造器来调用同一类中的指定构造器并为指定构造器的一些参数设置默认值。
+ 你也可以定义便利构造器为特殊用例类或是输入类型类创建实例。
+ 相比普通的构造模式，创建便利构造器会节省很多时间并将类的构造过程变得更加清晰。
+ convenience init(parameters) { }
+ 
+ 
+ Swift 对构造器之间的代理采用了如下三条规则：
+ 规则 1 指定构造器必须调用其直系父类的指定构造器。
+ 规则 2 便利构造器必须调用 同一 类中的其他构造器。
+ 规则 3 便利构造器最后必须调用指定构造器。
+ 
+ 简单的记忆方法：
+ 指定构造器必须 向上 代理。
+ 便利构造器必须 横向 代理。
+ 
+ 
+ 两段式构造器过程
+ 第一阶段，为类引入的每个存储属性赋一个初始值。
+ 第二阶段，在新的实例被认为可以使用前，每个类都有机会进一步定制其存储属性。
+ 
+ 两段式构造过程的使用让构造过程更安全，同时对于类层级结构中的每个类仍然给予完全的灵活性。
+ 两段式构造过程防止了属性在初始化前访问其值，并防止其他构造器意外给属性赋予不同的值。
+ 
+ 
+ Swift 的编译器执行了四个有帮助的安全检查以确保两段式构造过程无误完成：
+ 安全检查 1 指定构造器必须确保其类引入的所有属性在向上代理父类构造器之前完成初始化。
+ 安全检查 2 指定构造器必须在继承属性赋值前向上代理父类构造器，否则，便利构造器赋予的新值将被父类构造过程的一部分重写。
+ 安全检查 3 便利构造器必须在 任何 属性（包括同一类中定义的属性）赋值前代理另一个构造器。否则便利构造器赋予的新值将被其所属类的指定构造器重写。
+ 安全检查 4 构造器在第一阶段构造过程完成前，不能调用任何实例方法，不能读取任何实例属性的值，不能引用 self 作为一个值。
+ 
+*/
+
+
+
+
+class Vehicle {
+    var numberOfWheels = 0
+    var description: String {
+        return "\(numberOfWheels) wheel(s)"
+    }
+}
+class Bicycle: Vehicle {
+    override init() {
+        super.init()
+        numberOfWheels = 2
+    }
+}
+//let bicycle = Bicycle()
+//print("Bicycle: \(bicycle.description)")
+//// Bicycle: 2 wheel(s)
+//派生类可在构造过程期间可修改变量继承属性，但不能修改常量继承属性。
+
+
+
+
+//指定构造器和便利构造器
+class Food {
+    var name: String
+    init(name: String) {
+        self.name = name
+    }
+    convenience init() {
+        self.init(name: "[Unnamed]")
+    }
+}
+class RecipeIngredient: Food {
+    var quantity: Int
+    init(name: String, quantity: Int) {
+        self.quantity = quantity
+        super.init(name: name)
+    }
+    override convenience init(name: String) {
+        self.init(name: name, quantity: 1)
+    }
+}
+
+
+
+
+
+
+
+
 
 
 
