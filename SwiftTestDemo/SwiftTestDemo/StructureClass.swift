@@ -611,6 +611,11 @@ struct TestRect {
  安全检查 3 便利构造器必须在 任何 属性（包括同一类中定义的属性）赋值前代理另一个构造器。否则便利构造器赋予的新值将被其所属类的指定构造器重写。
  安全检查 4 构造器在第一阶段构造过程完成前，不能调用任何实例方法，不能读取任何实例属性的值，不能引用 self 作为一个值。
  
+ 
+ 可失败构造器
+ 无效的构造参数值可能会触发这种失败，或是缺失某种需要的外部资源，又或是未能满足某种条件。
+ 不能使用相同的参数类型或参数名定义一个可失败构造器后又定义一个非失败构造器。
+ 可失败构造器会创建一个关联值类型是自身构造类型的 可选 类型。在可失败构造器中编写 return nil 以表示可以在任何情况下触发失败
 */
 
 
@@ -659,6 +664,98 @@ class RecipeIngredient: Food {
 
 
 
+
+//可失败构造器
+struct Animal {
+    let species: String
+    init?(species: String) {
+        if species.isEmpty { return nil }
+        self.species = species
+    }
+}
+//let anonymousCreature = Animal(species: "")
+//// anonymousCreature 的类型是 Animal?，不是 Animal
+//if anonymousCreature == nil {
+//    print("The anonymous creature could not be initialized")
+//}
+//// "The anonymous creature could not be initialized"
+
+
+
+
+//枚举的可失败构造器
+//可以使用可失败构造器选择基于一个或多个参数的枚举成员。如果提供的参数不符合任何一个枚举成员，则构造失败。
+enum TemperatureUnit {
+    case kelvin, celsius, fahrenheit
+    init?(symbol: Character) {
+        switch symbol {
+        case "K":
+            self = .kelvin
+        case "C":
+            self = .celsius
+        case "F":
+            self = .fahrenheit
+        default:
+            return nil
+        }
+    }
+}
+//let unknownUnit = TemperatureUnit(symbol: "X")
+//if unknownUnit == nil {
+//    print("This is not a defined temperature unit, so initialization failed.")
+//}
+//// "This is not a defined temperature unit, so initialization failed."
+
+
+//带有原始值枚举的可失败构造器
+enum TemperatureUnitTest2: Character {
+    case kelvin = "K", celsius = "C", fahrenheit = "F"
+}
+//let fahrenheitUnit = TemperatureUnitTest2(rawValue: "F")
+//if fahrenheitUnit != nil {
+//    print("This is a defined temperature unit, so initialization succeeded.")
+//}
+//// "This is a defined temperature unit, so initialization succeeded."
+//let unknownUnit = TemperatureUnitTest2(rawValue: "X")
+//if unknownUnit == nil {
+//    print("This is not a defined temperature unit, so initialization failed.")
+//}
+//// "This is not a defined temperature unit, so initialization failed."
+
+
+//构造失败的传递
+//如果你代理了其他构造器而导致构造失败。整个构造过程立即失败，不再进一步执行构造代码。
+
+
+//init! 可失败构造器
+//可以定义一个可失败构造器，将其用于创建一个适当的隐式解包可选类型的实例。
+//为了定义这个可失败构造器，在关键字 init 后面用叹号来替代问号（init!）。
+
+
+//必要构造器
+//在类构造器的定义前写修饰符 required 以指明该类的每个派生类必须实现此构造器。
+//class SomeClass { required init() { } }
+//在每个派生类实现必要构造器时也必须在构造器前面写修饰符  required，
+//以指明构造器要求应用于继承链中所有派生类。重写一个必要指定构造器时无需写修饰符 override
+//class SomeSubclass: SomeClass { required init() { } }
+
+
+
+//使用闭包或函数设置默认属性值
+//class SomeClass {
+//    let someProperty: SomeType = {
+//        // 在闭包中创建一个带有默认值的 someProperty
+//        // someValue 的类型必须是 SomeType
+//        return someValue
+//    }()
+//}
+
+
+
+
+
+
+/*---------------------------- Deinitialization ------------------------*/
 
 
 
