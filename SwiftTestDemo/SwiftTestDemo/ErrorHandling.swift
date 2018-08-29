@@ -126,3 +126,38 @@ class VendingMachine {
 
 
 
+
+/*
+ 通过可选值处理错误
+ 可以使用 try? 将错误转换为可选值来处理错误。 如果在执行 try? 表达式时抛出错误，表达式的值将为 nil
+ 
+ func someThrowingFunction() throws -> Int { // ... }
+ let x = try? someThrowingFunction()
+ let y: Int?
+ do { y = try someThrowingFunction()
+ } catch { y = nil }
+ 
+ */
+
+
+/*
+ 当代码执行到即将离开当前代码块之前，可以使用 defer 语句来执行一组语句。
+ 无论是因为错误而离开 --- 抑或是因为诸如 return 或 break 等语句而离开，
+ defer 语句都可以让你执行一些必要的清理。例如，你可以使用 defer 语句来关闭文件描述符或释放手动分配的内存。
+ defer 语句会推迟执行，直到退出当前作用域。
+ 
+ func processFile(filename: String) throws {
+ if exists(filename) {
+ let file = open(filename)
+ 
+ defer { close(file) }
+ 
+ while let line = try file.readline() {
+ // Work with the file.
+ }
+ // 在此关闭（文件），位于语句的末端。
+ }
+ }
+ defer 语句来确保 open(_:) 函数有相应的 close(_:) 函数调用。
+ 
+ */
