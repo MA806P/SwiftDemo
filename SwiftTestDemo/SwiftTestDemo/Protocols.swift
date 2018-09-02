@@ -60,10 +60,85 @@ struct Person12: FullyNamed {
 
 //方法
 //协议可能需要通过遵循类型来实现特定的实例方法和类型方法。
+protocol RandomNumberGenerator {
+    func random() -> Double
+}
+class LinearCongruentialGenerator: RandomNumberGenerator {
+    var lastRandom = 42.0
+    let m = 139968.0
+    let a = 3877.0
+    let c = 29573.0
+    func random() -> Double {
+        lastRandom = ((lastRandom * a + c).truncatingRemainder(dividingBy:m))
+        return lastRandom / m
+    }
+}
+//let generator = LinearCongruentialGenerator()
+//print("Here's a random number: \(generator.random())")
+//// 打印 "Here's a random number: 0.3746499199817101"
+//print("And another one: \(generator.random())")
+//// 打印 "And another one: 0.729023776863283"
+
+
+
 /*
+ 有时需要有一个方法来修改（或 异变）它所属的实例。例如，对值类型（即结构体和枚举）的方法，
+ 将 mutating 关键字放在方法 func 关键字之前，
+ 以指示允许该方法修改它所属的实例以及该实例的任何属性。
  
+ 如果将协议实例方法要求标记为 mutating，则在为类编写该方法的实现时，
+ 不需要写 mutating 关键字。mutating 关键字仅由结构体和枚举使用。
  */
+protocol Togglable {
+    mutating func toggle()
+}
+enum OnOffSwitch: Togglable {
+    case off, on
+    mutating func toggle() {
+        switch self {
+        case .off:
+            self = .on
+        case .on:
+            self = .off
+        }
+    }
+}
+//var lightSwitch = OnOffSwitch.off
+//lightSwitch.toggle()
+//// lightSwitch 现在是 .on
 
 
+//协议可能要求通过遵循类型来实现特定的构造器。
+protocol SomeProtocol11 {
+    init(someParameter: Int)
+}
+class SomeClass11: SomeProtocol11 {
+    //你可以通过实现指定构造器或便利构造器来使遵循协议的类满足协议的构造器要求。
+    //在这两种情况下，你必须使用 required 修饰符标记构造器实现：
+    required init(someParameter: Int) {
+        // 下面是构造器的实现
+    }
+    //使用 required 修饰符可确保你在遵循协议类的所有子类上提供构造器要求的
+    //显式或继承实现，以便它们也符合协议。
+}
+//你并不需要在使用 final 修饰符标记的类上使用 required 修饰符来标记协议构造器的实现，
+//因为这样的类是不能进行子类化。
 
 
+protocol SomeProtocol12 {
+    init()
+}
+
+class SomeSuperClass12 {
+    init() {
+        // 下面是构造器的实现
+    }
+}
+
+class SomeSubClass12: SomeSuperClass12, SomeProtocol12 {
+    // 添加「required」修饰符是因为遵循了 SomeProtocol 协议;
+    //添加「override」修饰符是因为该类继承自 SomeSuperClass
+    required override init() {
+        // 下面是构造器的实现
+    }
+}
