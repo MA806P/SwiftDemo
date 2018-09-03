@@ -142,3 +142,45 @@ class SomeSubClass12: SomeSuperClass12, SomeProtocol12 {
         // 下面是构造器的实现
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+//将协议作为类型
+/*
+ 创建的任何协议都可以变为一个功能完备的类型在代码中使用
+ 作为函数、方法或构造器的参数类型或返回类型
+ 作为常量、变量或属性的类型
+ 作为数组、字典或其他容器的元素类型
+ */
+class Dice {
+    let sides: Int
+    let generator: RandomNumberGenerator
+    init(sides: Int, generator: RandomNumberGenerator) {
+        self.sides = sides
+        self.generator = generator
+    }
+    func roll() -> Int {
+        return Int(generator.random() * Double(sides)) + 1
+    }
+}
+
+
+
+/*
+ 委托 是一种设计模式，它使类或结构体能够将其某些职责交给（或 委托）到另一种类型的实例。
+ 通过定义封装委托职责的协议来实现此设计模式，从而保证遵循协议类型（称为委托）提供被委托的功能。
+ 委托可用于响应特定操作，或从外部源检索数据，而无需了解该源的具体类型。
+ */
+
+
+
+
+
