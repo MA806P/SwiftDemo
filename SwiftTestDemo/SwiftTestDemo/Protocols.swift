@@ -182,5 +182,110 @@ class Dice {
 
 
 
+//让扩展添加协议遵循
+/*
+ 可以通过扩展这个已存在的类型并让它遵循并实现一个新的协议。扩展可以为已存在的类型添加新属性，方法和下标
+ */
+protocol TextRepresentable {
+    var textualDescription: String { get }
+}
+extension Dice: TextRepresentable {
+    var textualDescription: String {
+        return "A \(sides)-sided dice"
+    }
+}
+//extension Dice: TextRepresentable {
+//    var textualDescription: String {
+//        return "A \(sides)-sided dice"
+//    }
+//}
+
+
+
+
+
+
+//有条件地遵循协议
+/*
+ 泛型类型可能只能在特定条件下满足协议的要求，例如类的泛型参数遵循一个协议。
+ 你可以通过在扩展类型时列出条件约束，让泛型类型有条件的遵循一个协议。
+ 通过编写一个泛型 where 分句，在遵循的协议名称后面写上约束条件。
+ */
+extension Array: TextRepresentable where Element: TextRepresentable {
+    var textualDescription: String {
+        let itemsAsText = self.map { $0.textualDescription }
+        return "[" + itemsAsText.joined(separator: ", ") + "]"
+    }
+}
+//let myDice = [d6, d12]
+//print(myDice.textualDescription)
+//// "[A 6-sided dice, A 12-sided dice]"
+
+
+
+
+
+//通过扩展申明采纳协议
+/*
+如果一个类型已经满足遵循一个协议的所有要求，但它没有申明遵循了这个协议，你可以通过一个空的扩展遵循该协议
+*/
+struct Hamster {
+    var name: String
+    var textualDescription: String {
+        return "A hamster named \(name)"
+    }
+}
+extension Hamster: TextRepresentable {}
+
+
+
+
+//协议可以用作诸如数组或字典之类的集合类型的元素类型
+//let things: [TextRepresentable] = [game, d12, simonTheHamster]
+//for thing in things { print(thing.textualDescription) }
+
+
+
+
+//协议可以 继承 一个或多个协议，并且可以在其继承的协议的基础上添加更多的要求。
+//协议继承的语法类似于类继承的语法，但是协议继承支持同时继承多个协议，并用逗号隔开：
+//protocol InheritingProtocol: SomeProtocol, AnotherProtocol { }
+
+
+
+
+//类专属协议
+//你可以通过将 AnyObject 协议添加到协议的继承列表，来将协议限定为仅类类型（而不是结构体或枚举）可用。
+//protocol SomeClassOnlyProtocol: AnyObject, SomeInheritedProtocol { }
+//SomeClassOnlyProtocol 只能被类类型遵循。 如果尝试编写遵循 SomeClassOnlyProtocol 协议的结构体或枚举，会出现编译时错误。
+
+
+
+
+
+//协议组合
+protocol Named {
+    var name: String { get }
+}
+protocol Aged {
+    var age: Int { get }
+}
+struct Person34: Named, Aged {
+    var name: String
+    var age: Int
+}
+//func wishHappyBirthday(to celebrator: Named & Aged) {
+//    print("Happy birthday, \(celebrator.name), you're \(celebrator.age)!")
+//}
+//let birthdayPerson = Person34(name: "Malcolm", age: 21)
+//wishHappyBirthday(to: birthdayPerson)
+//// "Happy birthday, Malcolm, you're 21!"
+
+//wishHappyBirthday 参数的类型是 Named & Aged，这意味着「任何同时遵循 Named 和 Aged 协议的类型。」
+//只要遵循这两个协议，将具体什么类型传递给函数并不重要。
+
+
+
+
 
 
