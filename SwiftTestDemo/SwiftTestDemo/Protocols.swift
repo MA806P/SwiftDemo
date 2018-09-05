@@ -288,4 +288,114 @@ struct Person34: Named, Aged {
 
 
 
+//协议遵循的检查
+/*
+ 可以使用 类型转换 中描述的 is 和 as 运算符来检查协议遵循，和转换成特定协议。
+ 如果实例遵循协议，则 is 运算符返回 true，如果不遵循则返回 false。
+ 向下转换运算符的 as? 返回协议类型的可选值，如果实例不遵循该协议，则该值为 nil。
+ 向下转换运算符的 as! 强制向下转换为协议类型，如果向下转换不成功则触发运行时错误。
+*/
+
+
+//可选协议要求
+/*
+你可以为协议定义 可选要求，这些要求不强制遵循类型的实现。可选要求以 optional 修饰符为前缀，作为协议定义的一部分。
+ 可选要求允许你的代码与 Objective-C 交互。协议和可选要求都必须用 @objc 属性标记。
+ 请注意，@objc 协议只能由继承自 Objective-C 类或其他 @objc 类的类遵循。结构体或枚举不能遵循它们。
+ 
+ 考虑到遵循协议的类型可能未实现要求，你应该使用可选链来调用可选协议要求。
+ 你通过在调用方法名称后面写一个问号来检查可选方法的实现，例如 someOptionalMethod?(someArgument)。
+*/
+@objc protocol CounterDataSource {
+    @objc optional func increment(forCount count: Int) -> Int
+    @objc optional var fixedIncrement: Int { get }
+}
+class Counter {
+    var count = 0
+    var dataSource: CounterDataSource?
+    func increment() {
+        if let amount = dataSource?.increment?(forCount: count) {
+            count += amount
+        } else if let amount = dataSource?.fixedIncrement {
+            count += amount
+        }
+    }
+}
+
+class TowardsZeroSource: NSObject, CounterDataSource {
+    func increment(forCount count: Int) -> Int {
+        if count == 0 {
+            return 0
+        } else if count < 0 {
+            return 1
+        } else {
+            return -1
+        }
+    }
+}
+//counter.count = -4
+//counter.dataSource = TowardsZeroSource()
+//for _ in 1...5 {
+//    counter.increment()
+//    print(counter.count)
+//}
+//// -3
+//// -2
+//// -1
+//// 0
+//// 0
+
+
+
+//协议扩展
+/*
+通过协议扩展，我们可以向符合协议的类型提供方法、构造器、下标和计算属性的实现。
+ 这允许你基于协议本身来实现行为，而无需再让每个遵循协议的类型都重复实现，或是使用全局函数。
+ 
+ 可以通过扩展 RandomNumberGenerator 协议来实现 randomBool() 方法，该方法使用 random() 的结果来返回一个随机的 Bool 值：
+ extension RandomNumberGenerator {
+    func randomBool() -> Bool { return random() > 0.5 }
+ }
+ 
+ let generator = LinearCongruentialGenerator()
+ print("Here's a random number: \(generator.random())")
+ // 打印 "Here's a random number: 0.3746499199817101"
+ print("And here's a random Boolean: \(generator.randomBool())")
+ // 打印 "And here's a random Boolean: true"
+ 
+*/
+
+
+//提供默认实现
+/*
+ 可以使用协议扩展来为任何方法或计算属性提供默认实现。
+ 如果一个符合的类型本身就实现了协议中要求的方法或属性，那么这个实现会代替协议扩展中的实现。
+ 
+ extension PrettyTextRepresentable  {
+    var prettyTextualDescription: String { return textualDescription }
+ }
+ 
+ */
+
+
+
+
+//为协议扩展添加条件约束
+//当我们定义一个协议扩展时，我们可以通过where关键字在被扩展的协议名称后指定一个任意类型在遵循协议前必须满足的约束条件。
+//可以在Collection协议的扩展中指定集合中的所有元素必须先遵循Equatable这个协议。
+//通过Equatable这个基础协议，我们便可以使用==或者!=操作符来检查任意两个元素是否相等。
+extension Collection where Element: Equatable {
+    func allEqual() -> Bool {
+        for element in self {
+            if element != self.first {
+                return false
+            }
+        }
+        return true
+    }
+}
+//allEqual()这个方法只有当集合中的所有元素都相等时才会返回true
+
+
+
 
