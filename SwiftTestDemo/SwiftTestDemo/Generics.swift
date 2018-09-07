@@ -104,8 +104,56 @@ func findIndex<T: Equatable>(of valueToFind: T, in array:[T]) -> Int? {
 
 
 
+//关联类型
+/*
+当定义一个协议时，有时候定义一个或多个关联类型作为协议的一部分是很有用的。
+ 关联类型 作为协议的一部分并为一种类型提供占位符名称。
+ 在实现该协议之前不会指定该关联类型的实际类型。关联类型使用 associatedtype 关键字来指定。
+
+*/
+
+protocol Container {
+    associatedtype Item
+    mutating func append(_ item: Item)
+    var count: Int { get }
+    subscript(i: Int) -> Item { get }
+}
+//任何符合 Container 协议的类型必须指定它存储的值的类型。
+//具体来说，它必须确保只将正确类型的元素添加到容器中，并且必须明确下标返回元素的类型。
+//append(_:) 方法的任何值必须与容器内元素的类型相同，并且容器的下标返回的值与容器内元素的类型相同。
+struct Stack123<Element>: Container {
+    // Stack<Element> 的原始实现
+    var items = [Element]()
+    mutating func push(_ item: Element) {
+        items.append(item)
+    }
+    mutating func pop() -> Element {
+        return items.removeLast()
+    }
+    // 符合 Container 协议
+    mutating func append(_ item: Element) {
+        self.push(item)
+    }
+    var count: Int {
+        return items.count
+    }
+    subscript(i: Int) -> Element {
+        return items[i]
+    }
+}
 
 
+//将约束添加到关联类型
+/*
+你可以将类型约束添加到协议的关联类型中，以要求符合的类型满足这些约束
+ protocol Container {
+ associatedtype Item: Equatable
+ mutating func append(_ item: Item)
+ var count: Int { get }
+ subscript(i: Int) -> Item { get }
+ }
+ 
+*/
 
 
 
