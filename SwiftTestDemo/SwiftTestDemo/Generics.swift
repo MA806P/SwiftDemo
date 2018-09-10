@@ -217,8 +217,68 @@ struct Stack124<Element>: Container {
  根据 Array 现有的 append(_:) 方法和下标，Swift 能够推断出 Item 的具体类型，
  就像上面的泛型 Stack 类型一样。定义此扩展后，你可以把任何 Array 当作 Container 使用。
  
+ 
+ 
+ 
+ 将约束添加到关联类型
+ protocol Container {  associatedtype Item: Equatable
+ 
+ 
+ 
+ 
+ 在其关联类型的约束中使用协议
+ protocol SuffixableContainer: Container {
+ associatedtype Suffix: SuffixableContainer where Suffix.Item == Item
+ func suffix(_ size: Int) -> Suffix
+ }
+ 
  */
 
+
+
+/*
+ 泛型 Where 子句
+ 可以通过定义 泛型 where 子句 来完成此操作。泛型 where 子句使你能够要求关联类型必须符合某个协议，
+ 或者某些类型参数和相关类型必须相同。泛型 where 子句以 where 关键字开头，
+ 后跟关联类型的约束条件或类型和关联类型之间的相等关系。你需要在一个类型或函数体的起始大括号之前写一个泛型 where 子句。
+ 
+ 
+ 在扩展中使用泛型 Where 子句
+ extension Stack where Element: Equatable {
+ 
+ 也可以编写一个通用的 where 子句，要求它们的 Item 为特定类型
+ extension Container where Item == Double {
+ 
+ 
+ 带有泛型 Where 子句的关联类型
+ associatedtype Iterator: IteratorProtocol where Iterator.Element == Item
+ 
+ 从其他协议继承的协议，通过在协议声明中包含泛型 where 子句，可以向继承的关联类型添加约束
+ protocol ComparableContainer: Container where Item: Comparable { }
+ 
+ 
+ 
+ 
+ 
+ 泛型下标
+ 下标也可以用泛型表示，同时也可以包含泛型 where 子句。
+ 可以在 下标 之后的尖括号内写一个类型占位符，在下标主体的起始大括号之前写一个泛型 where 子句
+ extension Container {
+ subscript<Indices: Sequence>(indices: Indices) -> [Item]
+ where Indices.Iterator.Element == Int {
+ var result = [Item]()
+ for index in indices {
+ result.append(self[index])
+ }
+ return result
+ }
+ }
+ 
+ 
+ 
+ 
+ 
+ */
 
 
 
