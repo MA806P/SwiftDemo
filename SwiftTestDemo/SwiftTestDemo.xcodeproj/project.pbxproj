@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		DA01287421153EB8000B16CF /* StructureClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA01287321153EB8000B16CF /* StructureClass.swift */; };
 		DA2D29A121254EAB00282C7D /* OptionalChaining.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2D29A021254EAB00282C7D /* OptionalChaining.swift */; };
+		DA45CDA2214C97DA00899F99 /* AdvancedOperators.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA45CDA1214C97DA00899F99 /* AdvancedOperators.swift */; };
 		DA5EFF1B20F5CC6600040E13 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5EFF1A20F5CC6600040E13 /* main.swift */; };
 		DA5EFF2420F5CCB200040E13 /* OCObject.m in Sources */ = {isa = PBXBuildFile; fileRef = DA5EFF2320F5CCB200040E13 /* OCObject.m */; };
 		DA6A922D212E3CEA006B4DA9 /* ErrorHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6A922C212E3CEA006B4DA9 /* ErrorHandling.swift */; };
@@ -40,6 +41,7 @@
 /* Begin PBXFileReference section */
 		DA01287321153EB8000B16CF /* StructureClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StructureClass.swift; sourceTree = "<group>"; };
 		DA2D29A021254EAB00282C7D /* OptionalChaining.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionalChaining.swift; sourceTree = "<group>"; };
+		DA45CDA1214C97DA00899F99 /* AdvancedOperators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvancedOperators.swift; sourceTree = "<group>"; };
 		DA5EFF1720F5CC6600040E13 /* SwiftTestDemo */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SwiftTestDemo; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA5EFF1A20F5CC6600040E13 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		DA5EFF2120F5CCB200040E13 /* SwiftTestDemo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SwiftTestDemo-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -104,6 +106,7 @@
 				DAC45F192146207C0057A5DF /* ARC.swift */,
 				DA90E97821489BF400C7C122 /* MemorySafety.swift */,
 				DACF5D992149FABF0032EFD3 /* AccessControl.swift */,
+				DA45CDA1214C97DA00899F99 /* AdvancedOperators.swift */,
 				DA5EFF2220F5CCB200040E13 /* OCObject.h */,
 				DA5EFF2320F5CCB200040E13 /* OCObject.m */,
 				DA5EFF2120F5CCB200040E13 /* SwiftTestDemo-Bridging-Header.h */,
@@ -177,6 +180,7 @@
 				DA71FE182140B58C00ACFA5D /* Generics.swift in Sources */,
 				DA01287421153EB8000B16CF /* StructureClass.swift in Sources */,
 				DA2D29A121254EAB00282C7D /* OptionalChaining.swift in Sources */,
+				DA45CDA2214C97DA00899F99 /* AdvancedOperators.swift in Sources */,
 				DA90E97921489BF400C7C122 /* MemorySafety.swift in Sources */,
 				DA5EFF1B20F5CC6600040E13 /* main.swift in Sources */,
 				DACFA1ED21362EDC00998FFE /* TypeCasting.swift in Sources */,
