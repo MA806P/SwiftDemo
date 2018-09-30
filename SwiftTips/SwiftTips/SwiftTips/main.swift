@@ -15,6 +15,55 @@ print("Hello, World!")
 // -----------------------------
 
 /*
+ 多元组 Tuple
+ */
+
+//交换
+func swapMe2<T>(a: inout T, b: inout T) {
+    (a, b) = (b, a)
+}
+
+var a = 1
+var b = 2
+swapMe2(a: &a, b: &b)
+print("a=\(a) b=\(b)") //a=2 b=1
+
+
+/*
+ “
+ /*
+ CGRectDivide(CGRect rect, CGRect *slice, CGRect *remainder,
+ CGFloat amount, CGRectEdge edge)
+ */
+ CGRect rect = CGRectMake(0, 0, 100, 100);
+ CGRect small;
+ CGRect large;
+ CGRectDivide(rect, &small, &large, 20, CGRectMinXEdge);
+ 上面的代码将 {0,0,100,100} 的 rect 分割为两部分，分别是 {0,0,20,100} 的 small 和 {20,0,80,100} 的 large。
+ 由于 C 系语言的单一返回，我们不得不通过传入指针的方式让方法来填充需要的部分，可以说使用起来既不直观，又很麻烦。”
+
+
+ “在 Swift 中，这个方法摇身一变，使用了多元组的方式来同时返回被分割的部分和剩余部分”
+extension CGRect {
+    //...
+    func divided(atDistance: CGFloat, from fromEdge: CGRectEdge)
+        -> (slice: CGRect, remainder: CGRect)
+    //...
+}
+//然后使用的时候，对比之前的做法，现在就非常简单并且易于理解了：
+
+let rect = CGRect(x: 0, y: 0, width: 100, height: 100)
+let (small, large) = rect.divided(atDistance: 20, from: .minXEdge)
+
+ */
+
+
+
+/*
+
+
+
+/*
  “Swift 的 for...in 可以用在所有实现了 Sequence 的类型上，
  而为了实现 Sequence 你首先需要实现一个 IteratorProtocol。”
  
@@ -89,7 +138,7 @@ for i in ReverseSequence(array: arr) {
 
 
 
-/*
+
 
 // -----------------------------
 /*
