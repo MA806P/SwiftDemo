@@ -10,16 +10,84 @@ import Foundation
 
 print("Hello, World!")
 
+// -----------------------------
+
+func doWork(block: ()->()) {
+    block()
+}
+
+doWork {
+    print("work")
+}
+
+//“对于 block 的调用是同步行为。如果我们改变一下代码，将 block 放到一个 Dispatch 中去，
+//让它在 doWork 返回后被调用的话，我们就需要在 block 的类型前加上 @escaping 标记来表明这个闭包是会“逃逸”出该方法的：
+func doWorkAsync(block: @escaping ()->()) {
+    DispatchQueue.main.async {
+        block()
+    }
+}
+
+
+class S {
+    
+    var foo = "foo"
+    
+    func method1() {
+        doWork {
+            print(foo)
+        }
+        foo = "bar"
+    }
+    
+    func method2() {
+        doWorkAsync {
+            print(self.foo)
+        }
+        foo = "bar"
+    }
+    
+    func method3() {
+        doWorkAsync {
+            [weak self] in
+            print(self?.foo ?? "nil")
+        }
+        foo = "bar"
+    }
+}
+
+S().method1()
+S().method2()
+S().method3()
+
+//闭包持有了 self，打印的值是 method2 最后对 foo 赋值后的内容 bar。
+//如果我们不希望在闭包中持有 self，可以使用 [weak self] 的方式来表达
+
+
+/*
+如果你在协议或者父类中定义了一个接受 @escaping 为参数方法，
+那么在实现协议和类型或者是这个父类的子类中，对应的方法也必须被声明为 @escaping，否则两个方法会被认为拥有不同的函数签名
+protocol P {
+    func work(b: @escaping ()->())
+}
+
+// 可以编译
+class C: P {
+    func work(b: @escaping () -> ()) {
+        DispatchQueue.main.async {
+            print("in C")
+            b()
+        }
+    }
+}
+// 而这样是无法编译通过的：
+//class C1: P { func work(b: () -> ()) { } }
+*/
 
 // -----------------------------
 /*
- @autoclosure 和 ??
- 
- @autoclosure 做的事情就是把一句表达式自动地封装成一个闭包 (closure)。
- 
- 
- 
- */
+ //@autoclosure 和 ??
+ //@autoclosure 做的事情就是把一句表达式自动地封装成一个闭包 (closure)。
 
 
 func logIfTrue(_ predicate:() -> Bool) {
@@ -39,7 +107,6 @@ func logIfTrue2(_ predicate: @autoclosure () -> Bool) {
     }
 }
 logIfTrue2(2 > 1) // 2>1 ==> ()->Bool
-
 
 
 
@@ -74,16 +141,9 @@ print("-- \(currentLevel)")
  也就是说只有形如 () -> T 的参数才能使用这个特性进行简化。
  另外因为调用者往往很容易忽视 @autoclosure 这个特性，所以在写接受 @autoclosure 的方法时还请特别小心，
  如果在容易产生歧义或者误解的时候，还是使用完整的闭包写法会比较好。
- 
- 
- 
- 
+ */
  
  */
-
-
-
-
 
 
 // -----------------------------

@@ -6,5 +6,3 @@ var str = "Hello, playground"
 
 
 
-
-
