@@ -10,8 +10,52 @@ import Foundation
 
 print("Hello, World!")
 
+
 // -----------------------------
 
+
+/*
+//Optional Chaining 可摆脱不必要的判断
+//因为 Optional Chaining 是随时都可能提前返回 nil 的，所以使用 Optional Chaining 所得到的东西其实都是 Optional 的
+
+class Toy {
+    let name: String
+    init(name: String) {
+        self.name = name
+    }
+}
+
+class Pet {
+    var toy: Toy?
+}
+
+class Child {
+    var pet: Pet?
+}
+
+var xiaoming = Child()
+
+let toyName = xiaoming.pet?.toy?.name
+
+extension Toy {
+    func play() {
+        
+    }
+}
+
+let playClosure = {(child:Child) -> (Void)? in child.pet?.toy?.play()}
+if let result: () = playClosure(xiaoming) {
+    print("YES")
+} else {
+    print("NO")
+}
+*/
+
+
+// -----------------------------
+
+/*
+ 
 func doWork(block: ()->()) {
     block()
 }
@@ -56,9 +100,9 @@ class S {
     }
 }
 
-S().method1()
-S().method2()
-S().method3()
+S().method1() //foo
+S().method2() //bar ?????? 为何我写的不打印
+S().method3() //nil ??????
 
 //闭包持有了 self，打印的值是 method2 最后对 foo 赋值后的内容 bar。
 //如果我们不希望在闭包中持有 self，可以使用 [weak self] 的方式来表达
@@ -83,6 +127,13 @@ class C: P {
 // 而这样是无法编译通过的：
 //class C1: P { func work(b: () -> ()) { } }
 */
+
+*/
+
+
+
+
+
 
 // -----------------------------
 /*
