@@ -12,6 +12,62 @@ print("Hello, World!")
 
 
 // -----------------------------
+//swift 支持重载操作符的特性
+
+struct Vector2D {
+    var x = 0.0
+    var y = 0.0
+}
+
+let v1 = Vector2D(x: 2.0, y: 3.0)
+let v2 = Vector2D(x: 2.0, y: 3.0)
+let v3 = Vector2D(x: v1.x + v2.x, y: v1.y + v2.y)
+
+
+func +(left: Vector2D, right: Vector2D) -> Vector2D {
+    return Vector2D(x: left.x + right.x, y: left.y + right.y)
+}
+let v4 = v1 + v2
+print("v3 = \(v3), v4 = \(v4)")
+//v3 = Vector2D(x: 4.0, y: 6.0), v4 = Vector2D(x: 4.0, y: 6.0)
+
+func +*(left: Vector2D, right: Vector2D) -> Double {
+    return left.x * right.x + left.y * right.y
+}
+//Swift 中已经有定义了 +* ，如果我们要新加操作符的话，需要先对其进行声明，告诉编译器这个符号其实是一个操作符
+precedencegroup DotProductPrecedence {
+    associativity: none
+    higherThan: MultiplicationPrecedence
+}
+
+infix operator +*: DotProductPrecedence
+
+
+/*
+ “precedencegroup
+ 定义了一个操作符优先级别。操作符优先级的定义和类型声明有些相似，一个操作符比需要属于某个特定的优先级。Swift 标准库中已经定义了一些常用的运算优先级组，比如加法优先级 (AdditionPrecedence) 和乘法优先级 (MultiplicationPrecedence) 等，你可以在这里(https://github.com/apple/swift-evolution/blob/master/proposals/0077-operator-precedence.md)找到完整的列表。如果没有适合你的运算符的优先级组，你就需要像我们在例子中做得这样，自己指定结合律方式和优先级顺序了。
+ associativity
+ 定义了结合律，即如果多个同类的操作符顺序出现的计算顺序。比如常见的加法和减法都是 left，就是说多个加法同时出现时按照从左往右的顺序计算 (因为加法满足交换律，所以这个顺序无所谓，但是减法的话计算顺序就很重要了)。点乘的结果是一个 Double，不再会和其他点乘结合使用，所以这里是 none；
+ higherThan
+ 运算的优先级，点积运算是优先于乘法运算的。除了 higherThan，也支持使用 lowerThan 来指定优先级低于某个其他组。
+ infix
+ 表示要定义的是一个中位操作符，即前后都是输入；其他的修饰子还包括 prefix 和 postfix，不再赘述；
+ 
+ “Swift 的操作符是不能定义在局部域中的，因为至少会希望在能在全局范围使用你的操作符，否则操作符也就失去意义了。
+ 另外，来自不同 module 的操作符是有可能冲突的，这对于库开发者来说是需要特别注意的地方。
+ 如果库中的操作符冲突的话，使用者是无法像解决类型名冲突那样通过指定库名字来进行调用的。
+ 因此在重载或者自定义操作符时，应当尽量将其作为其他某个方法的 "简便写法"，而避免在其中实现大量逻辑或者提供独一无二的功能。
+ 这样即使出现了冲突，使用者也还可以通过方法名调用的方式使用你的库。
+ 运算符的命名也应当尽量明了，避免歧义和可能的误解。
+ 因为一个不被公认的操作符是存在冲突风险和理解难度的，所以我们不应该滥用这个特性。
+ 在使用重载或者自定义操作符时，请先再三权衡斟酌，你或者你的用户是否真的需要”
+ 
+ */
+let result = v1 +* v2
+print("result = \(result)") //13 = 2*2 + 3*3
+
+
+// -----------------------------
 
 
 /*
