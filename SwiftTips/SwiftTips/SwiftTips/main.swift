@@ -12,8 +12,57 @@ print("Hello, World!")
 
 
 // -----------------------------
-//swift 支持重载操作符的特性
 
+//func 的参数修饰
+
+
+
+/*
+ func incrementor(variable: Int) -> Int {
+    variable += 1
+    print(variable)
+    return variable
+ }
+ 编译错误
+ Left side of mutating operator isn't mutable: 'variable' is a 'let' constant
+ 因为 Swift 其实是一门讨厌变化的语言。所有有可能的地方，都被默认认为是不可变的，也就是用 let 进行声明的
+ 这样不仅可以确保安全，也能在编译器的性能优化上更有作为。
+ 在方法的参数上也是如此，我们不写修饰符的话，默认情况下所有参数都是 let 的
+
+*/
+func incrementor(variable: Int) -> Int {
+    var num = variable
+    num += 1
+    return num
+}
+
+func incrementor2(variable: inout Int) {
+    variable += 1
+}
+var luckyNumber = 7
+incrementor2(variable: &luckyNumber)
+print(luckyNumber) //8
+
+//对于值类型来说，inout 相当于在函数内部创建了一个新的值，然后在函数返回时将这个值赋给 & 修饰的变量，这与引用类型的行为是不同的
+
+
+
+func makeIncrementor(addNumber: Int) -> (inout Int) -> () {
+    func incrementore3(variable: inout Int) -> () {
+        variable += addNumber
+    }
+    return incrementore3
+}
+let addTwo = makeIncrementor(addNumber: 2)
+var num = 8
+addTwo(&num)
+print(num) //10
+
+
+// -----------------------------
+
+/*
+//swift 支持重载操作符的特性
 struct Vector2D {
     var x = 0.0
     var y = 0.0
@@ -66,6 +115,7 @@ infix operator +*: DotProductPrecedence
 let result = v1 +* v2
 print("result = \(result)") //13 = 2*2 + 3*3
 
+ */
 
 // -----------------------------
 
