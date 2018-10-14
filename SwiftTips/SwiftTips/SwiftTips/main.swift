@@ -12,10 +12,14 @@ print("Hello, World!")
 
 
 // -----------------------------
+//字面量表达，“像特定的数字，字符串或者是布尔值这样，能够直截了当地指出自己的类型并为变量进行赋值的值”
+let array = [1,2,3]
+let dictionary = ["key1":"value1", "key2":"value2"]
 
+// -----------------------------
+
+/*
 //func 的参数修饰
-
-
 
 /*
  func incrementor(variable: Int) -> Int {
@@ -58,7 +62,7 @@ var num = 8
 addTwo(&num)
 print(num) //10
 
-
+*/
 // -----------------------------
 
 /*
