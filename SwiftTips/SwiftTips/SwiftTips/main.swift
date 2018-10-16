@@ -12,9 +12,83 @@ print("Hello, World!")
 
 
 // -----------------------------
+
+//下标
+//想要一下取出数组中几个元素
+
+extension Array {
+    subscript(input: [Int]) -> ArraySlice<Element> {
+        get {
+            var result = ArraySlice<Element>()
+            for i in input {
+                assert(i < self.count, "Index out of range")
+                result.append(self[i])
+            }
+            return result
+        }
+        
+        set {
+            for (index, i) in input.enumerated() {
+                assert(i < self.count, "Index out of range")
+                self[i] = newValue[index]
+            }
+        }
+    }
+}
+
+var array = [0, 1, 2, 3, 4, 5]
+var result = array[[0, 2, 4]]
+print(result) //[0, 2, 4]
+array[[0, 2, 4]] = [-1, -2, -3]
+print(array) //[-1, 1, -2, 3, -3, 5]
+
+
+// -----------------------------
+
+/*
 //字面量表达，“像特定的数字，字符串或者是布尔值这样，能够直截了当地指出自己的类型并为变量进行赋值的值”
 let array = [1,2,3]
 let dictionary = ["key1":"value1", "key2":"value2"]
+
+/*
+ 那些实现了字面量表达协议的类型，在提供字面量赋值的时候，
+ 就可以简单地按照协议方法中定义的规则“无缝对应”地通过赋值的方式将值表达为对应类型。
+ 这些协议包括了各个原生的字面量，在实际开发中我们经常可能用到的有：
+ “ExpressibleByArrayLiteral
+ ExpressibleByBooleanLiteral
+ ExpressibleByDictionaryLiteral
+ ExpressibleByFloatLiteral
+ ExpressibleByNilLiteral
+ ExpressibleByIntegerLiteral
+ ExpressibleByStringLiteral”
+ 
+ 所有的字面量表达协议都定义了一个 typealias 和对应的 init 方法。拿 ExpressibleByBooleanLiteral 举个例子：
+ protocol ExpressibleByBooleanLiteral {
+ typealias BooleanLiteralType
+ /// Create an instance initialized to `value`.
+ init(booleanLiteral value: BooleanLiteralType) }
+ 
+ */
+ //在我们需要自己实现一个字面量表达的时候，可以简单地只实现定义的 init 方法就行了。
+//举个不太有实际意义的例子，比如我们想实现一个自己的 Bool 类型，可以这么做：
+enum MyBool: Int {
+    case myTrue, myFalse
+}
+
+extension MyBool: ExpressibleByBooleanLiteral {
+    init(booleanLiteral value: Bool) {
+        self = value ? .myTrue : .myFalse
+    }
+}
+let myTrue: MyBool = true
+let myFalse: MyBool = false
+print(myTrue.rawValue)   // 0
+print(myFalse.rawValue)  // 1
+
+//字面量表达是一个很强大的特性，使用得当的话对缩短代码和清晰表意都很有帮助；
+//但是这同时又是一个比较隐蔽的特性：因为你的代码并没有显式的赋值或者初始化，所以可能会给人造成迷惑
+
+*/
 
 // -----------------------------
 
