@@ -10,9 +10,121 @@ import Foundation
 
 print("Hello, World!")
 
+// -----------------------------
+
+//typealias
+//typealias是用来为已经存在的类型重新定义名字的，通过命名可以使代码变的更加清晰。
+
+typealias Location = CGPoint
+typealias Distance = Double
+
+func distance(from location:Location, to anotherLocation: Location) -> Distance {
+    let dx = Distance(location.x - anotherLocation.x)
+    let dy = Distance(location.y - anotherLocation.y)
+    return sqrt(dx * dx + dy * dy)
+}
+
+let origin: Location = Location(x: 0, y: 0)
+let point: Location = Location(x: 1, y: 1)
+
+let d: Distance = distance(from: origin, to: point)
+print(d) //1.4142135623731
+
+//typealias 是单一的，也就是说你必须指定将某个特定的类型通过 typealias 赋值为新名字，而不能将整个泛型类型进行重命名。
+
+class PersonClass<T> {  }
+//错误代码 typealias Worker = PersonClass
+
+//如果我们在别名中也引入泛型，是可以进行对应的：
+// This is OK
+typealias Worker<T> = PersonClass<T>
+//当泛型类型的确定性得到保证后，别名也是可以使用的
+typealias WorkId = String
+typealias Worker2 = PersonClass<WorkId>
+
+
+//某个类型同时实现多个协议的组合时。我们可以使用 & 符号连接几个协议，
+//然后给它们一个新的更符合上下文的名字，来增强代码可读性：
+protocol Cat {  }
+protocol Dog {  }
+typealias Pat = Cat & Dog
+
+
+
+
+
+
+//associatedtype
+protocol Food { }
+protocol Animal {
+    func eat(_ food: Food)
+}
+
+struct Meat: Food { }
+struct Grass: Food { }
+
+struct Tiger: Animal {
+    func eat(_ food: Food) {
+        if let meat = food as? Meat {
+            print("eat \(meat)")
+        } else {
+            print("Tiger can only eat meat")
+        }
+    }
+}
+
+let meat = Meat()
+Tiger().eat(meat) //eat Meat()
+let grass = Grass()
+Tiger().eat(grass) //Tiger can only eat meat
+
+//“使用 associatedtype 我们就可以在 Animal 协议中添加一个限定，让 Tiger 来指定食物的具体类型”
+protocol Animal2 {
+    associatedtype F: Food
+    func eat2(_ food: F)
+}
+
+struct Tiger2: Animal2 {
+    //typealias F = Meat
+    func eat2(_ food: Meat) {
+        print("eat meat")
+    }
+}
+//“在 Tiger 通过 typealias 具体指定 F 为 Meat 之前，Animal 协议中并不关心 F 的具体类型，
+//只需要满足协议的类型中的 F 和 eat 参数一致即可。可以避免在 Tiger 的 eat 中进行判定和转换。
+struct Sheep: Animal2 {
+    func eat2(_ food: Grass) {
+        print("eat grass")
+    }
+}
+
+//“不过在添加 associatedtype 后，Animal 协议就不能被当作独立的类型使用了”
+/*
+ 错误代码
+func isDangerousTest(animal: Animal) -> Bool {
+    if animal is Tiger { return true } else { return false }
+}
+ */
+//“因为 Swift 需要在编译时确定所有类型，这里因为 Animal 包含了一个不确定的类型，所以随着 Animal 本身类型的变化，
+//其中的 F 将无法确定 (试想一下如果在这个函数内部调用 eat 的情形，你将无法指定 eat 参数的类型)。
+//在一个协议加入了像是 associatedtype 或者 Self 的约束后，它将只能被用为泛型约束，而不能作为独立类型的占位使用，
+//也失去了动态派发的特性。也就是说，这种情况下，我们需要将函数改写为泛型：
+
+func isDangerous<T: Animal>(animal: T) -> Bool {
+    if animal is Tiger {
+        return true
+    } else {
+        return false
+    }
+}
+
+//isDangerous(animal: Tiger()) //true
+//isDangerous(animal: Sheep()) //false
+
 
 // -----------------------------
 
+/*
 //命名空间
 /*
  在 Swift 中，由于可以使用命名空间了，即使是名字相同的类型，只要是来自不同的命名空间的话，都是可以和平共处的。
@@ -60,7 +172,7 @@ struct MyClassContainer2 {
 MyClassContainer1.MyClass.hello()
 MyClassContainer2.MyClass.hello()
 
-
+*/
 
 // -----------------------------
 /*
