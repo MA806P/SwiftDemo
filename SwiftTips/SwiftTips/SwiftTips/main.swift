@@ -13,6 +13,101 @@ print("Hello, World!")
 
 // -----------------------------
 
+//static 和 class
+//在非 class 的类型上下文中，我们统一使用 static 来描述类型作用域。这包括在 enum 和 struct 中表述类型方法和类型属性时。
+//在这两个值类型中，我们可以在类型范围内声明并使用存储属性，计算属性和方法
+
+
+struct PointTest {
+    let x: Double
+    let y: Double
+    
+    //存储属性
+    static let zero = PointTest(x: 0, y: 0)
+    
+    //计算属性
+    static var ones: [PointTest] {
+        return [PointTest(x: 1, y: 1), PointTest(x: -1, y: 1), PointTest(x: 1, y: -1), PointTest(x: -1, y: -1)]
+    }
+    
+    //类型方法
+    static func add(p1: PointTest, p2: PointTest) -> PointTest {
+        return PointTest(x: p1.x + p2.x, y: p1.y + p2.y)
+    }
+}
+
+//在Swift 1.2及之后，可以在class中使用 static 来声明一个类作用域的变量
+
+class MyClass {
+    static var bar: PointTest?
+}
+
+
+// -----------------------------
+
+//初始化返回nil
+/*
+ 在Swift中默认情况下初始化方法是不能写return语句来返回值的，也就是说我们没有机会初始化一个optional的值。
+ 
+ 在 Swift 1.0 及之前
+ “使用工厂模式，也就是写一个类方法来生成和返回实例，或者在失败的时候返回 nil。Swift 的 NSURL 就做了这样的处理：
+ class func URLWithString(URLString: String!) -> Self!
+ 使用的时候：
+ let url = NSURL.URLWithString("ht tp://swifter。tips")
+ print(url)
+ // 输出 nil
+ 不过虽然可以用这种方式来和原来一样返回 nil，但是这也算是一种折衷。在可能的情况下，
+ 我们还是应该倾向于尽量减少出现 Optional 的可能性，这样更有助于代码的简化。
+ 
+ 如果你确实想使用初始化方法而不愿意用工厂函数的话，也可以考虑用一个 Optional 量来存储结果
+ 这样你就可以处理初始化失败了，不过相应的代价是代码复杂度的增加
+ let url: NSURL? = NSURL(string: "ht tp://swifter。tips")
+ // nil”
+ 
+ “在 Swift 1.1 中 Apple 已经为我们加上了初始化方法中返回 nil 的能力。
+ 我们可以在 init 声明时在其后加上一个 ? 或者 ! 来表示初始化失败时可能返回 nil。”
+ 
+ */
+
+let url = NSURL(string: "http://..")
+print(url)
+
+extension Int {
+    init?(fromString: String) {
+        self = 0
+        var digit = fromString.count - 1
+        for c in fromString {
+            var number = 0
+            if let n = Int(String(c)) {
+                number = n
+            } else {
+                switch c {
+                case "一": number = 1
+                case "二": number = 2
+                case "三": number = 3
+                case "四": number = 4
+                default: return nil
+                }
+            }
+            self = self + number * Int(pow(10, Double(digit)))
+            digit = digit - 1
+        }
+    }
+}
+
+let number1 = Int(fromString: "1一三4四")
+print(number1) // Optional(11344)
+
+let number2 = Int(fromString: "12ab")
+print(number2) // nil
+
+//“结果都将是 Int? 类型，通过 Optional Binding，我们就能知道初始化是否成功，并安全地使用它们了
+//我们在这类初始化方法中还可以对 self 进行赋值，也算是 init 方法里的特权之一
+//“在新版本的 Swift 中，对于可能初始化失败的情况，我们应该始终使用可返回 nil 的初始化方法，而不是类型工厂方法。”
+
+
+// -----------------------------
+/*
 //初始化方法顺序，与OC不同Swift的初始化方法需要保证类型的所有属性都被初始化。所以初始化方法的调用顺序很有讲究。
 //“在某个类的子类中，初始化方法里语句的顺序并不是随意的，我们需要保证在当前子类实例的成员初始化完成后才能调用父类的初始化方法：
 
@@ -94,6 +189,9 @@ let anObj = ClassB(bigNum: true)
 //那么应当将 init(num: Int) 声明为必须，这样我们在子类中调用 init(bigNum: Bool) 时就始终能够找到一条完全初始化的路径了：”
 //对于 convenience 的初始化方法，我们也可以加上 required 以确保子类对其进行实现。
 //这在要求子类不直接使用父类中的 convenience 初始化方法时会非常有帮助。
+*/
+
+
 
 // -----------------------------
 
