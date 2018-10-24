@@ -13,6 +13,46 @@ print("Hello, World!")
 
 // -----------------------------
 
+// 多类型和容器
+//Array Dictionary Set 他们都是泛型的，也就是说我们在一个集合中只能放同一类型的元素
+//要想把不相关的类型放到同一个容器中
+let mixed: [Any] = [1, "two", 3] //Any类型可以隐式转换
+let objectArray = [1 as NSObject, "Two" as NSObject, 3 as NSObject]
+//转换为NSObject, 会造成部分信息的损失，我们从容器中取值时只能得到信息完全丢失后的结果，在使用时还需要进行一次类型转换。
+//这其实是在无其他可选方案后的最差选择：因为使用这样的转换的话，编译器就不能再给我们提供警告信息了。
+//我们可以随意地将任意对象添加进容器，也可以将容器中取出的值转换为任意类型，这是一件十分危险的事情
+
+
+//如上面的例子如果我们希望的是打印出容器内的元素的 description，可能我们更倾向于将数组声明为 [CustomStringConvertible] 的：
+
+let mixed2: [CustomStringConvertible] = [1, "two", 3]
+
+for obj in mixed2 {
+    print(obj.description)
+}
+//这种方法虽然也损失了一部分类型信息，但是相对于 Any 或者 AnyObject 还是改善很多，
+//在对于对象中存在某种共同特性的情况下无疑是最方便的。另一种做法是使用 enum 可以带有值的特点，
+//将类型信息封装到特定的 enum 中。下面的代码封装了 Int 或者 String 类型：
+
+enum IntOrString {
+    case IntValue(Int)
+    case StringValue(String)
+}
+
+let mixed3 = [IntOrString.IntValue(1), IntOrString.StringValue("two"), IntOrString.IntValue(3)]
+for value in mixed3 {
+    switch value {
+    case let .IntValue(i):
+        print(i)
+    case let .StringValue(s):
+        print(s.capitalized)
+    }
+}
+// 1
+
+// -----------------------------
+
+/*
 //static 和 class
 //在非 class 的类型上下文中，我们统一使用 static 来描述类型作用域。这包括在 enum 和 struct 中表述类型方法和类型属性时。
 //在这两个值类型中，我们可以在类型范围内声明并使用存储属性，计算属性和方法
@@ -37,14 +77,37 @@ struct PointTest {
 }
 
 //在Swift 1.2及之后，可以在class中使用 static 来声明一个类作用域的变量
+//class MyClass { static var bar: PointTest? }
 
-class MyClass {
-    static var bar: PointTest?
+
+//如果想在 protocol 里定义一个类型域上的方法或计算属性的话，使用static进行定义。
+
+protocol MyProtocol {
+    static func foo() -> String
 }
 
+struct MyStruct: MyProtocol {
+    static func foo() -> String {
+        return "MyStruct"
+    }
+}
+
+enum MyEnum: MyProtocol {
+    static func foo() -> String {
+        return "MyEnum"
+    }
+}
+
+class MyClass: MyProtocol {
+    static func foo() -> String {
+        return "MyClass"
+    }
+}
+ */
 
 // -----------------------------
 
+/*
 //初始化返回nil
 /*
  在Swift中默认情况下初始化方法是不能写return语句来返回值的，也就是说我们没有机会初始化一个optional的值。
@@ -104,7 +167,7 @@ print(number2) // nil
 //“结果都将是 Int? 类型，通过 Optional Binding，我们就能知道初始化是否成功，并安全地使用它们了
 //我们在这类初始化方法中还可以对 self 进行赋值，也算是 init 方法里的特权之一
 //“在新版本的 Swift 中，对于可能初始化失败的情况，我们应该始终使用可返回 nil 的初始化方法，而不是类型工厂方法。”
-
+*/
 
 // -----------------------------
 /*
