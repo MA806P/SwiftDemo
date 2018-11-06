@@ -13,6 +13,20 @@ print("Hello, World!")
 
 // -----------------------------
 
+//default 参数
+/*
+ swift 的方法支持默认参数，可以给某个参数指定一个默认使用的值
+ */
+
+func sayHello(str1: String = "Hello", str2: String, str3: String) {
+    print(str1 + str2 + str3)
+}
+sayHello(str2: "", str3: "World")
+
+
+// -----------------------------
+
+/*
 // 多类型和容器
 //Array Dictionary Set 他们都是泛型的，也就是说我们在一个集合中只能放同一类型的元素
 //要想把不相关的类型放到同一个容器中
@@ -49,6 +63,9 @@ for value in mixed3 {
     }
 }
 // 1
+*/
+
+
 
 // -----------------------------
 
