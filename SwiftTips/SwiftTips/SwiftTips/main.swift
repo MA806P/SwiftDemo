@@ -13,6 +13,74 @@ print("Hello, World!")
 
 // -----------------------------
 
+//正则表达式
+struct RegexHelper {
+    let regex: NSRegularExpression
+    
+    init(_ pattern: String) throws {
+        try regex = NSRegularExpression(pattern: pattern,
+                                        options: .caseInsensitive)
+    }
+    
+    func match(_ input: String) -> Bool {
+        let matches = regex.matches(in: input,
+                                    options: [],
+                                    range: NSMakeRange(0, input.utf16.count))
+        return matches.count > 0
+    }
+}
+/*
+ 先写一个接受正则表达式的字符串，以此生成 NSRegularExpression 对象。
+ 然后使用该对象来匹配输入字符串，并返回结果告诉调用者匹配是否成功
+ */
+
+let mailPattern = "^([a-z0-9_\\.-]+)@([\\da-z\\.-]+)\\.([a-z\\.]{2,6})$"
+
+let matcher: RegexHelper
+do {
+    matcher = try RegexHelper(mailPattern)
+}
+
+let maybeMailAddress = "onev@onevcat.com"
+
+if matcher.match(maybeMailAddress) {
+    print("有效的邮箱地址")
+}
+
+//正则表达式30分钟入门教程
+//http://deerchao.net/tutorials/regex/regex.htm
+
+//8个常用正则表达式
+//https://code.tutsplus.com/tutorials/8-regular-expressions-you-should-know--net-6149
+
+
+
+//实现 =~
+precedencegroup MatchPrecedence {
+    associativity: none
+    higherThan: DefaultPrecedence
+}
+
+infix operator =~: MatchPrecedence
+
+func =~(lhs: String, rhs: String) -> Bool {
+    do {
+        return try RegexHelper(rhs).match(lhs)
+    } catch _ {
+        return false
+    }
+}
+
+//然后就可以使用类似于其他语言的正则匹配的方法了：
+if "onev@onevcat.com" =~ "^([a-z0-9_\\.-]+)@([\\da-z\\.-]+)\\.([a-z\\.]{2,6})$" {
+    print("有效的邮箱地址")
+}
+// 输出: 有效的邮箱地址
+
+
+
+// -----------------------------
+
 //default 参数
 /*
  swift 的方法支持默认参数，可以给某个参数指定一个默认使用的值
