@@ -79,6 +79,73 @@ if "onev@onevcat.com" =~ "^([a-z0-9_\\.-]+)@([\\da-z\\.-]+)\\.([a-z\\.]{2,6})$" 
 
 
 
+
+
+
+//模式匹配 ~=模式匹配的操作符
+//func ~= <T: Equatable>(a: T, b: T) -> Bool //可以判断是否相等的类型
+//func ~= <T>(lhs: _OptionalNilComparisonType, rhs: T?) -> Bool //可以与nil比较的类型
+//func ~= <I: IntervalType>(pattern: I, value: I.Bound) -> Bool //一个范围输入和某个特定值
+
+//等类型的判断
+let password = "abc"
+switch password {
+case "abc": print("pass")
+default: print("no pass")
+}
+
+//optional的判断
+let num: Int? = nil
+switch num {
+case nil: print("nil")
+default: print("\(num!)")
+}
+
+//对范围的判断
+let x = 0.5
+switch x {
+case -1.0...1.0: print("区间内")
+default: print("区间外")
+}
+
+/*
+ Swift的switch就是使用了 ~= 操作符进行模式匹配，只不过是Swift隐式的完成
+那样在 case 做判断的时候我们完全可以使用我们自定义的模式匹配方法来进行判断，代码可以变得简洁有条理
+ 只需要按照要求重载 ~= 操作符，下面通过使用正则表达式做匹配例子
+*/
+func ~= (pattern: NSRegularExpression, input: String) -> Bool {
+    return pattern.numberOfMatches(in: input, options: [], range: NSRange(location: 0, length: input.count)) > 0
+}
+
+//将字符串转换为 NSRegularExpression 的操作符
+prefix operator ~/
+prefix func ~/(pattern: String) -> NSRegularExpression? {
+    do {
+        let a = try NSRegularExpression(pattern: pattern, options: .caseInsensitive)
+        return a
+    } catch _ {
+        return nil
+    }
+}
+
+let contact = ("http://xxxx.com", "xxxx@xxxx.com")
+let mailRegex: NSRegularExpression
+let siteRegex: NSRegularExpression
+
+mailRegex = (try ~/"^([a-z0-9_\\.-]+)@([\\da-z\\.-]+)\\.([a-z\\.]{2,6})$")!
+siteRegex = (try ~/"^(https?:\\/\\/)?([\\da-z\\.-]+)\\.([a-z\\.]{2,6})([\\/\\w \\.-]*)*\\/?$")!
+
+switch contact {
+case (siteRegex, mailRegex): print("同时拥有有效的网站和邮箱")
+case (_, mailRegex): print("只拥有有效的邮箱")
+case (siteRegex, _): print("只拥有有效的网站")
+default: print("嘛都没有")
+}
+// 输出
+// 同时拥有网站和邮箱
+
+
+
 // -----------------------------
 
 //default 参数
