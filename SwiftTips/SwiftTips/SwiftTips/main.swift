@@ -13,6 +13,39 @@ print("Hello, World!")
 
 // -----------------------------
 
+//AnyClass 元类型和 .self
+/*
+ swift 中能够表示“任意”这个概念的除了 Any 和 AnyObject 以外还有 AnyClass
+ typealias AnyClass = AnyObject.Type
+ */
+
+
+// -----------------------------
+
+//... 和 ..<
+for i in 0...3 {
+    print(i)
+}
+
+//可以用来连接两个字符串
+let test = "helLo"
+let interval = "a"..."z"
+for c in test {
+    if !interval.contains(String(c)) {
+        print("\(c)不是小写字母")
+    }
+}
+//L不是小写字母
+
+//在日常开发中，我们可能会需要确定某个字符是不是有效的 ASCII 字符，和上面的例子很相似，
+//我们可以使用 \0...~ 这样的 ClosedInterval 来进行 (\0 和 ~ 分别是 ASCII 的第一个和最后一个字符)。
+
+
+
+// -----------------------------
+
+/*
+
 //正则表达式
 struct RegexHelper {
     let regex: NSRegularExpression
@@ -144,10 +177,11 @@ default: print("嘛都没有")
 // 输出
 // 同时拥有网站和邮箱
 
-
+*/
 
 // -----------------------------
 
+/*
 //default 参数
 /*
  swift 的方法支持默认参数，可以给某个参数指定一个默认使用的值
@@ -157,7 +191,7 @@ func sayHello(str1: String = "Hello", str2: String, str3: String) {
     print(str1 + str2 + str3)
 }
 sayHello(str2: "", str3: "World")
-
+*/
 
 // -----------------------------
 
