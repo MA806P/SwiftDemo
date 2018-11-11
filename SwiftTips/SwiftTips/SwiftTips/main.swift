@@ -8,20 +8,63 @@
 
 import Foundation
 
+
 print("Hello, World!")
 
 
 // -----------------------------
 
+/*
 //AnyClass 元类型和 .self
 /*
  swift 中能够表示“任意”这个概念的除了 Any 和 AnyObject 以外还有 AnyClass
- typealias AnyClass = AnyObject.Type
+ typealias AnyClass = AnyObject.Type 这种方式得到是一个元类型Meta
+ */
+class A{
+    class func method() {
+        print("Hello")
+    }
+}
+let typeA: A.Type = A.self
+//.self 可以用在类型后面取的类型本身，获取到可以表示该类型的值
+//也可以用在实例后面取的实例本身
+//AnyClass 所表达的就是任意类型本身，对于A的类型取值，可以强制让它是一个 AnyClass
+let typeA2: AnyClass = A.self
+
+typeA.method()
+(typeA2 as! A.Type).method()
+//为什么不是直接调用 A.method() 对于单个独立的类型来说没有必要关系它的元类型，
+//元变成概念可以变得灵活强大，在编写框架性的代码时会非常方便，例如传递一些类型时，就不需要不断改动代码了
+
+/*
+class MusicViewController: UIViewController { }
+class AlbumViewController: UIViewController { }
+let usingVCTypes: [AnyClass] = [MusicViewController.self,
+                                AlbumViewController.self]
+func setupViewControllers(_ vcTypes: [AnyClass]) {
+    for vcType in vcTypes {
+        if vcType is UIViewController.Type {
+            let vc = (vcType as! UIViewController.Type).init()
+            print(vc)
+        }
+    }
+}
+setupViewControllers(usingVCTypes)
+ 
+ Cocoa API 中我们也常遇到一个 AnyClass 的输入，这时也应该使用 .self 的方式来获取所需要的元类型
+ self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "myCell")
+ 
+ .Type 表示的是某个类型的元类型，而在 Swift 中，除了 class，struct 和 enum 这三个类型外，
+ 我们还可以定义 protocol。对于 protocol 来说，有时候我们也会想取得协议的元类型。
+ 这时我们可以在某个 protocol 的名字后面使用 .Protocol 来获取，使用的方法和 .Type 是类似的。
+ 
  */
 
+ */
 
 // -----------------------------
 
+/*
 //... 和 ..<
 for i in 0...3 {
     print(i)
@@ -40,7 +83,7 @@ for c in test {
 //在日常开发中，我们可能会需要确定某个字符是不是有效的 ASCII 字符，和上面的例子很相似，
 //我们可以使用 \0...~ 这样的 ClosedInterval 来进行 (\0 和 ~ 分别是 ASCII 的第一个和最后一个字符)。
 
-
+*/
 
 // -----------------------------
 
