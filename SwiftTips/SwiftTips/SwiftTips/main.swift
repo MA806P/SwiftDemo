@@ -14,6 +14,49 @@ print("Hello, World!")
 
 // -----------------------------
 
+//协议和类方法中的Self
+/*
+ 在一些协议定义可能会看到首字母大写的 Self
+ protocol IntervalType { func clamp(xxx: Self ) -> Self {} }
+ 接受实现该协议的自身类型，并返回一个同样的类型
+ 因为协议其实本身是没有自己的上下文类型信息的，不知道什么类型来实现这个协议Swift也不能在协议中第一泛型进行限制
+ 当希望在协议中使用的类型就是实现这个协议本身的类型的话，就需要使用 Self 进行指代
+*/
+
+protocol Copyable {
+    func copy() -> Self
+    //该方法要求返回一个抽象的、表示当前类型的Self
+}
+
+class MyClass: Copyable {
+    var num = 1
+    
+    func copy() -> Self {
+        let result = type(of: self).init()
+        result.num = num
+        return result
+    }
+    
+    //“编译器提示我们如果想要构建一个 Self 类型的对象的话，需要有 required 关键字修饰的初始化方法，
+    //这是因为 Swift 必须保证当前类和其子类都能响应这个 init 方法。
+    //另一个解决的方案是在当前类类的声明前添加 final 关键字，告诉编译器我们不再会有子类来继承这个类型。
+    required init() {
+        
+    }
+}
+
+let object = MyClass()
+object.num = 100
+
+let newObject = object.copy()
+object.num = 1
+
+print("\(object.num) -- \(newObject.num)")//1 -- 100
+
+
+
+// -----------------------------
+
 /*
 //AnyClass 元类型和 .self
 /*
