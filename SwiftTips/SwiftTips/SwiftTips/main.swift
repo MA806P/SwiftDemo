@@ -14,6 +14,57 @@ print("Hello, World!")
 
 // -----------------------------
 
+/*
+/*
+ 动态类型和多方法
+ 可通过 dynamicType 来获取一个对象的动态类型（运行时的实际类型，而非代码指定或编译器看到的类型）
+ 但是不能根据对象在动态时的类型进行合适的重载方法调用
+ 在Swift中可以重载同样名字的方法，而只需要保证参数类型不同：
+ */
+class Pet {}
+class Cat: Pet {}
+class Dog: Pet {}
+
+func printPet(_ pet: Pet) {
+    print("Pet")
+}
+
+func printPet(_ cat: Cat) {
+    print("Cat")
+}
+
+func printPet(_ dog: Dog) {
+    print("Dog")
+}
+
+printPet(Pet()) //Pet
+printPet(Cat()) //Cat
+printPet(Dog()) //Dog
+//对于 Cat Dog 的实例，不会去调一个通用的父类 Pet 的方法，而是去寻找最合适的方法
+func printThem(_ pet: Pet, _ cat: Cat) {
+    printPet(pet)
+    printPet(cat)
+}
+printThem(Dog(), Cat())// Pet Cat
+// Dog() 的类型信息并没有被用来在运行时选择合适的方法，而是被忽略掉
+// 并采用了编译期间决定的 Pet 的方法，因为 Swift 默认情况下是不采用动态派发的
+// 因此方法的调用只能在编译时决定
+// 想要绕过这个限制，需要进行通过对输入类型做判断和转换
+func printThem2(_ pet: Pet, _ cat: Cat) {
+    if let aCat = pet as? Cat {
+        printPet(aCat)
+    } else if let aDog = pet as? Dog {
+        printPet(aDog)
+    }
+    printPet(cat)
+}
+printThem2(Dog(), Cat()) // Dog Cat
+ 
+ */
+
+// -----------------------------
+
+/*
 //协议和类方法中的Self
 /*
  在一些协议定义可能会看到首字母大写的 Self
@@ -53,7 +104,7 @@ object.num = 1
 
 print("\(object.num) -- \(newObject.num)")//1 -- 100
 
-
+*/
 
 // -----------------------------
 
