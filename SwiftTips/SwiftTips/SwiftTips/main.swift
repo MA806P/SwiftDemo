@@ -11,6 +11,85 @@ import Foundation
 
 print("Hello, World!")
 
+// -----------------------------
+
+/*
+ 属性观察
+ 可以在当前类型内监视对于属性的设定，并作出相应。willSet didSet
+ 属性观察的一个重要用处是作为设置值的验证。
+ 
+ */
+
+class MyClass {
+    
+    let oneYearInSecond: TimeInterval = 365 * 24 * 60 * 60
+    
+    var date: NSDate {
+        willSet {
+            let d = date
+            print("will: old value = \(d), new value = \(newValue)")
+        }
+        
+        didSet {
+            if date.timeIntervalSinceNow > oneYearInSecond {
+                print("设定的时间太晚了")
+                date = NSDate().addingTimeInterval(oneYearInSecond)
+            }
+            print("did: old value = \(oldValue), new value = \(date)")
+        }
+    }
+    
+    init() {
+        date = NSDate()
+    }
+}
+
+let foo = MyClass()
+foo.date = foo.date.addingTimeInterval(10)
+//will: old value = 2018-11-14 00:05:57 +0000, new value = 2018-11-14 00:06:07 +0000
+//did: old value = 2018-11-14 00:05:57 +0000, new value = 2018-11-14 00:06:07 +0000
+
+//初始化方法对属性的设定，以及在 willAet didSet 中对属性的再次设定都不会再次触发属性观察的调用
+/*
+ Swift中所声明的属性包括存储属性和计算属性两种。
+ 存储属性会在内存中实际分配地址对属性进行存储
+ 计算属性不包括背后的存储，只提供set和get两种方法。
+ 在同一个类型中，属性观察和计算属性是不能同时共存的。
+ 可以通过改写set中的内容来达到willSet didSet同样的属性观察的目的。
+ 如果无法改动这个类，有想要通过属性观察做一些事情，就需要子类化这个类，并重写它的属性。
+ 重写属性不知道父类属性的具体实现，只从父类属性中继承名字和类型，因此可以对父类属性任意添加属性观察，
+ 而不用在意父类中到底是存储属性还是计算属性：
+ */
+
+class A {
+    var number: Int {
+        get {
+            print("get")
+            return 1
+        }
+        set { print("set") }
+    }
+}
+class B: A {
+    override var number: Int {
+        willSet { print("will set") }
+        didSet { print("did set") }
+    }
+}
+
+let b = B()
+b.number = 0
+print("\(b.number)")
+//get
+//will set
+//set
+//did set
+//get
+//1
+
+//get被调用，因为实现了didSet会用到oldValue
+//这个值需要在整个set动作之前进行获取并存储待用，否则无法确保正确性
+//如果不实现 didSet 的话，第一次 get 操作也将不存在
 
 // -----------------------------
 
