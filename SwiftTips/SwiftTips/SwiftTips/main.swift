@@ -14,6 +14,79 @@ print("Hello, World!")
 
 // -----------------------------
 
+//Reflection 和 Mirror
+/*
+ 反射 Reflection 是一种在运行时检测、访问或者修改类型的行为的特性。
+ 一般静态语言类型的结构和方法的调用都需要在编译时决定，
+ 能做的只是使用控制流 if switch 来决定作出怎样的的设置或是调用哪个方法。
+ 而反射特性可以让我们有机会的运行的时候通过某些条件实时决定调用的方法，甚至向某个类型动态的设置
+ 甚至加入属性及方法，是一种非常灵活强大的语言特性。
+ 
+ Swift 中所有的类型都实现了 _Reflectable，这是一个内部协议，
+ 我们可以通过 _reflect 来获取任意对象的一个镜像，这个镜像对象包含类型的基本信息，
+ 在 Swift 2.0 之前，这是对某个类型的对象进行探索的一种方法。
+ 在 Swift 2.0 中，这些方法已经从公开的标准库中移除了，取而代之，我们可以使用 Mirror 类型来做类似的事情
+ */
+
+struct Perosn {
+    let name: String
+    let age: Int
+}
+let xiaoMing = Perosn(name: "XiaoMing", age: 20)
+let r = Mirror(reflecting: xiaoMing)
+print("xiaoMing is \(String(describing: r.displayStyle))")
+print("属性个数：\(r.children.count)")
+for child in r.children {
+    print("属性名：\(String(describing: child.label)), 值：\(child.value)")
+}
+
+//xiaoMing is Optional(Swift.Mirror.DisplayStyle.struct)
+//属性个数：2
+//属性名：Optional("name"), 值：XiaoMing
+//属性名：Optional("age"), 值：20
+
+//child是一对键值的多元组
+//public typealias Child = (label: String?, value: Any)
+//public typealias Children = AnyCollection<Mirror.Type.Child>
+//AnyForwardCollection 是遵守 CollectionType 协议的，因此我们可以简单地使用 count 来获取元素的个数，
+//而对于具体的代表属性的多元组，则使用下标进行访问。
+
+//“也可以简单地使用 dump 方法来通过获取一个对象的镜像并进行标准输出的方式将其输出出来”
+dump(xiaoMing)
+//    ▿ SwiftTips.Perosn
+//    - name: "XiaoMing"
+//    - age: 20
+
+//我们可以在运行时通过 Mirror 了解一个 Swift 类型的实例属性信息。
+//该特性最容易想到的应用的特性就是为任意 model 对象生成对应的JSON描述
+//另一个常见的应用场景是类似对Swift类型的对象做像OC中KVC那样的valuForKey的取值
+
+func valueFrom(_ object: Any, key: String) -> Any? {
+    let mirror = Mirror(reflecting: object)
+    for child in mirror.children {
+        let (targetKey, targetMirror) = (child.label, child.value)
+        if key == targetKey {
+            return targetMirror
+        }
+    }
+    return nil
+}
+if let name = valueFrom(xiaoMing, key: "name") as? String {
+    print("通过 key 得到值：\(name)")
+}
+//通过 key 得到值：XiaoMing
+
+//虽然理论上将反射特性应用在实际的 app 制作中是可行的，
+//但是这一套机制设计的最初目的是用于 REPL 环境和 Playground 中进行输出的。
+//所以我们最好遵守 Apple 的这一设定，只在 REPL 和 Playground 中用它来对一个对象进行深层次的探索，
+//而避免将它用在 app 制作中 -- 因为你永远不知道什么时候它们就会失效或者被大幅改动。
+
+
+
+
+// -----------------------------
+
+/*
 //lazy修饰符和lazy方法
 //在 swift 中使用在变量属性前加 lazy 关键字方式来简单的指定延时加载
 //使用lazy作为属性修饰符时，只能声明属性是变量，需要显示的指定属性类型
@@ -49,7 +122,7 @@ print("访问完毕")
 //访问完毕
 
 //“对于那些不需要完全运行，可能提前退出的情况，使用 lazy 来进行性能优化效果会非常有效。
-
+*/
 
 // -----------------------------
 
