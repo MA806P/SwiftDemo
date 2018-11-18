@@ -11,9 +11,55 @@ import Foundation
 
 print("Hello, World!")
 
+// -----------------------------
+
+//隐式解包 Optional
+/*
+ swift 中一种特殊的Optional，在对它的成员或方法进行访问时，编译器会帮助我们自动进行解包
+ ImplicitlyUnwrappedOptional 在声明的时候加上！告诉编译器要一个可以隐式解包的Optional值
+ var maybeObject: MyClass!
+ 编译器会自动为我们在后面插入解包符号！，下面两种写法是等效的：
+ var maybeObject: MyClass! = MyClass()
+ maybeObject!.foo()
+ maybeObject.foo()
+ 
+ “使用隐式解包 Optional 的最大好处是对于那些我们能确认的 API 来说，
+ 我们可直接进行属性访问和方法调用，会很方便。但是需要牢记在心的是，
+ 隐式解包不意味着 “这个变量不会是 nil，你可以放心使用”
+ 这种暗示，只能说 Swift 通过这个特性给了我们一种简便但是危险的使用方式罢了。
+ 
+ “Objective-C 中加入了像是 nonnull 和 nullable 这样的修饰符，这样一来，
+ 那些真正有可能为 nil 的返回可以被明确定义为普通的 Optional 值，
+ 而那些不会是 Optional 的值，也根据情况转换为了确定的类型。
+ 现在比较常见的隐式解包的 Optional 就只有使用 Interface Builder
+ 时建立的 IBOutlet 了：
+ @IBOutlet weak var button: UIButton!
+ 如果没有连接 IB 的话，对 button 的直接访问会导致应用崩溃，
+ 这种情况和错误在调试应用时是很容易被发现的问题。
+ 在我们的代码的其他部分，还是少用这样的隐式解包的 Optional 为好，
+ 很多时候多写一个 Optional Binding 就可以规避掉不少应用崩溃的风险。”
+
+
+ 
+ */
+
+class MyClass {
+    func foo() {
+        print("foo")
+    }
+}
+var maybeObject: MyClass! = MyClass()
+maybeObject!.foo()
+maybeObject.foo()
+
+//var maybeObject2: MyClass! = nil
+//maybeObject2!.foo() //崩溃
+
+
 
 // -----------------------------
 
+/*
 //Reflection 和 Mirror
 /*
  反射 Reflection 是一种在运行时检测、访问或者修改类型的行为的特性。
@@ -81,7 +127,7 @@ if let name = valueFrom(xiaoMing, key: "name") as? String {
 //所以我们最好遵守 Apple 的这一设定，只在 REPL 和 Playground 中用它来对一个对象进行深层次的探索，
 //而避免将它用在 app 制作中 -- 因为你永远不知道什么时候它们就会失效或者被大幅改动。
 
-
+*/
 
 
 // -----------------------------
