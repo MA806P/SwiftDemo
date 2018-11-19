@@ -11,6 +11,59 @@ import Foundation
 
 print("Hello, World!")
 
+
+// -----------------------------
+
+//多重 Optional
+/*
+ swift 的特色 Optional 解决了有和无这个困扰了OC许久的概念，使代码安全性得到了很大的增加
+ 但是多重的 Optional 很容易让人迷惑。
+ Optional 类型实际上是一个 enum , ？只不过是 Optional 类型的语法糖
+ enum Optional<T> : _Reflectable, NilLiteralConvertible {
+ case None
+ case Some(T)
+ //...
+ }
+ 对 T 没有任何限制 对于盒子中的盒子有时容易出错
+ */
+var string: String? = "string"
+var anotherString: String? = string
+var literalOptional: String?? = "string"
+//猜测 anotherString 和 literalOptional 是等效的，但是如果将 nil 赋值给她就不同了
+var aNil: String? = nil
+var anotherNil: String?? = aNil
+var literalNil: String?? = nil
+//anotherNil 是盒子中包了一个盒子，打开内层的盒子是空气
+//literalNil 是盒子中直接是空气
+if anotherNil != nil {
+    print("anotherNil")
+}
+if literalNil != nil {
+    print("literalNil")
+}
+//只输出 anotherNil
+//使用LLDB进行调试输出
+//(lldb) po anotherNil
+//    ▿ Optional<Optional<String>>
+//    - some : nil
+//
+//(lldb) po literalNil
+//nil
+
+//(lldb) fr v -R anotherNil
+//(Swift.Optional<Swift.Optional<Swift.String>>) anotherNil = some {
+//    some = none {
+//        //..
+//    }
+//}
+//(lldb) fr v -R literalNil
+//(Swift.Optional<Swift.Optional<Swift.String>>) literalNil = none {
+//    some = some {
+//        //..
+//    }
+//}
+
+
 // -----------------------------
 
 //隐式解包 Optional
