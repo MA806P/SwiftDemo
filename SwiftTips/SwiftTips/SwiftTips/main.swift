@@ -14,6 +14,34 @@ print("Hello, World!")
 
 // -----------------------------
 
+//Optional Map
+//经常会对 Array 类型使用 map 方法，能对数组中的所有元素应用某个规则，然后返回一个新的数组
+
+let arr = [1,2,3]
+let doubled = arr.map{
+    $0 * 2
+}
+print(doubled)
+
+//“map 方法能让我们很方便地对一个 Optional 值做变化和操作，而不必进行手动的解包工作”
+let num: Int? = 3
+let result = num.map{
+    $0 * 2
+}
+print(result) //Optional(6)
+let num2: Int? = nil
+let result2 = num2.map{
+    $0 * 2
+}
+print(result2) //nil
+
+
+
+
+
+// -----------------------------
+
+/*
 //多重 Optional
 /*
  swift 的特色 Optional 解决了有和无这个困扰了OC许久的概念，使代码安全性得到了很大的增加
@@ -62,10 +90,11 @@ if literalNil != nil {
 //        //..
 //    }
 //}
-
+*/
 
 // -----------------------------
 
+/*
 //隐式解包 Optional
 /*
  swift 中一种特殊的Optional，在对它的成员或方法进行访问时，编译器会帮助我们自动进行解包
@@ -107,7 +136,7 @@ maybeObject.foo()
 
 //var maybeObject2: MyClass! = nil
 //maybeObject2!.foo() //崩溃
-
+*/
 
 
 // -----------------------------
