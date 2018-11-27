@@ -14,6 +14,92 @@ print("Hello, World!")
 
 // -----------------------------
 
+//Protocol Extension
+/*
+ Swift 2引入一个非常重要的特性 Protocol Extension，之前 Extension 仅只能作用在实际的类型上 Class struct
+ “protocol extension 为 protocol 中定义的方法提供了一个默认的实现。
+ 有了这个特性以后，之前被放在全局环境中的接受方法，就可以被移动到协议扩展中去了
+ */
+
+protocol MyProtocol {
+    func method()
+}
+
+extension MyProtocol {
+    func method() {
+        print("Called in extension")
+    }
+}
+
+struct MyStruct: MyProtocol {
+}
+let myStruct = MyStruct()
+myStruct.method() //Called in extension
+
+struct MyStruct2: MyProtocol {
+    func method() {
+        print("Called in struct")
+    }
+}
+let myStruct2 = MyStruct2()
+myStruct2.method() //Called in struct
+
+
+//另一个可用到 protocol Extension 的地方是 Optional 的协议方法，通过提供 protocol 的 Extension 为 protocol 提供了
+//默认的实现，相当于变相将 protocol 中的方法设定为了 Optional
+//protocol extension 来说，有一种会非常让人迷惑的情况，就是在协议的扩展中实现了协议里没有定义的方法时的情况
+
+protocol A1 {
+    func method1() -> String
+}
+struct B1: A1 {
+    func method1() -> String {
+        return "hello"
+    }
+}
+let b1 = B1()
+print(b1.method1()) //hello
+
+let a1: A1 = B1()
+print(a1.method1()) //hello
+
+extension A1 {
+    func method1() -> String {
+        return "method1 hello"
+    }
+    
+    func method2() -> String {
+        return "method2 hello"
+    }
+}
+struct B2: A1 {
+    func method1() -> String {
+        return "B2 Method1 hello"
+    }
+    func method2() -> String {
+        return "B2 Method2 hello"
+    }
+}
+
+let b2 = B2()
+print(b2.method1()) //B2 Method1 hello
+print(b2.method2()) //B2 Method2 hello
+
+let a2 = b2 as A1 //告诉编译器需要的类型是 A2
+print(a2.method1()) //B2 Method1 hello
+print(a2.method2()) //method2 hello
+
+/*
+ “如果类型推断得到的是实际的类型
+ 那么类型中的实现将被调用；如果类型中没有实现的话，那么协议扩展中的默认实现将被使用
+ 如果类型推断得到的是协议，而不是实际类型
+ 并且方法在协议中进行了定义，那么类型中的实现将被调用；如果类型中没有实现，那么协议扩展中的默认实现被使用
+ 否则 (也就是方法没有在协议中定义)，扩展中的默认实现将被调用”
+ */
+
+// -----------------------------
+
+/*
 //Optional Map
 //经常会对 Array 类型使用 map 方法，能对数组中的所有元素应用某个规则，然后返回一个新的数组
 
@@ -35,7 +121,7 @@ let result2 = num2.map{
 }
 print(result2) //nil
 
-
+*/
 
 
 
