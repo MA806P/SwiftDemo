@@ -14,6 +14,60 @@ print("Hello, World!")
 
 // -----------------------------
 
+//Where 和模式匹配： where 关键字在Swift中很强大，使用场合
+
+// switch 语句，可以使用where限定某些条件case
+let name = ["aaa", "bbb", "ccc"]
+name.forEach {
+    switch $0 {
+    case let x where x.hasPrefix("a"):
+        print("has prefix a")
+    default:
+        print("hello \($0)")
+    }
+}
+//has prefix a
+//hello bbb
+//hello ccc
+
+let num: [Int?] = [48, 99, nil]
+let n = num.compactMap { $0 }
+for score in n where score > 60 {
+    print("及格 - \(score)")
+}
+//及格 - 99
+
+//和for循环类似，也可对可选绑定进行条件限定
+num.forEach {
+    if let score = $0, score > 60 {
+        print("及格 - \(score)")
+    } else {
+        print("no")
+    }
+}
+
+//“准库里对 RawRepresentable 协议定义 != 运算符定义时:Returns `true` iff `lhs.rawValue != rhs.rawValue`.
+//public func !=<T : RawRepresentable where T.RawValue : Equatable>(lhs: T, rhs: T) -> Bool
+//“限定了 T.RawValue 必须要遵守 Equatable 协议，这样我们才能通过对比 lhs 和 rhs 的 rawValue 是否相等
+
+
+//“有些时候，我们会希望一个协议扩展的默认实现只在某些特定的条件下适用，这时我们就可以用 where 关键字来进行限定。
+//标准库中的协议扩展大量使用了这个技术来进行限定，比如 Sequence 的 sorted 方法就被定义在这样一个类型限制的协议扩展中：
+//extension Sequence where Self.Iterator.Element : Comparable {
+    //public func sorted() -> [Self.Iterator.Element]
+//}
+
+let sortableArray: [Int] = [3, 2, 6, 7, 9]
+print("\(sortableArray.sorted())") //[2, 3, 6, 7, 9]
+
+//let unsortableArray: [Any?] = ["Hello", 4, nil]
+//unsortableArray.sorted() //无法编译
+
+
+// -----------------------------
+
+/*
+
 //Protocol Extension
 /*
  Swift 2引入一个非常重要的特性 Protocol Extension，之前 Extension 仅只能作用在实际的类型上 Class struct
@@ -97,6 +151,8 @@ print(a2.method2()) //method2 hello
  否则 (也就是方法没有在协议中定义)，扩展中的默认实现将被调用”
  */
 
+ */
+ 
 // -----------------------------
 
 /*
