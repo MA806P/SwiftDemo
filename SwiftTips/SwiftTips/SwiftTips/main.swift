@@ -12,8 +12,52 @@ import Foundation
 print("Hello, World!")
 
 
+
 // -----------------------------
 
+//indirect 和嵌套 enum
+//在涉及到一些数据结构 链表 数 图，往往会用到嵌套的类型
+
+class Node<T> {
+    let value: T?
+    let next: Node<T>?
+    
+    init(value: T?, next: Node<T>?) {
+        self.value = value
+        self.next = next
+    }
+}
+
+let list = Node(value: 1, next: Node(value: 2, next: Node(value: 3, next: Node(value: 4, next: nil))))
+
+//这样在表达空节点的时候不理想，使用nil表达空节点，不是等价的。空链表需要把 list 设置为 Optional，要么把 Node 的 value next
+//设置为 nil 这导致描述中存在歧义，不得不去做一些人为的约定 来表达这样情况
+
+indirect enum LinkedList<Element: Comparable> {
+    case empty
+    case node(Element, LinkedList<Element>)
+}
+let linkedList = LinkedList.node(1, .node(2, .node(3, .node(4, .empty))))
+/*“在 enum 的定义中嵌套自身对于 class 这样的引用类型来说没有任何问题，但是对于像 struct 或者 enum 这样的值类型来说，普通的做法是不可行的。
+  我们需要在定义前面加上 indirect 来提示编译器不要直接在值类型中直接嵌套。
+  用 enum 表达链表的好处在于，我们可以清晰地表示出空节点这一定义，这在像 Swift 这样类型十分严格的语言中是很有帮助的”
+ 
+ func removing(_ element: Element) -> LinkedList<Element> {
+ guard case let .node(value, next) = self else {
+ return .empty
+ }
+ return value == element ? next : LinkedList.node(value, remove(element))
+ }
+ 
+ let result = linkedList.removing(2)
+ */
+
+
+
+
+// -----------------------------
+
+/*
 //Where 和模式匹配： where 关键字在Swift中很强大，使用场合
 
 // switch 语句，可以使用where限定某些条件case
@@ -63,6 +107,7 @@ print("\(sortableArray.sorted())") //[2, 3, 6, 7, 9]
 //let unsortableArray: [Any?] = ["Hello", 4, nil]
 //unsortableArray.sorted() //无法编译
 
+ */
 
 // -----------------------------
 
