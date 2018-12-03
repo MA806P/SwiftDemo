@@ -14,6 +14,37 @@ print("Hello, World!")
 
 // -----------------------------
 
+//实例方法的动态调用
+/*
+ 可以让我们不直接使用实例来调用这个实例上的方法，通过类型取出这个类型的实例方法的签名
+ 然后再通过传递实例来拿到实际需要调用的方法。
+ 这种方法只适用于实例方法，对于属性的 getter setter 是不能用类似的写法
+ */
+
+class MyClass {
+    func method(number: Int) -> Int {
+        return number + 1
+    }
+    
+    class func method(number: Int) -> Int {
+        return number + 1
+    }
+}
+
+let f = MyClass.method //let f: (MyClass) -> (Int) -> Int
+// let f = { (obj: MyClass) in obj.method}
+let object = MyClass()
+//let result = f(object)(1)
+
+//如果遇到有类型方法的名字冲突时，如不改动 MyClass.method 将取到的是类型方法
+//“如果我们想要取实例方法的话，可以显式地加上类型声明加以区别
+let f1 = MyClass.method // class func method 的版本
+let f2: (Int) -> Int = MyClass.method // 和 f1 相同
+let f3: (MyClass) -> (Int) -> Int = MyClass.method // func method 的柯里化版本”
+
+
+// -----------------------------
+
 //Selector
 /*
  @selector 是 OC 时代的一个关键字 可以将一个方法转换并赋值给一个 SEL 类型，类似一个动态的函数指针。
