@@ -14,7 +14,70 @@ print("Hello, World!")
 
 // -----------------------------
 
+//单例
+/*
+ OC中公认的单列写法
+ + (id)sharedManager {
+ static MyManager * staticInstance = nil;
+ static dispatch_once_t onceToken;
+ 
+ dispatch_once(&onceToken, ^{
+ staticInstance = [[self alloc] init];
+ });
+ return staticInstance;
+ }
+
+ 在 Swift 3 中 Apple 移除了 dispatch_once
+ Swift 中使用 let 简单的方法来保证线程安全
+ 在 Swift 1.2 后，可以使用类变量
+ */
+
+class MyManager {
+    class var shared: MyManager {
+        struct Static {
+            static let shareInstance : MyManager = MyManager()
+        }
+        return Static.shareInstance
+    }
+}
+
+
+/*
+//由于 Swift 1.2 之前 class 不支持存储式的 property，我们想要使用一个只存在一份的属性时，
+//就只能将其定义在全局的 scope 中。值得庆幸的是，在 Swift 中是有访问级别的控制的，
+//我们可以在变量定义前面加上 private 关键字，使这个变量只在当前文件中可以被访问。”
+
+private let sharedInstance = MyManager()
+class MyManager {
+    class shared: MyManager {
+        return sharedInstance
+    }
+}
+*/
+
+//在 Swift 1.2 以及之后，如没有特别需求，推荐使用
+class MyManager1 {
+    static let shared = MyManager1()
+    private init() {
+        
+    }
+}
+/*
+ “这种写法不仅简洁，而且保证了单例的独一无二。在初始化类变量的时候，Apple 将会把这个初始化包装在一次 swift_once_block_invoke 中，
+ 以保证它的唯一性。不仅如此，对于所有的全局变量，Apple 都会在底层使用这个类似 dispatch_once 的方式来确保只以 lazy 的方式初始化一次。”
+ 
+ “我们在这个类型中加入了一个私有的初始化方法，来覆盖默认的公开初始化方法，
+ 这让项目中的其他地方不能够通过 init 来生成自己的 MyManager 实例，也保证了类型单例的唯一性。
+ 如果你需要的是类似 default 的形式的单例 (也就是说这个类的使用者可以创建自己的实例) 的话，可以去掉这个私有的 init 方法。”
+ 
+ */
+
+
+// -----------------------------
+
 //实例方法的动态调用
+
+/*
 /*
  可以让我们不直接使用实例来调用这个实例上的方法，通过类型取出这个类型的实例方法的签名
  然后再通过传递实例来拿到实际需要调用的方法。
@@ -31,8 +94,7 @@ class MyClass {
     }
 }
 
-let f = MyClass.method //let f: (MyClass) -> (Int) -> Int
-// let f = { (obj: MyClass) in obj.method}
+let f = MyClass.method //let f: (MyClass) -> (Int) -> Int // let f = { (obj: MyClass) in obj.method}
 let object = MyClass()
 //let result = f(object)(1)
 
@@ -41,6 +103,8 @@ let object = MyClass()
 let f1 = MyClass.method // class func method 的版本
 let f2: (Int) -> Int = MyClass.method // 和 f1 相同
 let f3: (MyClass) -> (Int) -> Int = MyClass.method // func method 的柯里化版本”
+*/
+
 
 
 // -----------------------------
