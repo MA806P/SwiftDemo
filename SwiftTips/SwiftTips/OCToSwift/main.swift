@@ -14,6 +14,51 @@ print("Hello, World!")
 
 // -----------------------------
 
+/*
+//条件编译
+/*
+ C系语言中，使用 #if #ifdef 编译条件分支来控制哪些代码需要编译。
+ Swift 中 #if 这套编译标记还是存在的，使用的语法也和原来没有区别
+ #if <condition>
+ #elseif <condition>
+ #else
+ #endif
+ condition 并不是任意的，Swift 内建了几种平台和架构的组合，来帮助我们为不同的平台编译不同的代码。
+ 
+ */
+
+//os(macOS) iOS tvOS watchOS Linux
+//arch() arm(32位CPU真机) arm64(64位CPU真机)  i386(32为模拟器)  x86_64(64位22CPU模拟器)
+//swift()  >=某个版本
+
+#if os(macOS)
+
+#else
+
+#endif
+
+
+
+//另一种方式是对自定义的符号进行条件编译，比如我们需要使用同一个 target 完成同一个 app 的收费版和免费版两个版本，
+//并且希望在点击某个按钮时收费版本执行功能，而免费版本弹出提示的话，可以使用类似下面的方法：
+ 
+ @IBAction func someButtonPressed(sender: AnyObject!) {
+ #if FREE_VERSION
+ // 弹出购买提示，导航至商店等
+ #else
+ // 实际功能
+ #endif
+ }
+ //在这里我们用 FREE_VERSION 这个编译符号来代表免费版本。
+//为了使之有效，我们需要在项目的编译选项中进行设置，在项目的 Build Settings 中，
+//找到 Swift Compiler - Custom Flags，并在其中的 Other Swift Flags 加上 -D FREE_VERSION 就可以了。”
+ 
+ 
+*/
+
+
+// -----------------------------
+
 //单例
 /*
  OC中公认的单列写法
