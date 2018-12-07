@@ -13,6 +13,19 @@ print("Hello, World!")
 
 // -----------------------------
 
+//UIApplicationMain
+//Cocoa开发环境已经在新建一个项目时帮助我们进行很多配置，导致很多人无法说清一个App启动的流程
+//C系语言中程序的入口都是main函数
+//int main(int argc, char * argv[]) {
+//    @autoreleasepool { return UIApplicationMain(argc, argv, nil, NSStringFromClass([AppDelegate class])); } }
+
+
+
+
+
+
+// -----------------------------
+
 //编译标记
 //在 OC 中在代码中插入 #pragma 来标记代码区间，方便代码定位
 //在 Swift 中使用 // MARK:-
