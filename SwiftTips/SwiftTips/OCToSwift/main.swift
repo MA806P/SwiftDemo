@@ -15,11 +15,41 @@ print("Hello, World!")
 
 //UIApplicationMain
 //Cocoa开发环境已经在新建一个项目时帮助我们进行很多配置，导致很多人无法说清一个App启动的流程
-//C系语言中程序的入口都是main函数
-//int main(int argc, char * argv[]) {
-//    @autoreleasepool { return UIApplicationMain(argc, argv, nil, NSStringFromClass([AppDelegate class])); } }
-
-
+/*
+ C系语言中程序的入口都是main函数
+ int main(int argc, char * argv[]) {
+    @autoreleasepool { return UIApplicationMain(argc, argv, nil, NSStringFromClass([AppDelegate class])); } }
+ 
+ UIApplicationMain 根据第三个参数初始化一个 UIAppliction 或者其子类对象 传nil就是用默认的UIAppliction，然后开始接收事件
+ AppDelegate 作为应用委托，用来接收与应用生命周期相关的委托方法。
+ “虽然这个方法标明为返回一个 int，但是其实它并不会真正返回。它会一直存在于内存中，直到用户或者系统将其强制终止。”
+ Swift 项目中在默认的 AppDelegate 只有一个 @UIApplicationMain 的标签，这个标签做的事情就是将被标注的类作为委托，
+ 去创建一个 UIApplication 并启动整个程序。在编译的时候，编译器将寻找这个标记的类，并自动插入像 main 函数这样的模板代码。
+ 
+ 和 C 系语言的 main.c 或者 main.m 文件一样，Swift 项目也可以有一个名为 main.swift 特殊的文件。
+ 在这个文件中，我们不需要定义作用域，而可以直接书写代码。这个文件中的代码将作为 main 函数来执行。
+ 比如我们在删除 @UIApplicationMain 后，在项目中添加一个 main.swift 文件，然后加上这样的代码：
+ UIApplicationMain(Process.argc, Process.unsafeArgv, nil, NSStringFromClass(AppDelegate))
+ 现在编译运行，就不会再出现错误了。
+ 
+ 我们还可以通过将第三个参数替换成自己的 UIApplication 子类，这样我们就可以轻易地做一些控制整个应用行为的事情了。
+ 比如将 main.swift 的内容换成：
+ 
+ import UIKit
+ 
+ class MyApplication: UIApplication {
+ override func sendEvent(event: UIEvent!) {
+ super.sendEvent(event)
+ print("Event sent: \(event)");
+ }
+ }
+ 
+ UIApplicationMain(Process.argc, Process.unsafeArgv, NSStringFromClass(MyApplication), NSStringFromClass(AppDelegate))
+ 这样每次发送事件 (比如点击按钮) 时，我们都可以监听到这个事件了。
+ 
+ 
+ 
+*/
 
 
 
