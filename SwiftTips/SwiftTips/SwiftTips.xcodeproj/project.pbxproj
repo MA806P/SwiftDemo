@@ -7,11 +7,33 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DA4407C521BF6A3500B4DF52 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4407C421BF6A3500B4DF52 /* main.m */; };
+		DA4407CB21BF6AC600B4DF52 /* MySwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4407CA21BF6AC600B4DF52 /* MySwift.swift */; };
+		DA4407D321BF6B0000B4DF52 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4407D221BF6B0000B4DF52 /* main.swift */; };
+		DA4407DC21BF6B4800B4DF52 /* MyObject.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4407DB21BF6B4800B4DF52 /* MyObject.m */; };
 		DA4C5E2D215DB66100EDACE7 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4C5E2C215DB66100EDACE7 /* main.swift */; };
 		DAEFB81021B2247B0004D0FB /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAEFB80F21B2247B0004D0FB /* main.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		DA4407C021BF6A3500B4DF52 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		DA4407CE21BF6B0000B4DF52 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
 		DA4C5E27215DB66100EDACE7 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -33,6 +55,15 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		DA4407C221BF6A3500B4DF52 /* OCTOSwiftExample */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = OCTOSwiftExample; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA4407C421BF6A3500B4DF52 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		DA4407C921BF6AC600B4DF52 /* OCTOSwiftExample-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OCTOSwiftExample-Bridging-Header.h"; sourceTree = "<group>"; };
+		DA4407CA21BF6AC600B4DF52 /* MySwift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MySwift.swift; sourceTree = "<group>"; };
+		DA4407D021BF6B0000B4DF52 /* SwiftToOCExample */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SwiftToOCExample; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA4407D221BF6B0000B4DF52 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		DA4407D921BF6B4700B4DF52 /* SwiftToOCExample-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SwiftToOCExample-Bridging-Header.h"; sourceTree = "<group>"; };
+		DA4407DA21BF6B4800B4DF52 /* MyObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyObject.h; sourceTree = "<group>"; };
+		DA4407DB21BF6B4800B4DF52 /* MyObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyObject.m; sourceTree = "<group>"; };
 		DA4C5E29215DB66100EDACE7 /* SwiftTips */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SwiftTips; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA4C5E2C215DB66100EDACE7 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		DAEFB80D21B2247B0004D0FB /* OCToSwift */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = OCToSwift; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -40,6 +71,20 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		DA4407BF21BF6A3500B4DF52 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DA4407CD21BF6B0000B4DF52 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		DA4C5E26215DB66100EDACE7 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -57,11 +102,34 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DA4407C321BF6A3500B4DF52 /* OCTOSwiftExample */ = {
+			isa = PBXGroup;
+			children = (
+				DA4407C421BF6A3500B4DF52 /* main.m */,
+				DA4407CA21BF6AC600B4DF52 /* MySwift.swift */,
+				DA4407C921BF6AC600B4DF52 /* OCTOSwiftExample-Bridging-Header.h */,
+			);
+			path = OCTOSwiftExample;
+			sourceTree = "<group>";
+		};
+		DA4407D121BF6B0000B4DF52 /* SwiftToOCExample */ = {
+			isa = PBXGroup;
+			children = (
+				DA4407D221BF6B0000B4DF52 /* main.swift */,
+				DA4407DA21BF6B4800B4DF52 /* MyObject.h */,
+				DA4407DB21BF6B4800B4DF52 /* MyObject.m */,
+				DA4407D921BF6B4700B4DF52 /* SwiftToOCExample-Bridging-Header.h */,
+			);
+			path = SwiftToOCExample;
+			sourceTree = "<group>";
+		};
 		DA4C5E20215DB66100EDACE7 = {
 			isa = PBXGroup;
 			children = (
 				DA4C5E2B215DB66100EDACE7 /* SwiftTips */,
 				DAEFB80E21B2247B0004D0FB /* OCToSwift */,
+				DA4407C321BF6A3500B4DF52 /* OCTOSwiftExample */,
+				DA4407D121BF6B0000B4DF52 /* SwiftToOCExample */,
 				DA4C5E2A215DB66100EDACE7 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -71,6 +139,8 @@
 			children = (
 				DA4C5E29215DB66100EDACE7 /* SwiftTips */,
 				DAEFB80D21B2247B0004D0FB /* OCToSwift */,
+				DA4407C221BF6A3500B4DF52 /* OCTOSwiftExample */,
+				DA4407D021BF6B0000B4DF52 /* SwiftToOCExample */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -94,6 +164,40 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		DA4407C121BF6A3500B4DF52 /* OCTOSwiftExample */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DA4407C821BF6A3500B4DF52 /* Build configuration list for PBXNativeTarget "OCTOSwiftExample" */;
+			buildPhases = (
+				DA4407BE21BF6A3500B4DF52 /* Sources */,
+				DA4407BF21BF6A3500B4DF52 /* Frameworks */,
+				DA4407C021BF6A3500B4DF52 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = OCTOSwiftExample;
+			productName = OCTOSwiftExample;
+			productReference = DA4407C221BF6A3500B4DF52 /* OCTOSwiftExample */;
+			productType = "com.apple.product-type.tool";
+		};
+		DA4407CF21BF6B0000B4DF52 /* SwiftToOCExample */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DA4407D421BF6B0000B4DF52 /* Build configuration list for PBXNativeTarget "SwiftToOCExample" */;
+			buildPhases = (
+				DA4407CC21BF6B0000B4DF52 /* Sources */,
+				DA4407CD21BF6B0000B4DF52 /* Frameworks */,
+				DA4407CE21BF6B0000B4DF52 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SwiftToOCExample;
+			productName = SwiftToOCExample;
+			productReference = DA4407D021BF6B0000B4DF52 /* SwiftToOCExample */;
+			productType = "com.apple.product-type.tool";
+		};
 		DA4C5E28215DB66100EDACE7 /* SwiftTips */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = DA4C5E30215DB66100EDACE7 /* Build configuration list for PBXNativeTarget "SwiftTips" */;
@@ -138,6 +242,14 @@
 				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = myz;
 				TargetAttributes = {
+					DA4407C121BF6A3500B4DF52 = {
+						CreatedOnToolsVersion = 9.3;
+						LastSwiftMigration = 0930;
+					};
+					DA4407CF21BF6B0000B4DF52 = {
+						CreatedOnToolsVersion = 9.3;
+						LastSwiftMigration = 0930;
+					};
 					DA4C5E28215DB66100EDACE7 = {
 						CreatedOnToolsVersion = 9.3;
 					};
@@ -160,11 +272,31 @@
 			targets = (
 				DA4C5E28215DB66100EDACE7 /* SwiftTips */,
 				DAEFB80C21B2247B0004D0FB /* OCToSwift */,
+				DA4407C121BF6A3500B4DF52 /* OCTOSwiftExample */,
+				DA4407CF21BF6B0000B4DF52 /* SwiftToOCExample */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
+		DA4407BE21BF6A3500B4DF52 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DA4407C521BF6A3500B4DF52 /* main.m in Sources */,
+				DA4407CB21BF6AC600B4DF52 /* MySwift.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DA4407CC21BF6B0000B4DF52 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DA4407DC21BF6B4800B4DF52 /* MyObject.m in Sources */,
+				DA4407D321BF6B0000B4DF52 /* main.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		DA4C5E25215DB66100EDACE7 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -184,6 +316,80 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
+		DA4407C621BF6A3500B4DF52 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "OCTOSwiftExample/OCTOSwiftExample-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		DA4407C721BF6A3500B4DF52 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "OCTOSwiftExample/OCTOSwiftExample-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		DA4407D521BF6B0000B4DF52 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SwiftToOCExample/SwiftToOCExample-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
+			};
+			name = Debug;
+		};
+		DA4407D621BF6B0000B4DF52 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SwiftToOCExample/SwiftToOCExample-Bridging-Header.h";
+				SWIFT_VERSION = 4.0;
+			};
+			name = Release;
+		};
 		DA4C5E2E215DB66100EDACE7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -338,6 +544,24 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		DA4407C821BF6A3500B4DF52 /* Build configuration list for PBXNativeTarget "OCTOSwiftExample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DA4407C621BF6A3500B4DF52 /* Debug */,
+				DA4407C721BF6A3500B4DF52 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DA4407D421BF6B0000B4DF52 /* Build configuration list for PBXNativeTarget "SwiftToOCExample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DA4407D521BF6B0000B4DF52 /* Debug */,
+				DA4407D621BF6B0000B4DF52 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		DA4C5E24215DB66100EDACE7 /* Build configuration list for PBXProject "SwiftTips" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
