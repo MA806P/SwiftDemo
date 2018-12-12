@@ -13,6 +13,59 @@ print("Hello, World!")
 
 // -----------------------------
 
+//可扩展协议和协议扩展
+/*
+ OC 中 protocol @optional 修饰的方法，并非必须要实现
+ 原生的 Swift protocol 里没有可选项，所有定义的方法都是必须实现的，要想实现需要将协议本身可选方法都定义为 OC 的
+ “使用 @objc 修饰的 protocol 就只能被 class 实现了，
+ 对于 struct 和 enum 类型，我们是无法令它们所实现的协议中含有可选方法或者属性的”
+ 
+ “在 Swift 2.0 中，可使用 protocol extension。
+ 我们可以在声明一个 protocol 之后再用 extension 的方式给出部分方法默认的实现。这样这些方法在实际的类中就是可选实现的了”
+ 
+ 
+ */
+
+@objc protocol OptionalProtocol {
+    @objc optional func optionalMethod()
+    func protocolMethod()
+    @objc optional func anotherOptionalMethod()
+}
+
+
+
+protocol NormalProtocol {
+    func optionalNormalProtocolMethod()
+    func necessaryNormalProtocolMethod()
+}
+
+extension NormalProtocol {
+    func optionalNormalProtocolMethod() {
+        print("optionalNormalProtocolMethod")
+    }
+}
+
+//报错：Non-class type 'MyStruct' cannot conform to class protocol 'OptionalProtocol'
+//struct MyStruct: OptionalProtocol {}
+
+class MyClass: OptionalProtocol, NormalProtocol {
+    func necessaryNormalProtocolMethod() {
+        print("MyClass optionalNormalProtocolMethod")
+    }
+    
+    func protocolMethod() {
+        print("MyClass protocolMethod")
+    }
+    
+    
+}
+
+let myClass = MyClass()
+myClass.optionalNormalProtocolMethod() //optionalNormalProtocolMethod
+
+
+// -----------------------------
+
 // @objc 和 dynamic
 /*
  最初的 Swift 版本中，不得不考虑与 OC 的兼容，允许同一个项目中使用 Swift 和 OC 进行开发
