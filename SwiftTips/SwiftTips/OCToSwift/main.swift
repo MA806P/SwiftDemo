@@ -13,6 +13,91 @@ print("Hello, World!")
 
 // -----------------------------
 
+//内存管理 weak 和 unowned
+//Swift 是自动管理内存的，遵循自动引用计数 ARC
+
+
+/*
+ 1、循环引用
+ 防止循环引用，不希望互相持有, weak 向编译器说明不希望持有
+ 除了 weak 还有 unowned。类比 OC unowned 更像是 unsafe_unretained
+ unowned 设置后即使他引用的内容已经被释放了，他仍会保持对被已经释放了的对象的一个无效引用，他不能是 Optional 值
+ 也不会指向 nil，当调用这个引用的方法时，程序崩溃。weak 则友好一点，在引用的内容被释放后，会自动变为nil，因此标记为 weak 的变量
+ 一定需要是 Optional 值。
+ “Apple 给我们的建议是如果能够确定在访问时不会已被释放的话，尽量使用 unowned，如果存在被释放的可能，那就选择用 weak
+ “日常工作中一般使用弱引用的最常见的场景有两个：
+ 设置 delegate 时
+ 在 self 属性存储为闭包时，其中拥有对 self 引用时”
+ 
+ 
+ 闭包和循环引用
+ “闭包中对任何其他元素的引用都是会被闭包自动持有的。如果我们在闭包中写了 self 这样的东西的话，那我们其实也就在闭包内持有了当前的对象。
+ 如果当前的实例直接或者间接地对这个闭包又有引用的话，就形成了一个 self -> 闭包 -> self 的循环引用”
+ 
+ 
+ 
+ 
+*/
+
+class A: NSObject {
+    let b: B
+    
+    override init() {
+        b = B()
+        super.init()
+        b.a = self
+    }
+    
+    deinit {
+        print("A deinit")
+    }
+}
+
+class B: NSObject {
+    
+    weak var a: A? = nil
+    
+    deinit {
+        print("B deinit")
+    }
+}
+
+var obj: A? = A()
+obj = nil //内存没有释放
+
+
+
+//闭包
+class Person {
+    let name: String
+    lazy var printName: ()->() = {
+        //如可以确定在整个过程中self不会被释放，weak 可以改为 unowned 就不需要 strongSelf 的判断
+        [weak self] in
+        if let strongSelf = self {
+            print("The name is \(strongSelf.name)")
+        }
+        
+        //如果需要标注的元素有多个
+        // { [unowned self, weak someObject] (number: Int) -> Bool in .. return true}
+    }
+    
+    init(personName: String) {
+        name = personName
+    }
+    
+    deinit {
+        print("Person deinit \(self.name)")
+    }
+}
+
+var xiaoMing : Person? = Person(personName: "XiaoMing")
+xiaoMing!.printName() //The name is XiaoMing
+xiaoMing = nil //Person deinit XiaoMing
+
+
+// -----------------------------
+
+/*
 //可扩展协议和协议扩展
 /*
  OC 中 protocol @optional 修饰的方法，并非必须要实现
@@ -63,6 +148,7 @@ class MyClass: OptionalProtocol, NormalProtocol {
 let myClass = MyClass()
 myClass.optionalNormalProtocolMethod() //optionalNormalProtocolMethod
 
+ */
 
 // -----------------------------
 
