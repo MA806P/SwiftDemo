@@ -13,6 +13,45 @@ print("Hello, World!")
 
 // -----------------------------
 
+// @autoreleasepool
+/*
+ swift 在内存管理上使用 ARC 的一套方法，不需要手动的调用 retain, release, autorelease 来管理引用计数
+ 编译器在编译时在合适的地方帮我们加入。
+ autorelease 会将接收改消息的对象放到 auto release pool 中，当 autoreleasepool 收到 drain 消息时，将这些对象引用计数-1
+ 然后从池子中移除。
+ 
+ “在 app 中，整个主线程其实是跑在一个自动释放池里的，并且在每个主 Runloop 结束时进行 drain 操作”
+ “因为我们有时候需要确保在方法内部初始化的生成的对象在被返回后别人还能使用，而不是立即被释放掉。”
+ OC 中使用 @autoreleasepool 就行了，其实 @autoreleasepool 在编译时会被展开为 NSAutoreleasePool 并附带 drain 方法的调用。
+ 
+
+Swift 中我们也是能使用 autoreleasepool 的 -- 虽然语法上略有不同。
+ 相比于原来在 Objective-C 中的关键字，现在它变成了一个接受闭包的方法：
+
+func autoreleasepool(code: () -> ())
+利用尾随闭包的写法，很容易就能在 Swift 中加入一个类似的自动释放池了：
+
+func loadBigData() {
+    if let path = NSBundle.mainBundle()
+        .pathForResource("big", ofType: "jpg") {
+        
+        for i in 1...10000 {
+            autoreleasepool {
+                let data = NSData.dataWithContentsOfFile(
+                    path, options: nil, error: nil)
+                
+                NSThread.sleepForTimeInterval(0.5)
+            }
+        }
+    }
+}
+ 上面的代码是 Swift 1.0 的，NSData.dataWithContentsOfFile 仅供参考
+ */
+
+// -----------------------------
+
+/*
+
 //内存管理 weak 和 unowned
 //Swift 是自动管理内存的，遵循自动引用计数 ARC
 
@@ -94,6 +133,7 @@ var xiaoMing : Person? = Person(personName: "XiaoMing")
 xiaoMing!.printName() //The name is XiaoMing
 xiaoMing = nil //Person deinit XiaoMing
 
+ */
 
 // -----------------------------
 
