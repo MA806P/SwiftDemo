@@ -13,6 +13,63 @@ print("Hello, World!")
 
 // -----------------------------
 
+//值类型和引用类型
+/*
+ Swift 的类型分为值类型和引用类型，值类型在传递和赋值时将进行赋值，引用类型则只会使用引用对象的一个”指向“。
+ struct enum 定义的类型是值类型，使用 class 定义的为引用类型。
+ Swift 中所有的内建类型都是值类型，Int String Array Dictionary 都是值类型
+ 
+ 值类型的好处，减少了堆上内存分配和回收的次数。值类型的一个特点是在传递和赋值时进行复制，
+ 每次复制肯定会产生额外开销，但是在 Swift 中这个消耗被控制在了最小范围内，
+ 在没有必要复制的时候，值类型的复制都是不会发生的。也就是说，简单的赋值，参数的传递等等普通操作，
+ 虽然我们可能用不同的名字来回设置和传递值类型，但是在内存上它们都是同一块内容。”
+ 
+ 将数组字典设计为值类型最大的考虑是为了线程安全，在数目较少时，非常高效
+ 在数目较多时 Swift 内建的值类型的容器类型在每次操作时都需要复制一遍，
+ 即使是存储的都是引用类型，在复制时我们还是需要存储大量的引用
+ 
+ “在需要处理大量数据并且频繁操作 (增减) 其中元素时，选择 NSMutableArray 和 NSMutableDictionary 会更好，
+ 而对于容器内条目小而容器本身数目多的情况，应该使用 Swift 语言内建的 Array 和 Dictionary。”
+ 
+ 
+ 
+ */
+
+
+func test(_ arr:[Int]) {
+    print(arr)
+    for i in arr {
+        print(i)
+    }
+}
+
+var a = [1,2,3]
+var b = a
+test(a)
+//在物理内存上都是用一个东西，而且 a 还只在栈空间上，只是发生了指针移动，完全没有堆内存的分配和释放问题，效率高
+//当对值进行改变时，值复制就是必须的了
+b.append(4) //b 和 a 内存地址不再相同。将其中的值类型进行复制，对于引用类型的话，只复制一份引用
+
+class MyObject {
+    var num = 0
+}
+
+var myObject = MyObject()
+var arr1 = [myObject]
+var arr2 = arr1
+
+arr2.append(myObject)
+
+myObject.num = 123
+print(arr1[0].num) //123
+print(arr2[0].num) //123
+
+
+
+
+
+// -----------------------------
+
 // @autoreleasepool
 /*
  swift 在内存管理上使用 ARC 的一套方法，不需要手动的调用 retain, release, autorelease 来管理引用计数
