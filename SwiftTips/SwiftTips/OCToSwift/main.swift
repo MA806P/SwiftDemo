@@ -13,6 +13,50 @@ print("Hello, World!")
 
 // -----------------------------
 
+//String 还是 NSString
+/*
+ 像 string 这样的 Swift 类型和 Foundation 的对应的类是可以无缝转换的，使用时怎么选择
+ 尽可能的使用原生的 string 类型。
+ 1、虽然有良好的互相转换的特性，但现在 Cocoa所有的API都接受和返回string类型，不必给自己凭空添加麻烦把框架返回的
+ 字符串做一遍转换
+ 2、在Swift中String是struct，相比NSString类来说更切合字符串的”不变“这一特性。配合常量赋值let，
+ 这种不变性在多线程编程就非常重要了。在不触及NSString特有操作和动态特性的时候使用String的方法，在性能上也有所提升。
+ 3、String 实现了 collection 这样的协议，因此有些 Swift 语法只有 String 才能使用
+ 
+ 使用 String 唯一一个比较麻烦的地方是 它和 Range 的配合
+ 
+ 
+ */
+
+
+let levels = "ABCDEF"
+for i in levels {
+    print(i)
+}
+
+var a = levels.contains("CD")
+print(a)
+
+
+//报错：Argument type 'NSRange' (aka '_NSRange') does not conform to expected type 'RangeExpression'
+//let nsRange = NSMakeRange(1, 4)
+//levels.replacingCharacters(in: nsRange, with: "XXXX")
+
+let indexPositionOne = levels.index(levels.startIndex, offsetBy: 1)
+let swiftRange = indexPositionOne ..< levels.index(levels.startIndex, offsetBy: 5)
+let replaceString = levels.replacingCharacters(in: swiftRange, with: "XXXX")
+print(replaceString) //AXXXXF
+
+//可能更愿意和基于 Int 的 Range 一起工作，而不喜欢用麻烦的 Range<String.Index>
+let nsRange = NSMakeRange(1, 4)
+let nsReplaceString = (levels as NSString).replacingCharacters(in: nsRange, with: "ZZZZ")
+print(nsReplaceString) // AZZZZF
+
+// -----------------------------
+
+
+/*
+
 //值类型和引用类型
 /*
  Swift 的类型分为值类型和引用类型，值类型在传递和赋值时将进行赋值，引用类型则只会使用引用对象的一个”指向“。
@@ -64,7 +108,7 @@ myObject.num = 123
 print(arr1[0].num) //123
 print(arr2[0].num) //123
 
-
+*/
 
 
 
