@@ -13,6 +13,14 @@ print("Hello, World!")
 
 // -----------------------------
 
+//UnsafePointer
+
+
+
+// -----------------------------
+
+/*
+
 //String 还是 NSString
 /*
  像 string 这样的 Swift 类型和 Foundation 的对应的类是可以无缝转换的，使用时怎么选择
@@ -51,6 +59,8 @@ print(replaceString) //AXXXXF
 let nsRange = NSMakeRange(1, 4)
 let nsReplaceString = (levels as NSString).replacingCharacters(in: nsRange, with: "ZZZZ")
 print(nsReplaceString) // AZZZZF
+ 
+ */
 
 // -----------------------------
 
