@@ -14,7 +14,49 @@ print("Hello, World!")
 // -----------------------------
 
 //UnsafePointer
+/*
+ Swift 是一门非常安全的语言，所有的引用或者变量的类型都是确定并且正确对应他们得实际类型的，
+ 应当无法进行任意的类型转换，也不能直接通过指针作出一些出格的事。有助于避免不必要的bug，迅速稳定的
+ 找出代码错误。在高安全的同时，也丧失了部分的灵活性。
+ 
+ 为了与 C 系帝国进行合作，Swift 定义了一套对 C 语言指针的访问和转换方法 UnsafePointer
+ “对于使用 C API 时如果遇到接受内存地址作为参数，或者返回是内存地址的情况，在 Swift 里会将它们转为 UnsafePointer<Type> 的类型”
+ 
+ “UnsafePointer，就是 Swift 中专门针对指针的转换。对于其他的 C 中基础类型，在 Swift 中对应的类型都遵循统一的命名规则：
+ 在前面加上一个字母 C 并将原来的第一个字母大写：比如 int，bool 和 char 的对应类型分别是 CInt，CBool 和 CChar。
+ 在下面的 C 方法中，我们接受一个 int 的指针，转换到 Swift 里所对应的就是一个 CInt 的 UnsafePointer 类型。
+ 这里原来的 C API 中已经指明了输入的 num 指针的不可变的 (const)，因此在 Swift 中我们与之对应的是 UnsafePointer 这个不可变版本。
+ 如果只是一个普通的可变指针的话，我们可以使用 UnsafeMutablePointer 来对应：
+ C API           Swift API
+ const Type *    UnsafePointer
+ Type *          UnsafeMutablePointer”
+ 
+ 
+ 如何在指针的内容和实际的值之间进行转换
+ 
+ */
 
+//C 语言
+//void method(const int *num) { printf("%d", *num); }
+// int a = 123; method(&a);
+
+//对应的 Swift 方法应该是：
+func method(_ num: UnsafePointer<CInt>) {
+    print(num.pointee)
+}
+var a: CInt = 123
+method(&a) //123
+
+//func CFArrayGetValueAtIndex(theArray: CFArray!, idx: CFIndex) -> UnsafePointer<Any> { }
+//“CFArray 中是可以存放任意对象的，所以这里的返回是一个任意对象的指针，相当于 C 中的 void *。
+//这显然不是我们想要的东西。Swift 中为我们提供了一个强制转换的方法 unsafeBitCast，
+//通过下面的代码，我们可以看到应当如何使用类似这样的 API，将一个指针强制按位转成所需类型的对象：
+let arr = NSArray(object: "meow")
+let str = unsafeBitCast(CFArrayGetValueAtIndex(arr, 0), to: CFString.self)
+// str = "meow”
+//“unsafeBitCast 会将第一个参数的内容按照第二个参数的类型进行转换，而不去关心实际是不是可行，
+//这也正是 UnsafePointer 的不安全所在，因为我们不必遵守类型转换的检查，而拥有了在指针层面直接操作内存的机会。”
+//“Apple 将直接的指针访问冠以 Unsafe 的前缀，就是提醒我们：这些东西不安全，亲们能不用就别用了吧”
 
 
 // -----------------------------
