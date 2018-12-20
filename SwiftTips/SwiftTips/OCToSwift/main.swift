@@ -59,6 +59,43 @@ let str = unsafeBitCast(CFArrayGetValueAtIndex(arr, 0), to: CFString.self)
 //“Apple 将直接的指针访问冠以 Unsafe 的前缀，就是提醒我们：这些东西不安全，亲们能不用就别用了吧”
 
 
+
+
+//C 指针内存管理
+/*
+ C 指针在 Swift 被冠名 unsafe 的另一个原因是无法对其2进行自动的内存管理，需要手动来申请释放内存
+ */
+
+class MyClass {
+    var a = 1
+    deinit {
+        print("deinit")
+    }
+}
+
+var pointer: UnsafeMutablePointer<MyClass>!
+pointer = UnsafeMutablePointer<MyClass>.allocate(capacity: 1)
+pointer.initialize(to: MyClass())
+print(pointer.pointee.a) //1
+//pointer = nil //UnsafeMutablePointer 不会自动内存管理，指向的内存没有释放回收，没有调用 deinit
+pointer.deinitialize(count: 1)//释放指针指向的内存的对象以及指针自己本身
+pointer = nil // deinit
+
+//“手动处理这类指针的内存管理时，我们需要遵循的一个基本原则就是谁创建谁释放。
+//deallocate 与 deinitialize 应该要和 allocate 与 initialize 成对出现”
+//“如果我们是通过调用了某个方法得到的指针，那么除非文档或者负责这个方法的开发者明确告诉你应该由使用者进行释放，否则都不应该去试图管理它的内存状态：
+
+var x:UnsafeMutablePointer<tm>!
+var t = time_t()
+time(&t)
+x = localtime(&t)
+x = nil
+//指针的内存申请也可以使用 malloc 或者 calloc 来完成，这种情况下在释放时我们需要对应使用 free 而不是 deallocate。
+
+
+
+
+
 // -----------------------------
 
 /*
