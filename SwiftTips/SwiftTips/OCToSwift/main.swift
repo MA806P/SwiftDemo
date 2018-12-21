@@ -11,8 +11,45 @@ import Foundation
 print("Hello, World!")
 
 
+
 // -----------------------------
 
+/*
+ “在 C 中有一类指针，你在头文件中无法找到具体的定义，只能拿到类型的名字，而所有的实现细节都是隐藏的。
+ 这类指针在 C 或 C++ 中被叫做不透明指针 (Opaque Pointer)，顾名思义，它的实现和表意对使用者来说是不透明的。”
+
+ swift 中对应这类不透明指针的类型是 COpaquePointer 用来表示那些在 Swift 中无法进行类型描述的 C 指针，其他的用
+ 更准确的 UnsafePointer<T> 来存储
+ 
+ “COpaquePointer 在 Swift 中扮演的是指针转换的中间人的角色，我们可以通过这个类型在不同指针类型间进行转换，除非有十足的把握
+ 知道自己在干什么，否则不要这么做。
+ 
+ 另外一种重要指针指向函数的指针，
+ 在 C 中的函数
+ int cFunction(int (callBack)(int x, int y)) { return callBack(1, 2); }
+ 如果想要在 Swift 中使用这个函数
+ 
+ let callback: @convention(c) (Int32, Int32) -> Int32 = {
+ (x, y) -> Int32 in
+ return x + y }
+ 
+ let result = cFunction(callback)
+ print(result) // 3”
+
+ let result = cFunction {
+ (x, y) -> Int32 in return x + y
+ }
+ 
+ 
+*/
+
+
+
+
+
+// -----------------------------
+
+/*
 //UnsafePointer
 /*
  Swift 是一门非常安全的语言，所有的引用或者变量的类型都是确定并且正确对应他们得实际类型的，
@@ -92,8 +129,7 @@ x = localtime(&t)
 x = nil
 //指针的内存申请也可以使用 malloc 或者 calloc 来完成，这种情况下在释放时我们需要对应使用 free 而不是 deallocate。
 
-
-
+*/
 
 
 // -----------------------------
