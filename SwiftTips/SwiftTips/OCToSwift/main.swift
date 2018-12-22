@@ -14,6 +14,38 @@ print("Hello, World!")
 
 // -----------------------------
 
+// GCD 和延时调用
+/*
+ Swift 中抛弃了传统的基于 C 的GCD API，采用了更为先进的书写方式。
+ */
+
+//创建目标队列
+let workingQueue = DispatchQueue(label: "my_queue")
+
+//派发到刚创建的队列中，GCD进行线程调度
+workingQueue.async {
+    //在 workingQueue 中异步进行
+    print("working")
+    Thread.sleep(forTimeInterval: 2) //模拟2s执行时间
+    
+    DispatchQueue.main.async {
+        //返回主线程更新 UI
+        print("refresh UI")
+    }
+}
+
+
+// GCD 延时调用
+let time: TimeInterval = 2.0
+DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + time) {
+    print("2 秒后输出")
+}
+//这里直接程序结束了，参考 SwiftAppTest 例子。封装对象，加上可以取消的功能
+
+
+
+// -----------------------------
+
 /*
  “在 C 中有一类指针，你在头文件中无法找到具体的定义，只能拿到类型的名字，而所有的实现细节都是隐藏的。
  这类指针在 C 或 C++ 中被叫做不透明指针 (Opaque Pointer)，顾名思义，它的实现和表意对使用者来说是不透明的。”
