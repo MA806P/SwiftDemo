@@ -14,6 +14,28 @@ print("Hello, World!")
 
 // -----------------------------
 
+//获取对象类型
+/*
+ “如果遵循规则的话，Swift 会是一门相当安全的语言：不会存在类型的疑惑，绝大多数的内容应该能在编译期间就唯一确定。”
+object_getClass 是一个定义在 OC 的 runtime 中的方法
+ 
+ */
+
+let date = NSDate()
+let name: AnyClass! = object_getClass(date)
+print(name) //some(__NSDate)
+
+let name2 = type(of: date)
+print(name2) //__NSDate
+
+let string = "Hello"
+let name3 = type(of: string)
+print(name3) //String
+
+
+// -----------------------------
+
+/*
 // GCD 和延时调用
 /*
  Swift 中抛弃了传统的基于 C 的GCD API，采用了更为先进的书写方式。
@@ -42,7 +64,7 @@ DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + time) {
 }
 //这里直接程序结束了，参考 SwiftAppTest 例子。封装对象，加上可以取消的功能
 
-
+*/
 
 // -----------------------------
 
