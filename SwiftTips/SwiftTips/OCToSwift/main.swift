@@ -12,7 +12,63 @@ print("Hello, World!")
 
 
 
+
 // -----------------------------
+
+//自省
+/*
+ 向一个对象发出询问以确定是不是属于某个类，这种操作称为自省。
+ OC 中
+ [obj1 isKindOfClass:[ClassA class]];
+ [obj2 isMemberOfClass:[ClassB class]];
+ isKindOfClass: 判断 obj1 是否是 ClassA 或者其子类的实例对象；
+ isMemberOfClass: 则对 obj2 做出判断，当且仅当 obj2 的类型为 ClassB 时返回为真。”
+ 这两个是 NSObject 的方法，在 Swift 中如是 NSObject 的子类的话，可直接使用这两个方法
+ 
+ “首先需要明确的一点是，我们为什么需要在运行时去确定类型。因为有泛型支持，Swift 对类型的推断和记录是完备的。
+ 因此在绝大多数情况下，我们使用的 Swift 类型都应该是在编译期间就确定的。
+ 如果在你写的代码中经常需要检查和确定 AnyObject 到底是什么类的话，几乎就意味着你的代码设计出了问题”
+ 
+ 
+ 
+*/
+
+class ClassA: NSObject { }
+class ClassB: ClassA { }
+
+let obj1: NSObject = ClassB()
+let obj2: NSObject = ClassB()
+
+print(obj1.isKind(of: ClassA.self))    // true
+print(obj2.isMember(of: ClassA.self))  // false
+
+//对于不是 NSObject 的类，怎么确定其类型
+class ClassC: NSObject { }
+class ClassD: ClassC { }
+
+let obj3: AnyObject = ClassD()
+let obj4: AnyObject = ClassD()
+
+print(obj3.isKind(of: ClassC.self))    // true
+print(obj4.isMember(of: ClassC.self))  // false
+
+//Swift 提供了一个简洁的写法，可以使用 is 来判断，is 相当于 isKindOfClass
+// is 不仅可用于 class 类型上，也可以对 Swift 的其他 struct enum 类型进行判断
+
+if (obj4 is ClassC) {
+    print("is ClassC")
+}
+
+// 如果编译器能够唯一确定类型，那么 is 的判断就没有必要
+//let string = "abc"
+//if string is String { print("is string") } // 警告：'is' test is always true
+
+
+
+// -----------------------------
+
+
+/*
 
 //获取对象类型
 /*
@@ -32,6 +88,7 @@ let string = "Hello"
 let name3 = type(of: string)
 print(name3) //String
 
+ */
 
 // -----------------------------
 
