@@ -18,6 +18,7 @@
 		DAAAC1BC21CDE76F0019E0B1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DAAAC1BB21CDE76F0019E0B1 /* Assets.xcassets */; };
 		DAAAC1BF21CDE76F0019E0B1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DAAAC1BD21CDE76F0019E0B1 /* LaunchScreen.storyboard */; };
 		DAAAC1C521CDE85E0019E0B1 /* DispatchWorkItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAAC1C421CDE85E0019E0B1 /* DispatchWorkItem.swift */; };
+		DAD837C221D45B2E008E2739 /* DispatchWorkItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD837C121D45B2E008E2739 /* DispatchWorkItem.swift */; };
 		DAEFB81021B2247B0004D0FB /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAEFB80F21B2247B0004D0FB /* main.swift */; };
 /* End PBXBuildFile section */
 
@@ -80,6 +81,7 @@
 		DAAAC1BE21CDE76F0019E0B1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DAAAC1C021CDE76F0019E0B1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DAAAC1C421CDE85E0019E0B1 /* DispatchWorkItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchWorkItem.swift; sourceTree = "<group>"; };
+		DAD837C121D45B2E008E2739 /* DispatchWorkItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DispatchWorkItem.swift; path = SwiftAppTest/DispatchWorkItem.swift; sourceTree = SOURCE_ROOT; };
 		DAEFB80D21B2247B0004D0FB /* OCToSwift */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = OCToSwift; sourceTree = BUILT_PRODUCTS_DIR; };
 		DAEFB80F21B2247B0004D0FB /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -194,6 +196,7 @@
 			isa = PBXGroup;
 			children = (
 				DAEFB80F21B2247B0004D0FB /* main.swift */,
+				DAD837C121D45B2E008E2739 /* DispatchWorkItem.swift */,
 			);
 			path = OCToSwift;
 			sourceTree = "<group>";
@@ -392,6 +395,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DAEFB81021B2247B0004D0FB /* main.swift in Sources */,
+				DAD837C221D45B2E008E2739 /* DispatchWorkItem.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
