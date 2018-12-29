@@ -36,42 +36,27 @@ class MyClass: NSObject {
 
 private var myContext = 0
 
-class Class: NSObject {
-    
+class AnotherClass: NSObject {
     var myObject: MyClass!
-    
+    var observation: NSKeyValueObservation?
     override init() {
         super.init()
         myObject = MyClass()
-        print("初始化 MyClass，当前日期: \(myObject.date)")
-        myObject.addObserver(self,
-                             forKeyPath: "date",
-                             options: .new,
-                             context: &myContext)
+        print("初始化 AnotherClass，当前日期: \(myObject.date)")
         
-        delayBling(3) {
-            self.myObject.date = Date()
-            
-        }
-    }
-    
-    override func observeValue(forKeyPath keyPath: String?,
-                               of object: Any?,
-                               change: [NSKeyValueChangeKey : Any]?,
-                               context: UnsafeMutableRawPointer?)
-    {
-        if let change = change, context == &myContext {
-            if let newDate = change[.newKey] as? Date {
-                print("MyClass 日期发生变化 \(newDate)")
+        observation = myObject.observe(\MyClass.date, options: [.new]) { (_, change) in
+            if let newDate = change.newValue {
+                print("AnotherClass 日期发生变化 \(newDate)")
             }
         }
-
+        
+        delayBling(1) { self.myObject.date = Date() }
     }
 }
-
 let obj = Class()
-        
-        
+
+//初始化 MyClass，当前日期: 2018-12-29 03:09:13 +0000
+//MyClass 日期发生变化 2018-12-29 03:09:17 +0000
 
 
 
