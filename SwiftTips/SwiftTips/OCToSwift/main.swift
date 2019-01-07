@@ -13,7 +13,94 @@ print("Hello, World!")
 
 // -----------------------------
 
+// 局部 Scope
+/*
+ C 系语言方法内部可以任意添加成对 {} 来限定代码的作用范围。
+ 超过作用域后里面的临时变量就将失效，可使方法内部的命名更加容易，那些不需要的引用的回收提前进行了
+ 也利于方法的梳理
+ 
+ -(void)loadView {
+ UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
+ 
+ {
+ UILabel *titleLabel = [[UILabel alloc]
+ initWithFrame:CGRectMake(150, 30, 200, 40)];
+ titleLabel.textColor = [UIColor redColor];
+ titleLabel.text = @"Title";
+ [view addSubview:titleLabel];
+ }
+ 
+ {
+ UILabel *textLabel = [[UILabel alloc]
+ initWithFrame:CGRectMake(150, 80, 200, 40)];
+ textLabel.textColor = [UIColor redColor];
+ textLabel.text = @"Text";
+ [view addSubview:textLabel];
+ }
+ 
+ self.view = view;
+ }
+ “推荐使用局部 scope 将它们分隔开来。比如上面的代码建议加上括号重写为以下形式，
+ 这样至少编译器会提醒我们一些低级错误，我们也可能更专注于每个代码块”
+ 
 
+ 在 Swift 直接使用大括号的写法是不支持的，这和闭包的定义产生了冲突。想类似的使用局部 scope 来分隔代码的话，
+ 定义一个接受 ()->() 作为函数的全局方法，然后执行
+ 
+ func local(_ closure: ()->()) { closure() }
+ 可以利用尾随闭包的特性模拟局部 scope
+ 
+ “override func loadView() {
+ let view = UIView(frame: CGRect(x: 0, y: 0, width: 320, height: 480))
+ view.backgroundColor = .white
+ 
+ local {
+ let titleLabel = UILabel(frame: CGRect(x: 150, y: 30, width: 200, height: 40))
+ titleLabel.textColor = .red
+ titleLabel.text = "Title"
+ view.addSubview(titleLabel)
+ }
+ 
+ local {
+ let textLabel = UILabel(frame: CGRect(x: 150, y: 80, width: 200, height: 40))
+ textLabel.textColor = .red
+ textLabel.text = "Text"
+ view.addSubview(textLabel)
+ }
+ 
+ self.view = view
+ }
+ 
+ 
+ Swift 2.0 中，为了处理异常，Apple 加入了 do 这个关键字来作为捕获异常的作用域。这一功能恰好为我们提供了一个完美的局部作用域
+ do { let textLabel = ... }
+ 
+ 
+ OC 中可使用 GNU 时候C 的声明扩展来限制局部作用域的时候同时进行复制，运用得当的话，可使代码更加紧凑和整洁。
+ self.titleLabel = ({
+ UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(150, 30, 20, 40)];
+ label.text = @"Title";
+ [view addSubview:label];
+ label;
+ });
+ 
+ 
+ swift 中可使用匿名的闭包，写出类似的代码：
+ let titleLabel: UILabel = {
+ let label = UILabel(frame: CGRect(x: 150, y: 30, width: 200, height: 40))
+ label.text = "Title"
+ return label
+ }()
+ 
+
+ 
+ */
+
+
+
+// -----------------------------
+
+/*
 // KeyPath 和 KVO
 
 /*
@@ -58,7 +145,7 @@ let obj = Class()
 //初始化 MyClass，当前日期: 2018-12-29 03:09:13 +0000
 //MyClass 日期发生变化 2018-12-29 03:09:17 +0000
 
-
+*/
 
 
 // -----------------------------
