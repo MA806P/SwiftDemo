@@ -10,6 +10,65 @@ import Foundation
 
 print("Hello, World!")
 
+// -----------------------------
+
+//判等
+/*
+ OC 中使用 isEqualToString 进行字符串判等。Swift 使用 ==
+ OC 中 == 这个符号意思是判断两个对象是否指向同一块内存地址，更关心的是对象的内容相同，OC 中通常对 isEqual 进行重写
+ 否则在调用这个方法时会直接使用 == 进行判断
+ 
+ Swift 里的 == 是一个操作符的声明
+ protocol Equatable {
+ func ==(lhs: Self, rhs: Self) -> Bool
+ }
+ 实现这个协议类型需要定义适合自己类型的 == 操作符，如果认为相等 返回 true
+ 
+ 
+ */
+
+let str1 = "abc"
+let str2 = "abc"
+let str3 = "def"
+print(str1 == str2) // true
+print(str2 == str3) // false
+
+
+class TodoItem {
+    let uuid: String
+    var title: String
+    
+    init(uuid: String, title: String) {
+        self.uuid = uuid
+        self.title = title
+    }
+}
+
+extension TodoItem: Equatable {
+    
+}
+
+//==的实现没有放在对应的 extension 里，而是放在全局的 scope 中，因为你应该需要在全局范围内都能使用 ==
+//事实上 Swift 的操作符都是全局的
+func ==(lhs: TodoItem, rhs: TodoItem) -> Bool {
+    return lhs.uuid == rhs.uuid
+}
+
+/*
+ 对于 NSObject 子类的判等你有两种选择，要么重载 ==，要么重写 -isEqual:。
+ 如果你只在 Swift 中使用你的类的话，两种方式是等效的；
+ 但是如果你还需要在 OC 中使用这个类的话，OC 不接受操作符重载，只能使用 -isEqual:，这时你应该考虑使用第二种方式。
+ 
+ 对于原来 OC 中使用 == 进行的对象指针的判定，在 Swift 中提供的是另一个操作符 ===。在 Swift 中 === 只有一种重载：
+ func ===(lhs: AnyObject?, rhs: AnyObject?) -> Bool
+ 它用来判断两个 AnyObject 是否是同一个引用。
+ 
+ 对于判等，和它紧密相关的一个话题就是哈希。
+ 重载了判等的话，我们还需要提供一个可靠的哈希算法使得判等的对象在字典中作为 key 时不会发生奇怪的事情。
+ 
+ */
+
+
 
 // -----------------------------
 
@@ -808,6 +867,7 @@ myClass.optionalNormalProtocolMethod() //optionalNormalProtocolMethod
 
 // -----------------------------
 
+/*
 //单例
 /*
  OC中公认的单列写法
@@ -867,6 +927,8 @@ class MyManager1 {
  */
 
 
+ */
+ 
 // -----------------------------
 
 //实例方法的动态调用
