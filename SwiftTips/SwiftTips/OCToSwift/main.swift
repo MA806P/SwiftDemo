@@ -8,7 +8,70 @@
 
 import Foundation
 
+
 print("Hello, World!")
+
+
+// -----------------------------
+
+//类族
+/*
+ 类族就是使用一个统一的公共类来定制单一的接口，然后在表面之下对应若干个私有类进行实现的方式。
+ 避免公开很多子类造成混乱，典型的例子 NSNumber
+ 类族在 OC 中实现起来也很自然，在所谓的 初始化方法 中将 self 进行替换，根据调用的方式或者输入的类型，返回合适的私有子类对象就可以了。
+ 
+ Swift 中有所不同，Swift 有真正的初始化方法，初始化的时候只能得到当前类的实例，并且要完成所有的配置。
+ 对于公共类，是不可能在初始化方法中返回其子类的信息。Swift中使用工厂方法
+ 
+ */
+
+
+class Drinking {
+    typealias LiquidColor = Int
+    
+    var color: LiquidColor {
+        return 0
+    }
+    
+    class func drinking (name: String) -> Drinking {
+        var drinking: Drinking
+        switch name {
+        case "Coke":
+            drinking = Coke()
+        case "Beer":
+            drinking = Beer()
+        default:
+            drinking = Drinking()
+        }
+        return drinking
+    }
+    
+}
+
+
+class Coke: Drinking {
+    override var color: LiquidColor {
+        return 1
+    }
+}
+
+class Beer: Drinking {
+    override var color: LiquidColor {
+        return 2
+    }
+}
+
+let coke = Drinking.drinking(name: "Coke")
+print(coke.color) //1
+
+let beer = Drinking.drinking(name: "Beer")
+print(beer.color) //22
+
+print(NSStringFromClass(type(of: coke))) //OCToSwift.Coke
+print(NSStringFromClass(type(of: beer))) //OCToSwift.Beer
+
+
+
 
 // -----------------------------
 
@@ -21,6 +84,8 @@ print("Hello, World!")
  
  Swift 的原生 Dictionary 中，key 一定是要实现了的 Hashable 协议的类型。
  像 Int 或者 String 这些 Swift 基础类型，已经实现了这个协议，因此可以用来作为 key 来使用。比如 Int 的 hashValue 就是它本身：
+ let num = 19
+ print(num.hashValue) // 19
  
  OC 中当对 NSObject 的子类 -isEqual 进行重写的时候，一般也需要将 -hash 方法重写，以提供一个判等为真时返回同样的哈希值的方法
  “在 Swift 中，NSObject 也默认就实现了 Hashable，而且和判等的时候情况类似，
@@ -36,13 +101,9 @@ print("Hello, World!")
  其次，某些对象的哈希值有可能随着系统环境或者时间的变化而改变。
  因此你也不应该依赖于哈希值来构建一些需要确定对象唯一性的功能，在绝大部分情况下，你将会得到错误的结果。”
  
- 
- 
- 
  */
 
-let num = 19
-print(num.hashValue) // 19
+
 
 
 // -----------------------------
