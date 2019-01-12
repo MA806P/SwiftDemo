@@ -14,6 +14,39 @@ print("Hello, World!")
 
 // -----------------------------
 
+//输出格式化
+/*
+ 在 Swift 里，我们在输出时一般使用的 print 中是支持字符串插值的，
+ 而字符串插值时将直接使用类型的 Streamable，Printable 或者 DebugPrintable 协议
+ (按照先后次序，前面的没有实现的话则使用后面的) 中的方法返回的字符串并进行打印。
+ 这样就可以不借助于占位符，也不用再去记忆类型所对应的字符表示，就能很简单地输出各种类型的字符串描述了。
+ 
+ C 的字符串格式化，在需要以一定格式输出的时候，传统的方式就显得很有用。例如打算只输出小数后两位
+ 
+ */
+
+let a = 3
+let b = 1.23456
+let c = "abc"
+print("int:\(a) double:\(b) string:\(c)")
+//int:3 double:1.23456 string:abc
+
+let format = String(format: "%.2lf", b)
+print("double:\(format)") //1.23
+
+extension Double {
+    func format(_ f: String) -> String {
+        return String(format: "%\(f)f", self)
+    }
+}
+
+let f = ".4"
+print("double:\(b.format(f))") //1.2346
+
+
+
+// -----------------------------
+
 //调用 C 动态库
 /*
  OC 是 C 的超级，可以无缝访问 C 的内容，只需要指定依赖并且导入头文件就可以了。
@@ -40,7 +73,7 @@ print("Hello, World!")
  
  */
 
-
+/*
 class Drinking {
     typealias LiquidColor = Int
     
@@ -85,7 +118,7 @@ print(beer.color) //22
 print(NSStringFromClass(type(of: coke))) //OCToSwift.Coke
 print(NSStringFromClass(type(of: beer))) //OCToSwift.Beer
 
-
+*/
 
 
 // -----------------------------
