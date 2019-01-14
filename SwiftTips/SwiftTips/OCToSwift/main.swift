@@ -14,6 +14,53 @@ print("Hello, World!")
 
 // -----------------------------
 
+// Options
+/*
+ 在 OC 中，很多需要提供某些选项的 API ，一般用来控制 API 的具体的行为配置等。可以使用 | & 按位逻辑符对这些选项进行操作。
+ [UIView animateWithDuration:0.3 delay:0.0
+ options:UIViewAnimationOptionCurveEaseIn | UIViewAnimationOptionAllowUserInteraction
+ animations:^{} completion:nil];
+ 
+ 在 Swift 中，对于原来的枚举类型 NS_ENUM 我们有新的 enum 类型来对应。
+ 但是原来的 NS_OPTIONS 在 Swift 里显然没有枚举类型那样重要，并没有直接的原生类型来进行定义。
+ 原来的 Option 值现在被映射为了满足 OptionSetType 协议的 struct 类型，以及一组静态的 get 属性：
+ 
+ public struct UIViewAnimationOptions : OptionSetType {
+ public init(rawValue: UInt)
+ static var layoutSubviews: UIViewAnimationOptions { get }
+ static var allowUserInteraction: UIViewAnimationOptions { get }
+ 
+ //...
+ 
+ static var transitionFlipFromBottom: UIViewAnimationOptions { get }
+ }
+ OptionSetType 是实现了 SetAlgebraType 的，因此我们可以对两个集合进行各种集合运算，包括并集、交集
+ 对于不需要选项输入的情况，可直接使用空集合 [] 来表示。
+ 
+ 
+ UIView.animate(withDuration: 0.3, delay: 0.0,
+ options: [.curveEaseIn, .allowUserInteraction],
+ animations: {},
+ completion: nil)
+ 
+ 
+ 要实现一个 Options 的 struct 的话，可以参照已有的写法建立类并实现 OptionSetType。
+ 因为基本上所有的 Options 都是很相似的，所以最好是准备一个 snippet 以快速重用：
+ 
+ struct YourOption: OptionSet {
+ let rawValue: UInt
+ static let none = YourOption(rawValue: 0)
+ static let option1 = YourOption(rawValue: 1)
+ static let option2 = YourOption(rawValue: 1 << 1)
+ //...
+ }
+ 
+ 
+ */
+
+
+// -----------------------------
+
 //输出格式化
 /*
  在 Swift 里，我们在输出时一般使用的 print 中是支持字符串插值的，
@@ -25,6 +72,7 @@ print("Hello, World!")
  
  */
 
+/*
 let a = 3
 let b = 1.23456
 let c = "abc"
@@ -42,7 +90,7 @@ extension Double {
 
 let f = ".4"
 print("double:\(b.format(f))") //1.2346
-
+*/
 
 
 // -----------------------------
