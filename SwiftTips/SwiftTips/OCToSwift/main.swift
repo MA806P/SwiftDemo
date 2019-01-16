@@ -14,6 +14,50 @@ print("Hello, World!")
 
 // -----------------------------
 
+// 数组 enumerate
+/*
+ 使用常见的需求是在枚举数组内元素的同时也想使用对应的下标索引
+ */
+
+let arr: NSArray = [1,2,3,4,5]
+var result = 0
+arr.enumerateObjects({(num, idx, stop) -> Void in
+    result += num as! Int
+    if idx == 2 {
+        stop.pointee = true
+    }
+})
+
+print(result) //6
+
+arr.enumerateObjects { (num, idx, stop) in
+    result += num as! Int
+    if idx == 3 {
+        stop.pointee = true
+    }
+}
+print(result) //16
+
+/*
+ “虽然说使用 enumerateObjectsUsingBlock: 非常方便，但是其实从性能上来说这个方法并不理想
+ 另外这个方法要求作用在 NSArray 上，这显然已经不符合 Swift 的编码方式了。
+ 在 Swift 中，我们在遇到这样的需求的时候，有一个效率，安全性和可读性都很好的替代，
+ 那就是快速枚举某个数组的 EnumerateGenerator，它的元素是同时包含了元素下标索引以及元素本身的多元组：”
+ */
+
+var result2 = 0
+for (idx, num) in [1,2,3,4,5].enumerated() {
+    result2 += num
+    if idx == 2 {
+        break
+    }
+}
+print(result2)//6
+
+
+
+// -----------------------------
+
 // Options
 /*
  在 OC 中，很多需要提供某些选项的 API ，一般用来控制 API 的具体的行为配置等。可以使用 | & 按位逻辑符对这些选项进行操作。
