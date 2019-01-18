@@ -14,11 +14,68 @@ print("Hello, World!")
 
 // -----------------------------
 
+//类型编码 @encode
+/*
+ OC 中有一些冷僻但是如果知道的话在特定情况下会很有用的关键字，比如 @encode
+ 通过传入一个类型，可获得代表这个类型的编码 C 字符串
+ 
+ char *typeChar1 = @encode(int32_t);
+ char *typeChar2 = @encode(NSArray);
+ // typeChar1 = "i", typeChar2 = "{NSArray=#}
+ 
+ 常用的地方是在 OC 运行时的消息发送机制中，由于类型信息的缺失，需要类型编码进行辅助保证类型信息也能够被传递。
+ 
+ Swift使用了自己的Metatype来处理类型，并且在运行时保留了这些类型的信息。但是在 Cocoa 中我们还是可以通过
+ NSValue 的 objcType 属性来获取对应值的类型指针：
+ class NSValue: NSObject, NSCopying, NSSecureCoding, NSCoding {
+ var objcType: UnsafePointer<Int8> {get}
+ }
+ 
+ */
+
+
+let int: Int = 0
+let float: Float = 0.0
+let double: Double = 0.0
+
+let intNumber: NSNumber = int as NSNumber
+let floatNumber: NSNumber = float as NSNumber
+let doubleNumber: NSNumber = double as NSNumber
+
+print(String(validatingUTF8: intNumber.objCType))
+print(String(validatingUTF8: floatNumber.objCType))
+print(String(validatingUTF8: doubleNumber.objCType))
+
+//Optional("q")
+//Optional("f")
+//Optional("d")
+// 注意，validatingUTF8 返回的是 `String?`”
+
+/*
+ 对于像其他一些可以转换为 NSValue 的类型，可以用同样方式获取类型编码，这些类型会是某些 struct，
+ 因为 NSValue 设计的初衷就是被作为那些不能直接放入 NSArray 的值的容器来使用的：
+ let p = NSValue(cgPoint: CGPoint(x: 3, y: 3))
+ String(validatingUTF8: p.objcType)
+ // {Some "{CGPoint=dd}"}
+ 
+ let t = NSValue(cgAffineTransform: .identity)
+ String(validatingUTF8: t.objCType)
+ // {Some "{CGAffineTransform=dddddd}"}
+ 
+ 有了这些信息之后，就能够在这种类型信息可能损失的时候构建准确的类型转换和还原。
+ 
+ */
+
+
+
+// -----------------------------
+
 // 数组 enumerate
 /*
  使用常见的需求是在枚举数组内元素的同时也想使用对应的下标索引
  */
 
+/*
 let arr: NSArray = [1,2,3,4,5]
 var result = 0
 arr.enumerateObjects({(num, idx, stop) -> Void in
@@ -53,7 +110,7 @@ for (idx, num) in [1,2,3,4,5].enumerated() {
     }
 }
 print(result2)//6
-
+*/
 
 
 // -----------------------------
