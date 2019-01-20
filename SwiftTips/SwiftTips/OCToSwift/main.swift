@@ -14,6 +14,28 @@ print("Hello, World!")
 
 // -----------------------------
 
+//C 代码调用 和 @asmname
+
+/*
+ 导入了 import Darwin 我们就可以在 Swift 中无缝使用 Darwin 中定义的 C 函数了，涵盖了绝大多数 C 标准库中的内容
+ Foundation 框架中包含了 Drawin ，在 app 开发中使用 UIKit 或者 Cocoa 这样的框架，它们又导入了 Foundation
+ 所以平时开发并不需要特别做什么，就可以使用这些标准的 C 函数了。
+ Swift 在导入时为我们将 Darwin 也进行了类型的自动转换对应，例如函数返回 Swift 类型，而非 C 的类型
+ func sin(_ x: Double) -> Double
+ 
+ 对于第三方的 C 代码，想要调用非标准库的 C 代码的话，将 C代码的头文件在桥接的头文件中进行导入
+ 详情见 target SwiftToOCExample
+ 
+ 
+ 
+ */
+
+print(sin(Double.pi/2)) //1.0
+
+
+// -----------------------------
+
+/*
 //类型编码 @encode
 /*
  OC 中有一些冷僻但是如果知道的话在特定情况下会很有用的关键字，比如 @encode
@@ -66,7 +88,7 @@ print(String(validatingUTF8: doubleNumber.objCType))
  
  */
 
-
+*/
 
 // -----------------------------
 
