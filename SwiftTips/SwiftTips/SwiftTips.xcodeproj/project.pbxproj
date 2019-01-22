@@ -12,6 +12,8 @@
 		DA4407D321BF6B0000B4DF52 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4407D221BF6B0000B4DF52 /* main.swift */; };
 		DA4407DC21BF6B4800B4DF52 /* MyObject.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4407DB21BF6B4800B4DF52 /* MyObject.m */; };
 		DA4C5E2D215DB66100EDACE7 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4C5E2C215DB66100EDACE7 /* main.swift */; };
+		DA7B9D2E21F6AFF5007847BD /* MyClassExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7B9D2D21F6AFF5007847BD /* MyClassExtension.swift */; };
+		DA7B9D3021F6B0D4007847BD /* MyClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7B9D2F21F6B0D4007847BD /* MyClass.swift */; };
 		DAAAC1B521CDE76E0019E0B1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAAC1B421CDE76E0019E0B1 /* AppDelegate.swift */; };
 		DAAAC1B721CDE76E0019E0B1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAAC1B621CDE76E0019E0B1 /* ViewController.swift */; };
 		DAAAC1BA21CDE76E0019E0B1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DAAAC1B821CDE76E0019E0B1 /* Main.storyboard */; };
@@ -74,6 +76,8 @@
 		DA4407DB21BF6B4800B4DF52 /* MyObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyObject.m; sourceTree = "<group>"; };
 		DA4C5E29215DB66100EDACE7 /* SwiftTips */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SwiftTips; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA4C5E2C215DB66100EDACE7 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		DA7B9D2D21F6AFF5007847BD /* MyClassExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyClassExtension.swift; sourceTree = "<group>"; };
+		DA7B9D2F21F6B0D4007847BD /* MyClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyClass.swift; sourceTree = "<group>"; };
 		DAAAC1B221CDE76E0019E0B1 /* SwiftAppTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftAppTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DAAAC1B421CDE76E0019E0B1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DAAAC1B621CDE76E0019E0B1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -201,6 +205,8 @@
 			isa = PBXGroup;
 			children = (
 				DAEFB80F21B2247B0004D0FB /* main.swift */,
+				DA7B9D2F21F6B0D4007847BD /* MyClass.swift */,
+				DA7B9D2D21F6AFF5007847BD /* MyClassExtension.swift */,
 				DAD837C121D45B2E008E2739 /* DispatchWorkItem.swift */,
 			);
 			path = OCToSwift;
@@ -400,6 +406,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA7B9D3021F6B0D4007847BD /* MyClass.swift in Sources */,
+				DA7B9D2E21F6AFF5007847BD /* MyClassExtension.swift in Sources */,
 				DAEFB81021B2247B0004D0FB /* main.swift in Sources */,
 				DAD837C221D45B2E008E2739 /* DispatchWorkItem.swift in Sources */,
 			);

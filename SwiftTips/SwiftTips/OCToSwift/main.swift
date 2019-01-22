@@ -11,6 +11,35 @@ import Foundation
 
 print("Hello, World!")
 
+// -----------------------------
+
+//Associated Object
+/*
+ 得益于 OC 的运行时和 Key-Value Coding 的特性，可以在运行时向一个对象添加值存储
+ 而在使用 Category 扩展现有的类的功能的时候，直接添加实例变量是不被允许的，这是一般使用 property 配合 Associated Object
+ 的方式，将一个对象 关联 到已有的扩展对象上
+ 
+ Swift 中这样的方法依旧有效
+ func objc_getAssociatedObject(object: AnyObject!, key: UnsafePointer<Void> )  -> AnyObject!
+ func objc_setAssociatedObject(object: AnyObject!, key: UnsafePointer<Void>, value: AnyObject!, policy: objc_AssociationPolicy)
+ 
+ */
+
+
+func printTitle(_ input: MyClass) {
+    if let title = input.title {
+        print("Title: \(title)")
+    } else {
+        print("没有配置")
+    }
+}
+
+let a = MyClass()
+printTitle(a) //没有配置
+a.title = "swift"
+printTitle(a) //Title: swift
+
+
 
 // -----------------------------
 
