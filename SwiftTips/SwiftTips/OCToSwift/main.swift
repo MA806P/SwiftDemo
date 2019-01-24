@@ -11,8 +11,60 @@ import Foundation
 
 print("Hello, World!")
 
+
 // -----------------------------
 
+//Lock
+/*
+ Cocoa 和 OC 中加锁的方式很多，最常用的是 @synchronized
+ 可用来修饰一个变量，并为其自动加上和解除互斥锁
+ - (void)myMethod:(id)anObj { @synchronized(anObj){ //...} }
+ 加锁解锁都是要消耗一定性能的，不太可能为所有的方法加上锁。
+ 过多的锁不仅没有意义，而且对于多线程编程来说，可能会产生死锁这样的陷阱，难以调试。
+ 
+ Swift 中加锁
+ 
+ */
+
+func myMethod(anObj: AnyObject!) {
+    objc_sync_enter(anObj)
+    //中间持有 anObj 锁
+    objc_sync_exit(anObj)
+}
+
+
+func synchronized(_ lock: AnyObject, closure: () -> ()) {
+    objc_sync_enter(lock)
+    closure()
+    objc_sync_exit(lock)
+}
+func myMethodLocked(anObj: AnyObject!) {
+    synchronized(anObj) {
+        // 在括号内持有 anObj 锁
+    }
+}
+
+
+//使用例子
+class Obj {
+    var _str = "123"
+    var str: String {
+        get {
+            return _str
+        }
+        
+        set {
+            synchronized(self) {
+                _str = newValue
+            }
+        }
+    }
+    
+}
+
+// -----------------------------
+
+/*
 //Associated Object
 /*
  得益于 OC 的运行时和 Key-Value Coding 的特性，可以在运行时向一个对象添加值存储
@@ -39,7 +91,7 @@ printTitle(a) //没有配置
 a.title = "swift"
 printTitle(a) //Title: swift
 
-
+*/
 
 // -----------------------------
 
