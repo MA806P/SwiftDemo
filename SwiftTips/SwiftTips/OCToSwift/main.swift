@@ -14,6 +14,79 @@ print("Hello, World!")
 
 // -----------------------------
 
+// Toll-Free Bridging 和 Unmanaged
+
+/*
+ 在 Swift 中对于 Core Foundation 在内存管理进行了一系列简化，大大降低了与这些 CF api 打交道的复杂程度。
+ 对于 Cocoa 中 Toll-Free Bridging 的处理。
+ NS 开头的类其实在 CF 中都有对应的类型存在，NS 只是对 CF 在更高层的一个封装。
+ 如 NSURL 在 CF 中的 CFURLRef 内存结构是同样的，NSString 对应着 CFStringRef
+ 在 OC 中 ARC 负责的只是 NSObject 的自动引用计数，对 CF 无法进行内存管理，在 NS 和 CF 之间进行转换时，
+ 需要向编译器说明是否需要转移内存的管理权。对于不涉及到内存管理的情况，在 OC 中直接在转换时加上 __bridge 来进行说明
+ 表示内存管理权不变。
+ 
+ NSURL *fileURL = [NSURL URLWithString:@"SomeURL"];
+ SystemSoundID theSoundID;
+ //OSStatus AudioServicesCreateSystemSoundID(CFURLRef inFileURL,
+ //                             SystemSoundID *outSystemSoundID);
+ OSStatus error = AudioServicesCreateSystemSoundID(
+ (__bridge CFURLRef)fileURL,
+ &theSoundID);
+ 
+ 
+ 
+ 而在 Swift 中，这样的转换可以直接省掉了，上面的代码可以写为下面的形式，简单了许多：
+ import AudioToolbox
+ 
+ let fileURL = NSURL(string: "SomeURL")
+ var theSoundID: SystemSoundID = 0
+ 
+ //AudioServicesCreateSystemSoundID(inFileURL: CFURL,
+ //        _ outSystemSoundID: UnsafeMutablePointer<SystemSoundID>) -> OSStatus
+ AudioServicesCreateSystemSoundID(fileURL!, &theSoundID)
+ 
+ CFURLRef 在Swift中是被 typealias 到 CFURL 上的，其他各类 CF 类都进行了类似的处理，主要是为了减少 API 的迷惑。
+ 
+ 
+ OC ARC 不能处理的一个问题是 CF 类型的创建和释放：对于 CF 系的 API，如果 API 的名字中含有 Create，Copy 或者 Retain
+ 在使用完成后需要调用 CFRelease 来进行释放。
+ Swift 中不在需要显示去释放带有这些关键字的内容了。只是在合适的地方加上了像 CF_RETURNS_RETAINED 和 CF_RETURNS_NOT_RETAINED 这样的标注。
+ 对于非系统的 CF API，自己写的或者第三方的，因为没有强制机制要求一定遵照 Cocoa 的命名规范，贸然进行自动内存管理是不可行的
+ 如没有明确使用上面的标注来指明内存管理的方式的话，这些返回 CF 对象的 API 导入 Swift 时，他们得类型会被对应为 “Unmanaged<T>。
+ 
+ 这意味着在使用时我们需要手动进行内存管理，一般来说会使用得到的 Unmanaged 对象的 takeUnretainedValue 或者 takeRetainedValue 从中取出需要的 CF 对象，并同时处理引用计数。
+ takeUnretainedValue 将保持原来的引用计数不变，在你明白你没有义务去释放原来的内存时，应该使用这个方法。
+ 而如果你需要释放得到的 CF 的对象的内存时，应该使用 takeRetainedValue 来让引用计数加一，然后在使用完后对原来的 Unmanaged 进行手动释放。
+ 为了能手动操作 Unmanaged 的引用计数，Unmanaged 中还提供了 retain，release 和 autorelease 供我们使用。
+ 
+ // CFGetSomething() -> Unmanaged<Something>
+ // CFCreateSomething() -> Unmanaged<Something>
+ // 两者都没有进行标注，Create 中进行了创建
+ 
+ let unmanaged = CFGetSomething()
+ let something = unmanaged.takeUnretainedValue()
+ // something 的类型是 Something，直接使用就可以了
+ 
+ let unmanaged = CFCreateSomething()
+ let something = unmanaged.takeRetainedValue()
+ 
+ // 使用 something
+ 
+ //  因为在取值时 retain 了，使用完成后进行 release
+ unmanaged.release()
+ 切记，这些只有在没有标注的极少数情况下才会用到，如果你只是调用系统的 CF API，而不会去写自己的 CF API 的话，是没有必要关心这些的。
+ 
+  */
+
+
+ 
+ 
+
+
+
+// -----------------------------
+
+/*
 //Lock
 /*
  Cocoa 和 OC 中加锁的方式很多，最常用的是 @synchronized
@@ -61,6 +134,8 @@ class Obj {
     }
     
 }
+ 
+ */
 
 // -----------------------------
 
