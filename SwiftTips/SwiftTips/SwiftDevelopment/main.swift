@@ -12,15 +12,65 @@ print("Swift 与开发环境及一些实践")
 
 // -----------------------------
 
-//print 和 debugPring
+//错误和异常处理
+/*
+ exception error
+ OC 中异常往往是程序员的错误导致APP无法继续运行，无法响应某个消息、数组越界等
+ NSError 相对来说代表的错误更多的是指那些“合理的”在用户使用App中可能遇到的情况，密码验证不匹配、读取文件发生问题等。
+ 
+ 作为某个可能产生错误的方法的使用者，我们用传入 NSErrorPointer 指针的方式来存储错误信息，
+ 然后在调用完毕后去读取内容，并确认是否发生了错误。
+ 
+ NSError *error;
+ BOOL success = [data writeToFile: path options: options error: &error];
+ if(error) { // 发生了错误 }
+ 
+ 程序员往往为了省事：
+ [data writeToFile: path options: options error: nil];
+ 
+ 
+ 在 Swift 2.0 ，Apple 为这门语言引入了异常机制。这类带有 NSError 指针作为参数的 API 都被改为了可以抛出异常的形式。
+ 
+ open func write(toFile path: String, options writeOptionsMask: NSData.WritingOptions) throws
+ 我们在使用这个 API 的时候，不再像之前那样传入一个 error 指针去等待方法填充，而是变为使用 try catch 语句：
+ 
+ do {
+ try d.write(toFile: "Hello", options: [])
+ } catch let error as NSError {
+ print ("Error: \(error.domain)")
+ }
+ 
+ 如果你不使用 try 的话，是无法调用 write(toFile:options:) 方法的，它会产生一个编译错误，这让我们无法有意无意地忽视掉这些错误。
+ 在上面的示例中 catch 将抛出的异常 (这里就是个 NSError) 用 let 进行了类型转换，
+ 这其实主要是针对 Cocoa 现有的 API 的，是对历史的一种妥协。
+ 
+ 对于我们新写的可抛出异常的 API，我们应当抛出一个实现了 Err 协议的类型，enum 就非常合适
+ 
+ 
+ 
+ 
+ */
+
+
+// -----------------------------
+
+//print 和 debugPrnt
 /*
  在定义和实现一个类型的时候，Swift常见做法是先定义最简单的类型结构，然后通过扩展Extension的方式来实现
  众多协议和各种各样的功能。有助于提升功能的可扩展行，OC中也有类似的 protocol+category 的形式，Swift更加简单快捷。
  
  在打印普通对象时，print只能打印出它的类型：
  对于 struct 好一些，会列举出它所有成员的名字和值
+ 
+ “CustomDebugStringConvertible 与 CustomStringConvertible 的作用很类似
+ 但是仅发生在调试中使用 debugger 来进行打印的时候的输出。
+ 对于实现了 CustomDebugStringConvertible 协议的类型，
+ 我们可以在给 meeting 赋值后设置断点并在控制台使用类似 po meeting 的命令进行打印，
+ 控制台输出将为 CustomDebugStringConvertible 中定义的 debugDescription 返回的字符串。
+ 
  */
 
+/*
 class MyClass {
     var num: Int
     init() {
@@ -37,8 +87,18 @@ struct Meeting {
     var place: String
     var attendeName: String
 }
-let meeting = Meeting(date: NSDate(timeIntervalSinceNow: 3600), place: "会议室", attendeName: "xian")
+let meeting = Meeting(date: NSDate(timeIntervalSinceNow: 3600), place: "会议室", attendeName: "小明")
+print(meeting) //Meeting(date: 2019-01-29 02:50:20 +0000, place: "会议室", attendeName: "小明")
 
+//“CustomStringConvertible 协议，这个协议定义了将该类型实例输出时所用的字符串”
+
+extension Meeting: CustomStringConvertible {
+    var description: String {
+        return "日期：\(self.date) 地点：\(self.place) 人物：\(self.attendeName)"
+    }
+}
+print(meeting) //日期：2019-01-29 02:53:23 +0000 地点：会议室 人物：小明
+*/
 
 // -----------------------------
 
@@ -56,9 +116,9 @@ let meeting = Meeting(date: NSDate(timeIntervalSinceNow: 3600), place: "会议�
  
  最佳实践当然是为创建一个 Range 的随机数的方法，这样我们就能在之后很容易地复用，甚至设计类似与 Randomable 这样的协议了：
  */
-let diceFaceCount: UInt32 = 6
-let randomRoll = Int(arc4random_uniform(diceFaceCount)) + 1
-print(randomRoll)
+//let diceFaceCount: UInt32 = 6
+//let randomRoll = Int(arc4random_uniform(diceFaceCount)) + 1
+//print(randomRoll)
 
 
 //func random(in range: Range<Int>) -> Int {
