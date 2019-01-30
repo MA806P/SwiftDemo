@@ -52,9 +52,78 @@ print("Swift 与开发环境及一些实践")
  */
 
 
+
+enum LoginError: Error {
+    case UserNotFound, UserPasswordNotMatch
+}
+
+let users = ["aaa":"111"]
+
+
+func login(user: String, password: String) throws {
+    if !users.keys.contains(user) {
+        throw LoginError.UserNotFound
+    }
+    
+    if users[user] != password {
+        throw LoginError.UserPasswordNotMatch
+    }
+    
+    print("Login successfully")
+}
+
+// ErrorType 可以非常明确地指出问题所在，调用时 catch 语句实质上是在进行模式匹配:
+
+do {
+    try login(user: "aaa", password: "111")
+} catch LoginError.UserNotFound {
+    print("UserNotFound")
+} catch LoginError.UserPasswordNotMatch {
+    print("UserPasswordNotMatch")
+}
+
+//相比于 Java C# 的方式（把可能抛出异常的代码放在try里，Swift则是放在do中，并在只可能发生异常的语句前加try）
+//Swift的可以更清楚知道是哪一个调用可能抛出异常，而不必逐句查阅文档。
+//当然并非完美，最大的问题是类型安全，不借助文档 无法从代码中直接得知所抛出的异常的类型。
+//光看方法定义，我们并不知 LoginError 会抛出，理想中的异常 API：“func login(user: String, password: String) throws LoginError
+
+
+/*
+ 对于非同步的 API，抛出异常时不可用的，这类一般涉及到网络或者耗时操作，产生错误的可能性要高很多，开发者无法忽视这样的错误
+ func dataTask(with: completionHandler: (Data?, URLResponse?, Error?) -> Void)
+ 开发中往往不会直接使用，而会选择进行一些封装，以求更方便调用和维护
+ */
+/*
+enum Result {
+    case Success(String)
+    case Error(NSError)
+}
+
+func doSomethingParam(param: String) -> Result {
+    
+    let success = false
+    
+    if success {
+        return Result.Success("成功完成")
+    } else {
+        let error = NSError(domain: "error domain", code: 1, userInfo: nil)
+        return Result.Error(error)
+    }
+}
+
+let result = doSomethingParam(param: "path")
+
+switch result {
+case let .Success(ok):
+    let serverResponse = ok
+case let .Error(error):
+    let serverResponse = error.description
+}
+*/
+
 // -----------------------------
 
-//print 和 debugPrnt
+//print 和 debugPrint
 /*
  在定义和实现一个类型的时候，Swift常见做法是先定义最简单的类型结构，然后通过扩展Extension的方式来实现
  众多协议和各种各样的功能。有助于提升功能的可扩展行，OC中也有类似的 protocol+category 的形式，Swift更加简单快捷。
