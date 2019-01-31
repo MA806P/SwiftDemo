@@ -119,7 +119,87 @@ case let .Success(ok):
 case let .Error(error):
     let serverResponse = error.description
 }
+ 
+ 
+ 可以在 enum 中指定泛型，可使结果统一化：
+ enum Result<T> {
+ case Success(T)
+ case Error(NSError)
+ }
+ “只需要在返回结果时指明 T 的类型，就可以使用同样的 Result 枚举来代表不同的返回结果了。
+ 这么做可以减少代码复杂度和可能的状态，同时不是优雅地解决了类型安全的问题”
+
+ 
+ 
+ 
+ “try 可以接 ! 表示强制执行，这代表你确定知道这次调用不会抛出异常。如果在调用中出现了异常的话，你的程序将会崩溃，
+ 这和我们在对 Optional 值用 ! 进行强制解包时的行为是一致的。
+ 另外，我们也可以在 try 后面加上 ? 来进行尝试性的运行。try? 会返回一个 Optional 值：如果运行成功，没有抛出错误的话，
+ 它会包含这条语句的返回值，否则将为 nil。和其他返回 Optional 的方法类似，
+ 一个典型的 try? 的应用场景是和 if let 这样的语句搭配使用，不过如果你用了 try? 的话，就意味着你无视了错误的具体类型：”
+
+ 
+ 
+ 
 */
+
+
+enum E: Error {
+    case Negative
+}
+
+func methodThrowsWhenPassingNegative(number: Int) throws -> Int {
+    if number < 0 {
+        throw E.Negative
+    }
+    return number
+}
+
+if let num = try? methodThrowsWhenPassingNegative(number: 100) {
+    print(type(of: num))
+} else {
+    print("failed")
+}
+// Int
+
+//在一个可以 throw 的方法里，永远不应该返回一个 Optional 的值。因为结合 try？使用的话，这个 Optional 返回值
+// 将被再次包装一层 Optional 这种值非常容易产生错误 这样：throws -> Int?
+
+/*
+ “rethrows 和 throws 做的事情并没有太多不同，它们都是标记了一个方法应该抛出错误。
+ 但是 rethrows 一般用在参数中含有可以 throws 的方法的高阶函数中，来表示它既可以接受普通函数，
+ 也可以接受一个能 throw 的函数作为参数。也就是像是下面这样的方法，我们可以在外层用 rethrows 进行标注：
+  */
+func methodThrows(num: Int) throws {
+    if num < 0 {
+        print("Throwing!")
+        throw E.Negative
+    }
+    print("Executed!")
+}
+
+func methodRethrows(num: Int, f: (Int) throws -> ()) rethrows {
+    try f(num)
+}
+
+do {
+    try methodRethrows(num: 1, f: methodThrows)
+} catch _ {
+    
+}
+//Executed!
+
+
+/*
+ “我们简单地把 rethrows 改为 throws，这段代码依然能正确运行。
+ 但是 throws 和 rethrows 还是有所区别的。简单理解的话你可以将 rethrows 看做是 throws 的“子类”，rethrows
+ 的方法可以用来重载那些被标为 throws 的方法或者参数，或者用来满足被标为 throws 的协议，但是反过来不行。
+ 如果你拿不准要怎么使用的话，就先记住你在要 throws 另一个 throws 时，应该将前者改为 rethrows
+ 这样在不失灵活性的同时保证了代码的可读性和准确性。
+ 标准库中很常用的 map，reduce 等函数式特点鲜明的函数都采用了 rethrows 的方式来拓展适用范围。”
+ 
+ */
+
 
 // -----------------------------
 
