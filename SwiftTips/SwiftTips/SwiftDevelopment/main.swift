@@ -10,8 +10,69 @@ import Foundation
 
 print("Swift 与开发环境及一些实践")
 
+
+
 // -----------------------------
 
+//断言
+
+/*
+ 断言在 Cocoa 开发里一般用来检查输入参数是否满足一定条件并对其进行论断。
+ 对于判定输入是否满足某种条件，Swift 为我们提供了一系统 assert 方法来使用断言
+ 
+ “func assert(
+ @autoclosure condition: () -> Bool,
+ @autoclosure _ message: () -> String = default,
+ file: StaticString = default,
+ line: UInt = default
+ )”
+ 
+ 
+ “断言的另一个优点是它是一个开发时的特性，只有在 Debug 编译的时候有效，而在运行时是不被编译执行的，
+ 因此断言并不会消耗运行时的性能。这些特点使得断言成为面向程序员的在调试开发阶段非常合适的调试判断，
+ 而在代码发布的时候，我们也不需要刻意去将这些断言手动清理掉”
+ 
+ “虽然默认情况下只在 Release 的情况下断言才会被禁用，但是有时候我们可能出于某些目的希望断言在调试开发时也暂时停止工作，
+ 或者是在发布版本中也继续有效。我们可以通过显式地添加编译标记达到这个目的。
+ 在对应 target 的 Build Settings 中，我们在 Swift Compiler - Custom Flags 中的
+ Other Swift Flags 中添加 -assert-config Debug 来强制启用断言，
+ 或者 -assert-config Release 来强制禁用断言。
+ 当然，除非有充足的理由，否则并不建议做这样的改动。
+ 如果我们需要在 Release 发布时在无法继续时将程序强行终止的话，应该选择使用 fatalError。
+ 
+ 原来在 Objective-C 中使用的断言函数 NSAssert 在 Swift 中已经被彻底移除”
+ 
+ 
+ 
+ */
+
+/*
+var absoluteZeroInCelsius = -273.15
+
+func convertToKelvin(_ celsius: Double) -> Double {
+    assert(celsius > absoluteZeroInCelsius, "输入的摄氏温度不能低于绝对零度")
+    return celsius - absoluteZeroInCelsius
+}
+
+let roomTemperature = convertToKelvin(27)
+// roomTemperature = 300.15
+
+let tooCold = convertToKelvin(-300)
+// 运行时错误:
+// assertion failed:
+// 输入的摄氏温度不能低于绝对零度 : file {YOUR_FILE_PATH}, line {LINE_NUMBER}”
+/*
+ Assertion failed: 输入的摄氏温度不能低于绝对零度: file /Users/MA806P/Desktop/SwiftDemo/SwiftTips/SwiftTips/SwiftDevelopment/main.swift, line 36
+ 2019-02-14 12:02:30.701054+0800 SwiftDevelopment[11809:684376] Assertion failed: 输入的摄氏温度不能低于绝对零度: file /Users/MA806P/Desktop/SwiftDemo/SwiftTips/SwiftTips/SwiftDevelopment/main.swift, line 36
+ */
+
+*/
+
+
+// -----------------------------
+
+/*
+ 
 //错误和异常处理
 /*
  exception error
@@ -199,6 +260,9 @@ do {
  标准库中很常用的 map，reduce 等函数式特点鲜明的函数都采用了 rethrows 的方式来拓展适用范围。”
  
  */
+
+*/
+
 
 
 // -----------------------------
