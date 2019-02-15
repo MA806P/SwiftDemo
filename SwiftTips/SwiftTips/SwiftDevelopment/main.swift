@@ -11,6 +11,87 @@ import Foundation
 print("Swift 与开发环境及一些实践")
 
 
+// -----------------------------
+
+//fatalError
+/*
+ 断言只会在 Debug 环境中有效，在 Release 编译中所有的断言都将被禁用
+ 在遇到确实因为输入的错误无法使用程序继续运行的时候，一般考虑以产生致命错误 fatalError 的方式来终止程序
+ 
+ @noreturn func fatalError(
+ @autoclosure message: () -> String = default,
+ file: StaticString = default,
+ line: UInt = default
+ )
+ @noreturn，这表示调用这个方法的话可以不再需要返回值，因为程序整个都将终止。这可以帮助编译器进行一些检查
+ 
+ 
+ 
+ 
+ */
+
+//let array = [1,2,3]
+//array[4] //Fatal error: Index out of range
+
+
+enum MyEnum {
+    
+    case Value1,Value2,Value3
+}
+
+func check(someValue: MyEnum) -> String {
+    switch someValue {
+    case .Value1:
+        return "OK"
+    case .Value2:
+        return "NOT OK"
+    default:
+        //没有返回 string 也能编译通过
+        fatalError("Should not show!")
+    }
+}
+
+var checkString = check(someValue: MyEnum.Value2) //Fatal error: Should not show!
+print(checkString)
+
+
+
+//“父类定义了某个方法，但是自己并不给出具体实现，而是要求继承它的子类去实现这个方法”
+
+class MyClass {
+    func methodMustBeImplementedInSubclass() {
+        fatalError("这个方法必须在子类中被重写")
+    }
+}
+
+class YourClass: MyClass {
+    override func methodMustBeImplementedInSubclass() {
+        print("子类中实现了父类中的方法")
+    }
+}
+
+class OtherClass: MyClass {
+    func someMethod() {
+        print("someMethod")
+    }
+}
+
+
+YourClass().methodMustBeImplementedInSubclass()
+
+//OtherClass().methodMustBeImplementedInSubclass() //Fatal error: 这个方法必须在子类中被重写
+//通过协议，可将需要实现的方法定义在协议中，遵守这个协议的类型必须实现这个方法
+
+/*
+ 对于其他一切我们不希望别人随意调用，但是又不得不去实现的方法，我们都应该使用 fatalError 来避免任何可能的误会。
+ 比如父类标明了某个 init 方法是 required 的，但是你的子类永远不会使用这个方法来初始化时，就可以采用类似的方式，
+ 被广泛使用 (以及被广泛讨厌的) init(coder: NSCoder) 就是一个例子。在子类中，我们往往会写：
+ required init(coder: NSCoder) {
+ fatalError("NSCoding not supported")
+ }
+ 来避免编译错误。
+ 
+ */
 
 // -----------------------------
 
