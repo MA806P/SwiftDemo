@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DA35E5C52217FB08007E8870 /* HelloTest.h in Headers */ = {isa = PBXBuildFile; fileRef = DA35E5C32217FB08007E8870 /* HelloTest.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DA35E5CA2217FB15007E8870 /* Hello.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA35E5C92217FB15007E8870 /* Hello.swift */; };
 		DA4407C521BF6A3500B4DF52 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4407C421BF6A3500B4DF52 /* main.m */; };
 		DA4407CB21BF6AC600B4DF52 /* MySwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4407CA21BF6AC600B4DF52 /* MySwift.swift */; };
 		DA4407D321BF6B0000B4DF52 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4407D221BF6B0000B4DF52 /* main.swift */; };
@@ -27,6 +29,16 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		DA35E5A52217F65D007E8870 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		DA4407C021BF6A3500B4DF52 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -75,6 +87,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		DA35E5C12217FB08007E8870 /* HelloTest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = HelloTest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA35E5C32217FB08007E8870 /* HelloTest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HelloTest.h; sourceTree = "<group>"; };
+		DA35E5C42217FB08007E8870 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DA35E5C92217FB15007E8870 /* Hello.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hello.swift; sourceTree = "<group>"; };
 		DA4407C221BF6A3500B4DF52 /* OCTOSwiftExample */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = OCTOSwiftExample; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA4407C421BF6A3500B4DF52 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		DA4407C921BF6AC600B4DF52 /* OCTOSwiftExample-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OCTOSwiftExample-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -106,6 +122,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		DA35E5BD2217FB08007E8870 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		DA4407BF21BF6A3500B4DF52 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -151,6 +174,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DA35E5C22217FB08007E8870 /* HelloTest */ = {
+			isa = PBXGroup;
+			children = (
+				DA35E5C32217FB08007E8870 /* HelloTest.h */,
+				DA35E5C42217FB08007E8870 /* Info.plist */,
+				DA35E5C92217FB15007E8870 /* Hello.swift */,
+			);
+			path = HelloTest;
+			sourceTree = "<group>";
+		};
 		DA4407C321BF6A3500B4DF52 /* OCTOSwiftExample */ = {
 			isa = PBXGroup;
 			children = (
@@ -183,6 +216,7 @@
 				DA4407C321BF6A3500B4DF52 /* OCTOSwiftExample */,
 				DA4407D121BF6B0000B4DF52 /* SwiftToOCExample */,
 				DAAAC1B321CDE76E0019E0B1 /* SwiftAppTest */,
+				DA35E5C22217FB08007E8870 /* HelloTest */,
 				DA4C5E2A215DB66100EDACE7 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -196,6 +230,7 @@
 				DA4407D021BF6B0000B4DF52 /* SwiftToOCExample */,
 				DAAAC1B221CDE76E0019E0B1 /* SwiftAppTest.app */,
 				DAD1046B21FC3E9A002C80AB /* SwiftDevelopment */,
+				DA35E5C12217FB08007E8870 /* HelloTest.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -243,7 +278,36 @@
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		DA35E5BE2217FB08007E8870 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DA35E5C52217FB08007E8870 /* HelloTest.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
+		DA35E5C02217FB08007E8870 /* HelloTest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DA35E5C62217FB08007E8870 /* Build configuration list for PBXNativeTarget "HelloTest" */;
+			buildPhases = (
+				DA35E5BC2217FB08007E8870 /* Sources */,
+				DA35E5BD2217FB08007E8870 /* Frameworks */,
+				DA35E5BE2217FB08007E8870 /* Headers */,
+				DA35E5BF2217FB08007E8870 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = HelloTest;
+			productName = HelloTest;
+			productReference = DA35E5C12217FB08007E8870 /* HelloTest.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 		DA4407C121BF6A3500B4DF52 /* OCTOSwiftExample */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = DA4407C821BF6A3500B4DF52 /* Build configuration list for PBXNativeTarget "OCTOSwiftExample" */;
@@ -302,6 +366,7 @@
 				DAAAC1AE21CDE76E0019E0B1 /* Sources */,
 				DAAAC1AF21CDE76E0019E0B1 /* Frameworks */,
 				DAAAC1B021CDE76E0019E0B1 /* Resources */,
+				DA35E5A52217F65D007E8870 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -356,6 +421,10 @@
 				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = myz;
 				TargetAttributes = {
+					DA35E5C02217FB08007E8870 = {
+						CreatedOnToolsVersion = 9.3;
+						LastSwiftMigration = 0930;
+					};
 					DA4407C121BF6A3500B4DF52 = {
 						CreatedOnToolsVersion = 9.3;
 						LastSwiftMigration = 0930;
@@ -397,11 +466,19 @@
 				DA4407CF21BF6B0000B4DF52 /* SwiftToOCExample */,
 				DAAAC1B121CDE76E0019E0B1 /* SwiftAppTest */,
 				DAD1046A21FC3E9A002C80AB /* SwiftDevelopment */,
+				DA35E5C02217FB08007E8870 /* HelloTest */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		DA35E5BF2217FB08007E8870 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		DAAAC1B021CDE76E0019E0B1 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -415,6 +492,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		DA35E5BC2217FB08007E8870 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DA35E5CA2217FB15007E8870 /* Hello.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		DA4407BE21BF6A3500B4DF52 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -493,6 +578,69 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		DA35E5C72217FB08007E8870 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = DR2Q2U5BQX;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = HelloTest/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				PRODUCT_BUNDLE_IDENTIFIER = com.myz.HelloTest;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		DA35E5C82217FB08007E8870 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = DR2Q2U5BQX;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = HelloTest/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				PRODUCT_BUNDLE_IDENTIFIER = com.myz.HelloTest;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 		DA4407C621BF6A3500B4DF52 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -701,6 +849,7 @@
 		DAAAC1C221CDE76F0019E0B1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
@@ -721,6 +870,7 @@
 		DAAAC1C321CDE76F0019E0B1 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
@@ -742,7 +892,12 @@
 		DAD1046F21FC3E9A002C80AB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CODE_SIGN_STYLE = Automatic;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/SwiftDevelopment",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -752,7 +907,12 @@
 		DAD1047021FC3E9A002C80AB /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CODE_SIGN_STYLE = Automatic;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/SwiftDevelopment",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -782,6 +942,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		DA35E5C62217FB08007E8870 /* Build configuration list for PBXNativeTarget "HelloTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DA35E5C72217FB08007E8870 /* Debug */,
+				DA35E5C82217FB08007E8870 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		DA4407C821BF6A3500B4DF52 /* Build configuration list for PBXNativeTarget "OCTOSwiftExample" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
