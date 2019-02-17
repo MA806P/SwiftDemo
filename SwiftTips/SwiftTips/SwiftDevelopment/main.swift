@@ -8,9 +8,36 @@
 
 import Foundation
 
+
 //import HelloTest
 
 print("Swift 与开发环境及一些实践")
+
+
+// -----------------------------
+
+//安全的资源组织方式
+/*
+ 很多使用字符串来指定某个资源的用法，例通过项目中图片名字来生成 UIImage 对象：
+ let image = UIImage(name: "my_image")
+ 
+ 这种方法存在隐患，如果资源名称发生改变，必须在代码中作出相应的改变
+ 在 OC 时代，我们一般通过宏定义来缓解在这个问题，通过将资源名字设置为宏定义，就可以在相对集中的地方来管理和修改。
+ 但这样并没有从本质上解决资源名字改变给我们带来的困扰。在 Swift 中没有宏定义，取而代之，可以灵活使用 rawValue
+ 为 String 的 enum 类型。通过为资源类型添加合适的 Extension 来让编译器帮助我们在资源名称修改时能在代码中做对应的改变
+ 
+ 
+ enum ImageName: String { case myImage = "my_image" }
+ extension UIImage {
+    convenience init!(imageName: ImageName) { self.init(named: imageName.rawValue) }
+ }
+ 使用时就可以直接用 extension 中的类型安全版本：
+ let image = UIImage(imageName: .myImage)
+ 
+ */
+
+
+
 
 
 // -----------------------------
@@ -33,9 +60,6 @@ print("Swift 与开发环境及一些实践")
  
  虽然和 Apple 的框架的后缀名一样是 .framework，使用方式也类似，
  但是这些第三方框架都是实实在在的静态库，每个 app 需要在编译的时候进行独立地链接。
- 
- 
- 
  
  
  */
