@@ -16,6 +16,29 @@ print("Swift 与开发环境及一些实践")
 
 // -----------------------------
 
+//Playground 延时运行
+/*
+ Playground 提供了一个顺序执行的环境，每次更改其中代码后整个文件会被重新编译，并清空原来的状态并运行。
+ 
+ class MyClass { @objc func callMe() {print("Hi")} }
+ let object = MyClass()
+ Timer.scheduledTimer(timeInterval: 1, target: object, selector: #selector(MyClass.callMe), userInfo: nil, repeats: true)
+ 
+ 执行完 Timer 语句之后，整个 Playground 将停止掉，Hi 永远不会被打印出来
+ 
+ 为了使 Playground 有延时运行功能，引入扩展包 PlaygroundSupport 框架
+ import PlaygroundSupport
+ PlaygroundPage.current.needsIndefiniteExecution = true
+ 
+ 延时运行是有限度的，计数会停在30次，默认会在顶层代码最后一句运行后30秒的时候停止执行
+ 要想改变 Alt+cmd+回车，打开辅助编辑器 设定
+ 
+ 
+ */
+
+
+// -----------------------------
+
 //安全的资源组织方式
 /*
  很多使用字符串来指定某个资源的用法，例通过项目中图片名字来生成 UIImage 对象：
