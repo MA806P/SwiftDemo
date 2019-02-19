@@ -36,6 +36,28 @@ print("Swift 与开发环境及一些实践")
  
  */
 
+// Playground 与项目协作
+//“Playground 其实是可以用在项目里的，通过配置，我们是可以做到让 Playground 使用项目中已有的代码的。”
+
+
+// Playground 可视化开发
+/*
+ Playground 是支持直接运行 UI 代码并在集成环境中显示 UI，并允许用户进行交互的。
+ 将想要显示的 UIView 子类赋值给当前 PlaygroundPage 的 liveView 属性，
+ 并且打开 Assistant Editor (option + Shift + Command + Return)，就能看到我们创建的视图了
+ 
+ import UIKit
+ import PlaygroundSupport
+ PlaygroundPage.current.liveView = label
+ 
+ liveView，它其实接受的是任意满足 PlaygroundLiveViewable 协议的属性。
+ 而 PlaygroundLiveViewable 本身需要返回一个 PlaygroundLiveViewRepresentation。
+ 在 PlaygroundSupport 中，UIView 和 UIViewController 都实现了这个协议。
+ 我们不仅能够在 Playground 中显示一个单独的 view，也能够将一个 View Controller 实例赋值给 liveView，并与其进行交互
+ 
+ 
+ */
+
 
 // -----------------------------
 
