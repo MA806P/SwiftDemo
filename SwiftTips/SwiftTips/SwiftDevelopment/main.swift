@@ -16,6 +16,27 @@ print("Swift 与开发环境及一些实践")
 
 // -----------------------------
 
+//数学和数字
+/*
+ Drawin 里的 math.h 定义了很多和数学相关的内容。在 Swift 中也被进行了 module 映射，因此在 Swift 中可以直接使用。
+ 
+ 除了导入了 math.h 的内容外，Swift 也在标准库中对极限情况的数字做了约定：
+ Int.max  Int.min 取对应平台的 Int 的最大最小值
+ Double.infinity 代表无穷，类似 1.0、0.0 代表数学意义上的无限大
+ Double.nan - Not a Number 用来表示某些未被定义的或者出现了错误的运算
+ */
+
+func circlePerimeter(radius: Double) -> Double {
+    return 2 * Double.pi * radius
+}
+
+func yPosition(dy: Double, angle: Double) -> Double {
+    return dy * tan(angle)
+}
+
+
+// -----------------------------
+
 //Playground 延时运行
 /*
  Playground 提供了一个顺序执行的环境，每次更改其中代码后整个文件会被重新编译，并清空原来的状态并运行。
