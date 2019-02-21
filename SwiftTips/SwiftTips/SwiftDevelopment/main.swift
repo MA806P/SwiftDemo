@@ -14,8 +14,127 @@ import Foundation
 print("Swift 与开发环境及一些实践")
 
 
+
 // -----------------------------
 
+// JSON 和 Codable
+
+
+/*
+ // jsonString
+ {"menu": {
+    "id": "file",
+    "value": "File",
+    "popup": {
+        "menuitem": [
+            {"value": "New", "onclick": "CreateNewDoc()"},
+            {"value": "Open", "onclick": "OpenDoc()"},
+            {"value": "Close", "onclick": "CloseDoc()"}
+        ]
+    }
+ }
+ }
+ 
+ 
+ */
+
+ let jsonString = "{\"menu\": {\"id\": \"file\",\"value\": \"File\",\"popup\": {\"menuitem\": [ {\"value\": \"New\", \"onclick\":\"CreateNewDoc()\"},{\"value\":\"Open\", \"onclick\": \"OpenDoc()\"},{\"value\": \"Close\", \"onclick\": \"CloseDoc()\"}]}}}"
+
+let json: Any = try! JSONSerialization.jsonObject(with: jsonString.data(using: .utf8, allowLossyConversion: true)!, options: [])
+
+// 在 Swift 4 之前处理json很麻烦，因为 Swift 对于类型的要求非常严格
+if let jsonDic = json as? NSDictionary {
+    if let menu = jsonDic["menu"] as? [String: Any] {
+        if let popup: Any = menu["popup"] {
+            if let popupDic = popup as? [String: Any] {
+                if let menuitems = popupDic["menuitem"] {
+                    if let menuitemArr = menuitems as? [Any] {
+                        print(menuitemArr.count)
+                        //...
+                    }
+                }
+            }
+        }
+    }
+}
+
+/*
+ Swift 4 中新加入了 Codable 协议，用来处理数据的序列化和反序列化
+ 利用内置的 JSONEncoder 和 JSONDecoder，在对象实例和 JSON 表现之间进行转换变得非常简单
+ 
+ 只要一个类型中所有的成员都实现了 Codable ，那么这个类型也就可以自动满足 Codable 的要求。
+ Swift 标准库中 String Int Double Date URL 这样的类型是默认就实现了 Codable，可以基于这些常见类型来构建更复杂的 Codable 类型
+ 
+ 如果 JSON 中的 key 和类型中的变量名不一致的话，还需要在对应类中声明 CodingKeys 枚举，并用合适的键值覆盖对应的默认值
+ 下面例子中 menuitem onclick 就是这种情况
+*/
+
+//处理上面的 JSON 创建一系列对应类型，并声明他们实现 Codable
+struct Obj: Codable {
+    let menu: Menu
+    struct Menu: Codable {
+        let id: String
+        let value: String
+        let popup: Popup
+    }
+}
+
+struct Popup: Codable {
+    let menuItem: [MenuItem]
+    enum CodingKeys: String, CodingKey {
+        case menuItem = "menuitem"
+    }
+}
+
+struct MenuItem: Codable {
+    let value: String
+    let onClick: String
+    
+    enum CodingKeys: String, CodingKey {
+        case value
+        case onClick = "onclick"
+    }
+}
+
+let data = jsonString.data(using: .utf8)!
+do {
+    let obj = try JSONDecoder().decode(Obj.self, from: data)
+    let value = obj.menu.popup.menuItem[0].value
+    print("成功: value = \(value)")
+} catch {
+    print("出错啦：\(error)")
+}
+
+
+//NSNull
+/*
+ OC 中 NSDictionary NSArray 只能储存对象，对于像 JSON 中可能存在的 null 值，就只能用 NSNull 对象来表示
+ 在处理 JSON 时，NSNull 无法使用像 nil 那样对所有方法都相应的特性。
+ 因为 Objective-C 是没有强制的类型检查的，我们可以任意向一个对象发送任何消息，
+ 这就导致如果 JSON 对象中存在 null 时的话，对其映射为的 NSNull 直接发送消息时，app 将发生崩溃。
+ 
+ 在 OC 中，我们一般通过严密的判断来解决这个问题：
+ 1、在每次发送消息的时候都进行类型检查，以确保将要接收消息的对象不是 NSNull 的对象。
+ 2、另一种方法是添加 NSNull 的 category 让它响应各种常见的方法 如[obj integerValue] 并返回默认值
+ 前一种过于麻烦，后一种难免有疏漏。
+ 
+ 在 Swift 中这个问题被语言的特性彻底解决了，因为 Swift 所有强调的就是类型安全，无论怎么说都需要一层转换
+ 除非我们故意不去将 AnyObject 转换为我们需要的类型，否则我们绝对不会错误的向一个 NSNull 发送消息
+ NSNull 会默默地被通过 Optional Binding 被转换为 nil，从而避免被执行：
+ */
+
+let jsonValue: AnyObject = NSNull() //假设 jsonValue 是从一个 JSON 中取出的 NSNull
+if let str = jsonValue as? String {
+    print(str.hasPrefix("a"))
+} else {
+    print("不能解析")
+}
+
+
+
+// -----------------------------
+
+/*
 //数学和数字
 /*
  Drawin 里的 math.h 定义了很多和数学相关的内容。在 Swift 中也被进行了 module 映射，因此在 Swift 中可以直接使用。
@@ -33,7 +152,7 @@ func circlePerimeter(radius: Double) -> Double {
 func yPosition(dy: Double, angle: Double) -> Double {
     return dy * tan(angle)
 }
-
+*/
 
 // -----------------------------
 
