@@ -13,12 +13,61 @@ import Foundation
 
 print("Swift 与开发环境及一些实践")
 
+// -----------------------------
+
+//性能考虑
+/*
+ “相比于 Objective-C，Swift 最大的改变就在于方法调用上的优化。在 Objective-C 中，
+ 所有的对于 NSObject 的方法调用在编译时会被转为 objc_msgSend 方法。
+ 这个方法运用 Objective-C 的运行时特性，使用派发的方式在运行时对方法进行查找。
+ 因为 Objective-C 的类型并不是编译时确定的，我们在代码中所写的类型不过只是向编译器的一种“建议”，不论对于怎样的方法，这种查找的代价基本都是同样的。”
+ 
+ “Objective-C 运行时十分高效，相比于 I/O 这样的操作来说，单次的方法派发和查找并不会花费太多的时间，
+ 但实事求是地说，这确实也是 Objective-C 性能上可以改进的地方，这种改善在短时间内大量方法调用时会比较明显。”
+ 
+ 
+ “Swift 因为使用了更安全和严格的类型，如果我们在编写代码中指明了某个实际的类型的话 (注意，需要的是实际具体的类型，而不是像 Any 这样的抽象的协议)，
+ 我们就可以向编译器保证在运行时该对象一定属于被声明的类型。这对编译器进行代码优化来说是非常有帮助的，
+ 因为有了更多更明确的类型信息，编译器就可以在类型中处理多态时建立虚函数表 (vtable)，这是一个带有索引的保存了方法所在位置的数组。
+ 在方法调用时，与原来动态派发和查找方法不同，现在只需要通过索引就可以直接拿到方法并进行调用了，这是实实在在的性能提升。”
+ 
+ 
+ “如果遇到性能敏感和关键的代码部分，我们最好避免使用 Objective-C 和 NSObject 的子类。
+ 在以前我们可能会选择使用混编一些 C 或者 C++ 代码来处理这些关键部分，而现在我们多了 Swift 这个选项。
+ 相比起 C 或者 C++，Swift 的语言特性上要先进得多，而使用 Swift 类型和标准库进行编码和构建的难度，比起使用 C 或 C++ 来要简单太多。
+ 另外，即使不是性能关键部分，我们也应该尽量考虑在没有必要时减少使用 NSObject 和它的子类。
+ 如果没有动态特性的需求的话，保持在 Swift 基本类型中会让我们得到更多的性能提升。”
+ 
+ 
+ 
+ */
+
+
+//文档注释
+
+/**
+ A demo method
+ - parameter input: An Int number
+ - returns: The string represents the input number
+ */
+func method(input: Int) -> String {
+    return String(input)
+}
+/*
+ 使用 option + 单击 可以看到 Xcode 格式化后的 Quick Help 对话框
+ https://developer.apple.com/library/archive/documentation/Xcode/Reference/xcode_markup_formatting_ref/index.html#//apple_ref/doc/uid/TP40016497
+ 手写 -parameter 或者 -returns 这样的东西是非常浪费时间的，
+ Xcode 8 中自带了注释文档生成的工具，你可以在想要添加注释的方法或者属性上方使用快捷键 (默认是 Alt + Cmd + /)，
+ 它就能够帮助你快速并且自动地生成符合格式的文档注释模板
+ 
+*/
 
 
 // -----------------------------
 
 // JSON 和 Codable
 
+/*
 
 /*
  // jsonString
@@ -129,7 +178,7 @@ if let str = jsonValue as? String {
 } else {
     print("不能解析")
 }
-
+*/
 
 
 // -----------------------------
