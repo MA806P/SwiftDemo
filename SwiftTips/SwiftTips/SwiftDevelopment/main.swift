@@ -15,6 +15,114 @@ print("Swift 与开发环境及一些实践")
 
 // -----------------------------
 
+
+//宏定义 define
+/*
+ 宏定义合理利用可以写出简洁漂亮的代码，但同时，也无法受益于 IDE 工具，难以重构和维护，可能隐藏很多 bug
+ 
+ Swift 中没有宏定义了，Apple给了我们一些替代的建议：
+ > 使用合适作用范围的 let 或者 get 属性来替代 var M_PI: Double { get }
+ > 对宏定义的方法，类似的在同样作用域写为 Swift 方法
+ 
+ // objc
+ #define NSLocalizedString(key, comment) \
+ [[NSBundle mainBundle] localizedStringForKey:(key) value:@"" table:nil]
+ 
+ // Swift
+ func NSLocalizedString( _ key: String, tableName: String? = default, bundle: NSBundle = default,
+                         value: String = default, comment: String) -> String
+ 
+ 
+ > 随着 #define 的消失，像 #ifdef 这样通过宏定义是否存在来进行条件判断并解决某些代码是否参与编译的方式也消失了
+ 但是我们仍然可以使用 #if 并配合编译的配置来完成条件编译
+ 
+ define 在编译时实际做的事类似查找替换，比如只替换掉某部分内容。
+ 
+ 
+ */
+
+
+//溢出
+/*
+ iOS 中如果同时面临 32位和64位的设备进行开发的局面，这个条件所导致的最直接的一个结果就是数字类型的区别
+ Swift 中一般简单的使用 Int 表示整数，在 iPhone5和以下的设备，这个类型其实等同于 Int32，
+ 而在 64为设备中表示的是 Int64
+ */
+
+class MyClass {
+    var a: Int = 1
+    func method() {
+        a = a * 100000
+        a = a * 100000
+        a = a * 100000
+        print(a)
+    }
+}
+
+MyClass().method()
+
+// 64 位环境 (iPhone 5s 及以上)
+// 1,000,000,000,000,000
+
+// 32 位环境 (iPhone 5c 及以下)
+// 崩溃。32位的Int最大值 2,147,483,647
+
+/*
+ 和其他一些编程语言的处理不同的是，Swift在溢出的时候选择了让程序直接崩溃而不是截掉超出的部分，这也是一种安全性的表现
+ 编译器其实已经足够智能，可以帮助我们在编译的时候发现某些必然的错误
+func intOutTest() {
+    var max = Int.max
+    max = max + 1
+    //无法编译通过：Arithmetic operation '9223372036854775807 + 1' (on type 'Int') results in an overflow
+}
+ 
+ 在存在溢出可能性的地方，使用更大空间的类型来表示，将 Int32 显式的声明为 Int64，如无法满足需求可考虑使用两个 Int64 来实现 Int128
+ 如要实现溢出截断不是崩溃，Swift中可以使用 带有 & 的操作符，Swift就会忽略溢出的错误：
+ 
+ 溢出加法 (&+)
+ 溢出减法 (&-)
+ 溢出乘法 (&*)
+ 溢出除法 (&/)
+ 溢出求模 (&%)
+ 
+*/
+
+func intOutTest() {
+    var max = Int.max
+    max = max &+ 1
+    print(max)
+}
+intOutTest()
+//64位系统下： -9223372036854775808
+
+
+// Log 输出
+/*
+ Swift 中输出方法 print ，开发中我们往往需要更好更精确的输出，包括输出这个log文件，调用的行号，所处的方法名字等。
+ 编译器提供了几个很有用的编译符号，用来处理类似这样的需求，
+ #file 包含这个符号的文件的路径。 #line 符号出现处的行号， #column 符号出现处的列，#function 包含这个符号的方法名字
+ 
+ 过多的输出可能对运行的性能造成影响。在 Release 版本中关闭掉向控制台的输出也是开发中常见的做法。
+ 
+ */
+
+func printLog<T>(_ message: T,
+                    file: String = #file,
+                    method: String = #function,
+                    line: Int = #line)
+{
+    #if DEBUG //新版本的LLVM编译器在遇到这个空方法时，甚至会直接将这个方法整个去掉，完全不去调用，从而实现零成本
+    print("\((file as NSString).lastPathComponent)[\(line)], \(method): \(message)")
+    #endif
+}
+
+
+func method() {
+    printLog("log out")
+}
+
+method() //main.swift[39], method(): log out
+
 //性能考虑
 /*
  “相比于 Objective-C，Swift 最大的改变就在于方法调用上的优化。在 Objective-C 中，
@@ -44,7 +152,7 @@ print("Swift 与开发环境及一些实践")
 
 
 //文档注释
-
+/*
 /**
  A demo method
  - parameter input: An Int number
@@ -53,7 +161,7 @@ print("Swift 与开发环境及一些实践")
 func method(input: Int) -> String {
     return String(input)
 }
-/*
+
  使用 option + 单击 可以看到 Xcode 格式化后的 Quick Help 对话框
  https://developer.apple.com/library/archive/documentation/Xcode/Reference/xcode_markup_formatting_ref/index.html#//apple_ref/doc/uid/TP40016497
  手写 -parameter 或者 -returns 这样的东西是非常浪费时间的，
