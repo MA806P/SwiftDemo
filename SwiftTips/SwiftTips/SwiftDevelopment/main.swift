@@ -13,6 +13,62 @@ import Foundation
 
 print("Swift 与开发环境及一些实践")
 
+
+// -----------------------------
+
+//属性访问控制
+/*
+ Swift 中有低至高提供了 private fileprivate internal public open 五种访问控制的权限
+ 默认的 internal 在绝大部分时候是适用的
+ private 让代码只能在当前作用域或者同一文件中同一类型的作用域中被使用
+ fileprivate 表示代码可以在当前文件中被访问，而不做类型限定
+ 
+ 对于一个严格的项目来说，精确的最小化访问控制级别对于代码的维护来说还是相当重要的
+ 如想让同一 module或者是target 中的其他代码访问的话，保持默认的internal就可以了
+ 如在为其他开发者开发库的话，可能希望用一些 public 甚至 open，target之外只能调用到 public 和 open的代码
+ 区别在于，只有被open标记的内容才能在别的框架中被继承或者重写。如只希望使用某个类型和方法，而不希望继承或者重写的话，应将其限定为 public
+ */
+
+class Foo {
+    private var privateInt = 3
+    fileprivate var filePrivateInt = 4
+}
+
+class Baz {
+    func baz() {
+        print(Foo().filePrivateInt)
+    }
+}
+
+extension Foo {
+    func fooExtension() {
+        print(privateInt)
+    }
+}
+//上面的例子在同一个文件中是合法的，但如果将 Baz 和 extension Foo 的部分移动到别的文件中的话就无法编译了
+
+
+class MyClass {
+    var name: String?
+    private var name1: String?
+    private(set) var name2: String?
+}
+/*
+ 对于属性来说，访问控制还多了一层需要注意的地方。
+ 没有任何的修饰，可以在同一 module 中随意地读取或者设置这个变量
+ 对于那些只希望在当前文件中使用的属性来说，可以在声明前面加上 private 使其变为私有：private var name: String?
+ 对于那些我们只希望在类型之外也能够读取到这个类型，同时为了保证类型的封装和安全，只能在内部对其进行改变和设置：
+ private(set) var name: String? 因为 set 被限制为了 private 就可以保证 name 只会在当前作用域被更改
+ 这种写法没有对读取做限制，相当于使用了默认的 internal 权限
+ */
+public class MyClass1 {
+    public private(set) var name3: String?
+    //如希望在别的 module 中也能访问这个属性，同时又保持只在当前作用域可以设置
+    //需要将 get 的访问权限提高为 public ，属性的访问控制可以通过两次的访问权限指定来实现
+    //MyClass1 前面也添加的 public，这是编译器所要求的。因为如果只为 name 的 get 添加 public 而不管 MyClass 的话，
+    //module 外就连 MyClass 都访问不到了，属性的访问控制级别也就没有任何意义了。
+}
+
 // -----------------------------
 
 
@@ -49,17 +105,17 @@ print("Swift 与开发环境及一些实践")
  而在 64为设备中表示的是 Int64
  */
 
-class MyClass {
-    var a: Int = 1
-    func method() {
-        a = a * 100000
-        a = a * 100000
-        a = a * 100000
-        print(a)
-    }
-}
-
-MyClass().method()
+//class MyClass {
+//    var a: Int = 1
+//    func method() {
+//        a = a * 100000
+//        a = a * 100000
+//        a = a * 100000
+//        print(a)
+//    }
+//}
+//
+//MyClass().method()
 
 // 64 位环境 (iPhone 5s 及以上)
 // 1,000,000,000,000,000
@@ -87,13 +143,13 @@ func intOutTest() {
  
 */
 
-func intOutTest() {
-    var max = Int.max
-    max = max &+ 1
-    print(max)
-}
-intOutTest()
-//64位系统下： -9223372036854775808
+//func intOutTest() {
+//    var max = Int.max
+//    max = max &+ 1
+//    print(max)
+//}
+//intOutTest()
+////64位系统下： -9223372036854775808
 
 
 // Log 输出
@@ -106,22 +162,22 @@ intOutTest()
  
  */
 
-func printLog<T>(_ message: T,
-                    file: String = #file,
-                    method: String = #function,
-                    line: Int = #line)
-{
-    #if DEBUG //新版本的LLVM编译器在遇到这个空方法时，甚至会直接将这个方法整个去掉，完全不去调用，从而实现零成本
-    print("\((file as NSString).lastPathComponent)[\(line)], \(method): \(message)")
-    #endif
-}
-
-
-func method() {
-    printLog("log out")
-}
-
-method() //main.swift[39], method(): log out
+//func printLog<T>(_ message: T,
+//                    file: String = #file,
+//                    method: String = #function,
+//                    line: Int = #line)
+//{
+//    #if DEBUG //新版本的LLVM编译器在遇到这个空方法时，甚至会直接将这个方法整个去掉，完全不去调用，从而实现零成本
+//    print("\((file as NSString).lastPathComponent)[\(line)], \(method): \(message)")
+//    #endif
+//}
+//
+//
+//func method() {
+//    printLog("log out")
+//}
+//
+//method() //main.swift[39], method(): log out
 
 //性能考虑
 /*
