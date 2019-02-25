@@ -16,6 +16,77 @@ print("Swift 与开发环境及一些实践")
 
 // -----------------------------
 
+// Core Data
+/*
+ 大多数第一次接触到 OC 的 @dynamic 都是在和 Core Data 打交道的时候。
+ OC 中如果将某个属性实现为 @dynamic 就意味着告诉编译器我们不会在编译时就确定这个属性的实现，因此不需要在编译期间对这个属性的 getter setter 做检查
+ 这是我们向编译器做出的承诺，表示我们将来在运行时来提供这个属性的存取方法
+ 
+ OC 中的 @dynamic 和 Swift 中的 dynamic 关键字完全是两回事
+ 所有的 Core Data Model 类都是 NSManagedObject 的子类，利用我们定义的 Core Data 数据图和关系在运行时动态生成合适的 getter setter 方法
+ 我们只需要使用 Xcode的工具自动生成 NSManagedObject 的子类并使用就行了：
+ 
+ // MyModel.h
+ @interface MyModel : NSManagedObject
+ @property (nonatomic, copy) NSString * title;
+ @end
+ 
+ // MyModel.m
+ #import "MyModel.h"
+ @implementation MyModel
+ @dynamic title;
+ @end
+ 很遗憾，Swift 里是没有 @dynamic 关键字的，因为 Swift 并不保证一切都走动态派发，因此从语言层面上提供这种动态转发的语法也并没有太大意义。
+ 在 Swift 中严格来说是没有原来的 @dynamic 的完整的替代品的，但是如果我们将范围限定在 Core Data 的话就有所不同。
+ 
+ Core Data 是 Cocoa 的一个重要组成部分，也是非常依赖 @dynamic 特性的部分。
+ Apple 在 Swift 中专门为 Core Data 加入了一个特殊的标注来处理动态代码，那就是 @NSManaged。
+ 我们只需要在 NSManagedObject 的子类的成员的字段上加上 @NSManaged
+ class MyModel: NSManagedObject { @NSManaged var title: String }
+ “编译器便不再会纠结于没有初始化方法实现 title 的初始化，而在运行时对于 MyModel 的读写也都将能利用数据图完成恰当的操作了。
+ 另外，在通过数据模型图创建 Entity 时要特别注意在 Class 中指定类型名时必须加上 app 的 module 名字，才能保证在代码中做类型转换时不发生错误。”
+ 
+ 
+ Apple 在文档中指出 @NSManaged 是专门用来解决 Core Data 中动态代码的问题的，因此我们最好是遵守这个规则，
+ 只在 NSManagedObject 的子类中使用它。但是如果你将 @NSManaged 写到其他的类中，也是能够编译通过的。
+ 在这种情况下，被标记的属性的访问将会回滚到 Objective-C 的 getter 和 setter 方法。
+ 也即，对于一个叫做 title 的属性，在运行时会调用 title 和 setTitle: 方法。”
+ 
+ 
+ */
+
+
+
+//Swift 中的测试
+/*
+ Xcode 集成了 XCTest 作为测试框架，Swift 的代码测试默认也使用这个框架进行
+ 对 app 的测试在 Swift 1.x 的时代中一直是一个很麻烦的问题。而在 Swift 2.0 中， Apple 为 app 的测试开了“后门”。
+ 现在我们可以通过在测试代码中导入 app 的 target 时，在之前追加 @testable，就可以访问到 app target 中 internal 的内容了
+ 
+// 位于 app target 的业务代码
+func methodToTest() {
+    
+}
+
+// 测试
+@testable import MyApp
+
+//...
+func testMethodToTest() {
+    
+    // 配置测试
+    
+    someObj.methodToTest()
+    
+    // 断言结果
+}
+ 
+ */
+
+
+
+// -----------------------------
+
 //属性访问控制
 /*
  Swift 中有低至高提供了 private fileprivate internal public open 五种访问控制的权限
@@ -29,30 +100,32 @@ print("Swift 与开发环境及一些实践")
  区别在于，只有被open标记的内容才能在别的框架中被继承或者重写。如只希望使用某个类型和方法，而不希望继承或者重写的话，应将其限定为 public
  */
 
-class Foo {
-    private var privateInt = 3
-    fileprivate var filePrivateInt = 4
-}
 
-class Baz {
-    func baz() {
-        print(Foo().filePrivateInt)
-    }
-}
+//class Foo {
+//    private var privateInt = 3
+//    fileprivate var filePrivateInt = 4
+//}
+//
+//class Baz {
+//    func baz() {
+//        print(Foo().filePrivateInt)
+//    }
+//}
+//
+//extension Foo {
+//    func fooExtension() {
+//        print(privateInt)
+//    }
+//}
+////上面的例子在同一个文件中是合法的，但如果将 Baz 和 extension Foo 的部分移动到别的文件中的话就无法编译了
+//
+//class MyClass {
+//    var name: String?
+//    private var name1: String?
+//    private(set) var name2: String?
+//}
 
-extension Foo {
-    func fooExtension() {
-        print(privateInt)
-    }
-}
-//上面的例子在同一个文件中是合法的，但如果将 Baz 和 extension Foo 的部分移动到别的文件中的话就无法编译了
 
-
-class MyClass {
-    var name: String?
-    private var name1: String?
-    private(set) var name2: String?
-}
 /*
  对于属性来说，访问控制还多了一层需要注意的地方。
  没有任何的修饰，可以在同一 module 中随意地读取或者设置这个变量
@@ -61,13 +134,13 @@ class MyClass {
  private(set) var name: String? 因为 set 被限制为了 private 就可以保证 name 只会在当前作用域被更改
  这种写法没有对读取做限制，相当于使用了默认的 internal 权限
  */
-public class MyClass1 {
-    public private(set) var name3: String?
-    //如希望在别的 module 中也能访问这个属性，同时又保持只在当前作用域可以设置
-    //需要将 get 的访问权限提高为 public ，属性的访问控制可以通过两次的访问权限指定来实现
-    //MyClass1 前面也添加的 public，这是编译器所要求的。因为如果只为 name 的 get 添加 public 而不管 MyClass 的话，
-    //module 外就连 MyClass 都访问不到了，属性的访问控制级别也就没有任何意义了。
-}
+//public class MyClass1 {
+//    public private(set) var name3: String?
+//    //如希望在别的 module 中也能访问这个属性，同时又保持只在当前作用域可以设置
+//    //需要将 get 的访问权限提高为 public ，属性的访问控制可以通过两次的访问权限指定来实现
+//    //MyClass1 前面也添加的 public，这是编译器所要求的。因为如果只为 name 的 get 添加 public 而不管 MyClass 的话，
+//    //module 外就连 MyClass 都访问不到了，属性的访问控制级别也就没有任何意义了。
+//}
 
 // -----------------------------
 
