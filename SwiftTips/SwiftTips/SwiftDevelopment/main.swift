@@ -14,6 +14,107 @@ import Foundation
 print("Swift 与开发环境及一些实践")
 
 
+
+// -----------------------------
+
+/*
+ 兼容性：新型语言，Swift必然会经常性的发生变化。
+ Apple 通过将一个最小化的运行库集成打包到 APP 中这样的方式解决兼容性的问题
+ 使用了 Swift 语言的项目在编译时会在 app 包中带有这一套运行时环境，并在启动时加载这些 dylib 包作为 Swift 代码的运行环境。
+ 这些库文件位于打包好的 app 的 Frameworks 文件夹中
+ 
+ 优点：
+ 首先是虽然 Swift 语言在不断变化，但是你的 app 不论在什么样的系统版本上都可以保持与开发编译时的行为一致，
+ 因为你依赖的 Swift 运行时是和 app 绑定的。这对于确保 Swift 升级后新版本的 app 在原有的设备和系统上运行正常是必要的。
+ 
+ 另一个好处是向下兼容。虽然 Swift 是和 iOS 8 及 OSX 10.10 一同推出的，但是通过加载 Swift 的动态库，
+ Apple 允许 Swift 开发的 app 在 iOS 7 和 OSX 10.9 上也能运行，这对 Swift 的尽快推广和使用也是十分关键的。”
+ 
+ 
+ 缺点：
+ “更大的 app 尺寸和内存占用。在 Swift 1.0 版本下，通过 Release 打包后同样的 Swift 空工程的 ipa 文件要比 Objective-C 空工程的尺寸大上 4~5 MB，
+ 在设备上运行时也会有额外的 2~3 MB 的内存空间开销。如果制作的 app 对于磁盘空间占用很敏感的话，现在的 Swift 的这个不足是难以绕开的。”
+ 
+ 对于第三方 Swift 代码的正确使用方式，要么是直接将源代码添加到项目中进行编译，要么是将生成 framework 的项目作为依赖添加到自己的项目中一起编译。
+ 
+ 
+
+*/
+
+//泛型扩展
+//swif 对泛型的支持，使得我们可以避免为类似的功能多次书写重复的代码。泛型可以使用 extension 为泛型类型添加新的方法
+//“public struct Array<Element> : RandomAccessCollection, MutableCollection”
+//实现方法随机取出 Array 中的一个元素
+extension Array {
+    var random: Element? {
+        return self.count != 0 ? self[Int(arc4random_uniform(UInt32(self.count)))] : nil
+    }
+}
+let arr = ["aaa", "bbb", "ccc"]
+print(arr.random!)
+
+//“在扩展中是不能添加整个类型可用的新泛型符号的，但是对于某个特定的方法来说，我们可以添加 T 以外的其他泛型符号。”
+//“我们不能通过扩展来重新定义当前已有的泛型符号，但是可以对其进行使用；
+//在扩展中也不能为这个类型添加泛型符号；但只要名字不冲突，我们是可以在新声明的方法中定义和使用新的泛型符号的。”
+
+extension Array {
+    func appendRandomDescription<U: CustomStringConvertible>(_ input: U) -> String {
+        if let element = self.random {
+            return "\(element) " + input.description
+        } else {
+            return "empty array"
+        }
+    }
+}
+//我们限定了只接受实现了 CustomStringConvertible 的参数作为参数，然后将这个内容附加到自身的某个随机元素的描述上。
+//因为参数 input 实现了 CustomStringConvertible，所以在方法中我们可以使用 description 来获取描述字符串。
+
+let languages = ["Swift","ObjC","C++","Java"]
+print(languages.random!)
+
+let ranks = [1,2,3,4]
+print(ranks.random!)
+
+print(arr.appendRandomDescription(ranks.random!)) //ccc 3
+// 随机组合 languages 和 ranks 中的各一个元素，然后输出
+
+
+// -----------------------------
+
+//闭包歧义
+//“Swift 的闭包写法很多，但是最正规的应该是完整地将闭包的输入和输出都写上，然后用 in 关键字隔离参数和实现”
+
+//extension Int {
+//    func times(f:(Int)->()) {
+//        print("Int")
+//        for i in 1...self {
+//            f(i)
+//        }
+//    }
+//}
+//
+//3.times { (i: Int)->() in
+//    print(i)
+//}
+////Int 1 2 3
+//
+////闭包接受 Int 输入没有返回，可简化：
+//3.times { i in
+//    print(i)
+//}
+
+
+//extension Int {
+//    func times2(f: () -> Void) {
+//        print("Int")
+//        for i in 1...self {
+//            f()
+//        }
+//    }
+//}
+////typealias Void = (), ()是一个不含任何元素的多元组
+
+
 // -----------------------------
 
 // Core Data
