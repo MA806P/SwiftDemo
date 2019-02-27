@@ -14,6 +14,106 @@ import Foundation
 print("Swift 与开发环境及一些实践")
 
 
+// -----------------------------
+
+//尾递归
+
+//递归在程序设计中是一种很有用的方法，它可以将复杂的过程用易于理解的方式转化和描述。
+func sum(_ n: UInt) -> UInt {
+    if n == 0 {
+        return 0
+    }
+    return n + sum(n - 1)
+}
+
+print(sum(4)) //10
+print(sum(100)) //5050
+
+/*
+ print(sum(1000000000000)) EXC_BAD_ACCESS (code=2, address=)
+ 大一点的数，运行时出错。 因为每次对于 sum 的递归调用都需要在调用栈上保存当前状态，否则我们就无法计算最后的 n + sum(n - 1)。
+ 当 n 足够大，调用栈足够深的时候，栈空间将被耗尽而导致错误，也就是我们常说的栈溢出了。
+ 
+ “解决栈溢出的一个好方法是采用尾递归的写法。顾名思义，尾递归就是让函数里的最后一个动作是一个函数调用的形式，
+ 这个调用的返回值将直接被当前函数返回，从而避免在栈上保存状态。这样一来程序就可以更新最后的栈帧，而不是新建一个，来避免栈溢出的发生。”
+ 
+ “如果你在项目中直接尝试运行这段代码的话还是会报错，因为在 Debug 模式下 Swift 编译器并不会对尾递归进行优化。
+ 我们可以在 scheme 设置中将 Run 的配置从 Debug 改为 Release，这段代码就能正确运行了。”
+ 
+*/
+
+func tailSum(_ n: UInt) -> UInt {
+    func sumInternal(_ n: UInt, current: UInt) -> UInt {
+        if n == 0 {
+            return current
+        } else {
+            return sumInternal(n - 1, current: current + n)
+        }
+    }
+    return sumInternal(n, current: 0)
+}
+
+print(tailSum(1000000)) //500000500000
+
+
+
+
+// -----------------------------
+
+//  列举 enum 类型
+/*
+enum Suit: String {
+    case spades = "黑桃"
+    case hearts = "红桃"
+    case clubs = "草花"
+    case diamonds = "方片"
+}
+
+enum Rank: Int, CustomStringConvertible {
+    case ace = 1
+    case two, three, four, five, six, seven, eight, nine, ten
+    case jack, queen, king
+    var description: String {
+        switch self {
+        case .ace:
+            return "A"
+        case .jack:
+            return "J"
+        case .queen:
+            return "Q"
+        case .king:
+            return "K"
+        default:
+            return String(self.rawValue)
+        }
+    }
+}
+//“两次循环，先循环取出 Suit 中的四种花色，然后在其中循环 Rank 类型取出数字后，就可以配合得到 52 张牌了。”
+
+protocol EnumeratableEnum {
+    static var allValues: [Self] { get }
+}
+
+extension Suit: EnumeratableEnum {
+    static var allValues: [Suit] {
+        return [.spades, .hearts, .clubs, .diamonds]
+    }
+}
+
+extension Rank: EnumeratableEnum {
+    static var allValues: [Rank] {
+        return [.ace, .two, .three, .four, .five, .six, .seven, .eight, .nine, .ten, .jack, .queen, .king]
+    }
+}
+
+for suit in Suit.allValues {
+    for rank in Rank.allValues {
+        print("\(suit.rawValue)-\(rank)")
+    }
+}
+
+*/
+
 
 // -----------------------------
 
@@ -37,11 +137,10 @@ print("Swift 与开发环境及一些实践")
  
  对于第三方 Swift 代码的正确使用方式，要么是直接将源代码添加到项目中进行编译，要么是将生成 framework 的项目作为依赖添加到自己的项目中一起编译。
  
- 
-
 */
 
 //泛型扩展
+/*
 //swif 对泛型的支持，使得我们可以避免为类似的功能多次书写重复的代码。泛型可以使用 extension 为泛型类型添加新的方法
 //“public struct Array<Element> : RandomAccessCollection, MutableCollection”
 //实现方法随机取出 Array 中的一个元素
@@ -77,7 +176,7 @@ print(ranks.random!)
 
 print(arr.appendRandomDescription(ranks.random!)) //ccc 3
 // 随机组合 languages 和 ranks 中的各一个元素，然后输出
-
+*/
 
 // -----------------------------
 
