@@ -1,10 +1,6 @@
-# SwiftDemo
 
-Example of Stanford Engineering courses: Developing Apps for iOS, CS193P
-
-
-# Learning notes
-### [The Swift Programming Language (Swift 4.2)](https://developer.apple.com/library/content/documentation/Swift/Conceptual/Swift_Programming_Language/index.html#//apple_ref/doc/uid/TP40014097)
+# Swift Learning notes
+### [The Swift Programming Language (Swift 5.1)](https://docs.swift.org/swift-book/)
 
 #### Simple Values
 Use let to make a constant and var to make a variable. 
@@ -13,6 +9,14 @@ There’s an even simpler way to include values in strings: Write the value in p
 ```
 let apples = 3
 let appleSummary = "I have \(apples) apples."
+```
+
+Use three double quotation marks (""") for strings that take up multiple lines.  
+```
+let quotation = """
+I said "I have \(apples) apples."
+And then I said "I have \(apples + oranges) pieces of fruit."
+"""
 ```
 
 Create arrays and dictionaries using brackets ([]), and access their elements by writing the index or key in brackets. A comma is allowed after the last element.
@@ -85,7 +89,18 @@ print(m)
 Use ..< to make a range that omits its upper value, and use ... to make a range that includes both values.
 
 
-
+Switches support any kind of data and a wide variety of comparison operations -- they aren't limited to integers and tests for equality.
+```
+let vegetable = "red pepper"
+switch vegetable {
+case "celery":
+    print("celery")
+case let x where x.hasSuffix("pepper"):
+    print("pepper")
+default:
+    print("nothing")
+}
+```
 
 #### Functions and Closures
 
