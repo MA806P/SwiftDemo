@@ -45,6 +45,19 @@ shoppingList = []
 occupations = [:]
 ```
 
+Switches support any kind of data and a wide variety of comparison operations -- they aren't limited to integers and tests for equality.
+```
+let vegetable = "red pepper"
+switch vegetable {
+case "celery":
+    print("celery")
+case let x where x.hasSuffix("pepper"):
+    print("pepper")
+default:
+    print("nothing")
+}
+```
+
 
 #### Control Flow
 
@@ -89,18 +102,6 @@ print(m)
 Use ..< to make a range that omits its upper value, and use ... to make a range that includes both values.
 
 
-Switches support any kind of data and a wide variety of comparison operations -- they aren't limited to integers and tests for equality.
-```
-let vegetable = "red pepper"
-switch vegetable {
-case "celery":
-    print("celery")
-case let x where x.hasSuffix("pepper"):
-    print("pepper")
-default:
-    print("nothing")
-}
-```
 
 #### Functions and Closures
 
@@ -161,7 +162,23 @@ let sortedNumbers = numbers.sorted { $0 > $1 }
 #### Objects and Classes
 
  An initializer to set up the class when an instance is created. Use init to create one.
- Every property needs a value assigned—either in its declaration or in the initializer.
+ Every property needs a value assigned—either in its declaration or in the initializer.   
+ ```
+ class NamedShape {
+    var numberOfSides: Int = 0
+    var name: String
+    
+    init(name: String) {
+        self.name = name
+    }
+    func simpleDescription() -> String {
+        return "A shape with \(numberOfSides) sides"
+    }
+}
+var tmpShape = NamedShape(name: "suqare")
+tmpShape.numberOfSides = 6
+print("shape: \(tmpShape.simpleDescription())")
+ ```
 
  Use deinit to create a deinitializer if you need to perform some cleanup before the object is deallocated.
  
@@ -170,11 +187,62 @@ let sortedNumbers = numbers.sorted { $0 > $1 }
  Methods on a subclass that override the superclass’s implementation are marked with override—overriding a method by accident, without  override, is detected by the compiler as an error. The compiler also detects methods with override that don’t actually override any     method in the superclass.
  
  In addition to simple properties that are stored, properties can have a getter and a setter.
+ 
+ ```
+ class NamedShape {
+    var numberOfSides: Int = 0
+    var name: String
+    
+    init(name: String) {
+        self.name = name
+    }
+    func simpleDescription() -> String {
+        return "A shape with \(numberOfSides) sides"
+    }
+}
+var tmpShape = NamedShape(name: "suqare")
+tmpShape.numberOfSides = 6
+print("shape: \(tmpShape.simpleDescription())")
+
+
+class Square: NamedShape {
+    var sideLength: Double
+    init(sideLength: Double, name: String) {
+        self.sideLength = sideLength
+        //self.name = name //'self' used in property access 'name' before 'super.init' call
+        super.init(name: name)
+        numberOfSides = 4
+    }
+    func area() -> Double {
+        return sideLength * sideLength
+    }
+    override func simpleDescription() -> String {
+        return "square with sides of length \(sideLength)"
+    }
+    
+    var perimeter: Double {
+        get {
+            return 4 * sideLength
+        }
+        set {
+            sideLength = newValue / 4.0
+        }
+    }
+}
+let tmpSquare = Square(sideLength: 3.0, name: "test square")
+tmpSquare.area() //9
+tmpSquare.simpleDescription()
+print("suqare side length \(tmpSquare.sideLength)") //3.0
+tmpSquare.perimeter = 20
+print("suqare side length \(tmpSquare.sideLength)") //5.0
+
+ ```
 
  
- #### Enumerations and Structures
+####  Enumerations and Structures
  
- ###### enum
+
+###### enum
  Use enum to create an enumeration. Like classes and all other named types, enumerations can have methods associated with them.
  
  By default, Swift assigns the raw values starting at zero and incrementing by one each time, but you can change this behavior by explicitly specifying values.
@@ -201,13 +269,16 @@ let sortedNumbers = numbers.sorted { $0 > $1 }
 }
 let hearts = Suit.hearts
 let heartsDescription = hearts.simpleDescription()
- ```
- ###### struct
+ ```   
+  
+###### struct
  Use struct to create a structure. Structures support many of the same behaviors as classes, including methods and initializers. One of the most important differences between structures and classes is that structures are always copied when they are passed around in your code, but classes are passed by reference.
  
- #### Protocols and Extensions
  
- ###### protocol
+#### Protocols and Extensions
+ 
+
+###### protocol
  Use protocol to declare a protocol.
 ```
 protocol ExampleProtocol {
