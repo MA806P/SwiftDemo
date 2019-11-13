@@ -103,7 +103,7 @@ func partition(_ head: ListNode?, _ x: Int) -> ListNode? {
     return prevDummy.next
 }
 
-let node = partition(list.head, 4)
+let node = partition(list.head, 6)
 dumpList(node)
 print("this is a line \n")
 
