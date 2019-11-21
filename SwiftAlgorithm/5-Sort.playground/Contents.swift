@@ -73,4 +73,20 @@ func quickSort(_ array: [Int]) -> [Int] {
     return quickSort(left) + middle + quickSort(right)
 }
 
+/*
+var array2 = [10,2,3,7,5,3,8,4,6,9,1]
+array2.sort() //[1, 2, 3, 3, 4, 5, 6, 7, 8, 9, 10]
+array2.sort(by: >) //[10, 9, 8, 7, 6, 5, 4, 3, 3, 2, 1]
+//Java中，自带sort函数部分是用归并排序实现的
+//Swift中 sort函数是一种内省算法 IntroSort,
+//由堆排序、插入排序、快速排序三种算法构成，根据输入深度选择最佳的算法来完成。
+ */
 
+/*
+var dict = ["1":"a", "3":"c", "2":"b"]
+let keys = Array(dict.keys) //["2", "3", "1"]
+let sortKeys = keys.sorted(){
+    return dict[$0]! > dict[$1]!
+}
+print("sort keys = \(sortKeys)") //sort keys = ["3", "2", "1"]
+*/
