@@ -15,7 +15,8 @@ int main(int argc, const char * argv[]) {
         NSLog(@"Hello, World!");
         
         MySwiftClass *swiftClass = [[MySwiftClass alloc] init];
-        [swiftClass greetingWithName:@"123"];
+        [swiftClass sayHello];
+        
         
         MySwiftOtherClass *otherClass = [[MySwiftOtherClass alloc] init];
         [otherClass greeting:@"小明"];
