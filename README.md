@@ -3,8 +3,8 @@
 
 ## Swift Learning notes
 
-### [The Swift Programming Language](https://docs.swift.org/swift-book/)
-### [《The Swift Programming Language》in Chinese](https://swiftgg.gitbook.io/swift/)
+### [《The Swift Programming Language》](https://docs.swift.org/swift-book/)
+### [《The Swift Programming Language》中文版](https://swiftgg.gitbook.io/swift/)
 
 
 
