@@ -22,7 +22,7 @@ extension NSDictionary {
         return (value(forKeyPath: keyPath) as? NSNumber)?.boolValue
     }
     func url(forKeyPath keyPath: String) -> URL? {
-        if let urlString = string(forKeyPath: keyPath), urlString.characters.count > 0, let url = URL(string: urlString) {
+        if let urlString = string(forKeyPath: keyPath), urlString.count > 0, let url = URL(string: urlString) {
             return url
         } else {
             return nil

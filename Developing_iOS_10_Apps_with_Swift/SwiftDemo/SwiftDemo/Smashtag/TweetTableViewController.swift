@@ -64,7 +64,7 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
         //we use the row height in the storyboard as an "estimate"
         tableView.estimatedRowHeight = tableView.rowHeight
         //but use whatever autolayout says the height should be as the actual row height
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
         // the row height could alternatively be set
         // using the UITableViewDelegate method heightForRowAt
         

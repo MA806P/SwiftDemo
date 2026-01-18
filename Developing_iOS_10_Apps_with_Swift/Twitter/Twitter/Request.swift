@@ -7,8 +7,8 @@
 //
 
 import Foundation
-import Accounts
-import Social
+@preconcurrency import Accounts
+@preconcurrency import Social
 import CoreLocation
 
 // Simple Twitter query class
@@ -20,7 +20,7 @@ import CoreLocation
 //   a follow-on TwitterRequest to get more Tweets (newer or older) can be created
 //   using the requestFor{Newer,Older} methods
 
-private var twitterAccount: ACAccount?
+nonisolated(unsafe) private var twitterAccount: ACAccount?
 
 public class Request: NSObject
 {

@@ -28,7 +28,7 @@ class TestViewController: UIViewController {
     
     func showButtonBegan() {
         
-        UIView.animate(withDuration: 0.8, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: UIViewAnimationOptions.curveEaseOut, animations: {
+        UIView.animate(withDuration: 0.8, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: UIView.AnimationOptions.curveEaseOut, animations: {
             self.buttonCollect.forEach({ $0.isHidden = !$0.isHidden })
         }, completion: nil)
         

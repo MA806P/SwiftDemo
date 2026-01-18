@@ -11,11 +11,11 @@ struct DemoURL
 {
     static let stanford = URL(string: "http://stanford.edu/about/images/intro_about.jpg")
 
-    static var NASA: Dictionary<String,URL> = {
+    static let NASA: Dictionary<String,URL> = {
          let NASAURLStrings = [
-            "Cassini" : "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1491369799466&di=862faf8a9b0d947f4e469a88d23028e2&imgtype=0&src=http%3A%2F%2Ffile06.16sucai.com%2F2016%2F0921%2Fda78bbfe5a27798a8d300f30d5ad594e.jpg",
-            "Earth" : "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1491369840769&di=383f36cf873b9df07265ade1845b7121&imgtype=0&src=http%3A%2F%2Fpic1.win4000.com%2Fwallpaper%2F3%2F57c69ab296692.jpg",
-            "Saturn" : "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1491369921402&di=59da6d3bab5ad6f3d833427a76b4225d&imgtype=0&src=http%3A%2F%2Fimgstore.cdn.sogou.com%2Fapp%2Fa%2F100540002%2F514415.jpg"
+            "Cassini" : "https://gips2.baidu.com/it/u=1674525583,3037683813&fm=3028&app=3028&f=JPEG&fmt=auto?w=1024&h=1024",
+            "Earth" : "https://gips3.baidu.com/it/u=3892227616,2240763844&fm=3028&app=3028&f=JPEG&fmt=auto?w=3200&h=3200",
+            "Saturn" : "https://gips3.baidu.com/it/u=3886271102,3123389489&fm=3028&app=3028&f=JPEG&fmt=auto?w=1280&h=960"
         ]
         var urls = Dictionary<String,URL>()
         for (key, value) in NASAURLStrings {

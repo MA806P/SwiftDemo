@@ -16,7 +16,6 @@
 		1847184D1E6A64AC0090E9E3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 184718471E6A64AC0090E9E3 /* Assets.xcassets */; };
 		1847184E1E6A64AC0090E9E3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 184718481E6A64AC0090E9E3 /* LaunchScreen.storyboard */; };
 		1847184F1E6A64AC0090E9E3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1847184A1E6A64AC0090E9E3 /* Main.storyboard */; };
-		184718501E6A64AC0090E9E3 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1847184C1E6A64AC0090E9E3 /* Info.plist */; };
 		184718531E6AADE50090E9E3 /* CalculatorBrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184718521E6AADE50090E9E3 /* CalculatorBrain.swift */; };
 		184718561E6AAE0A0090E9E3 /* CalculatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184718541E6AAE0A0090E9E3 /* CalculatorViewController.swift */; };
 		184718571E6AAE0A0090E9E3 /* CalculatorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 184718551E6AAE0A0090E9E3 /* CalculatorViewController.xib */; };
@@ -60,7 +59,6 @@
 		184718471E6A64AC0090E9E3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		184718491E6A64AC0090E9E3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1847184B1E6A64AC0090E9E3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		1847184C1E6A64AC0090E9E3 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		184718521E6AADE50090E9E3 /* CalculatorBrain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculatorBrain.swift; sourceTree = "<group>"; };
 		184718541E6AAE0A0090E9E3 /* CalculatorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculatorViewController.swift; sourceTree = "<group>"; };
 		184718551E6AAE0A0090E9E3 /* CalculatorViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CalculatorViewController.xib; sourceTree = "<group>"; };
@@ -137,7 +135,6 @@
 				184718471E6A64AC0090E9E3 /* Assets.xcassets */,
 				184718481E6A64AC0090E9E3 /* LaunchScreen.storyboard */,
 				1847184A1E6A64AC0090E9E3 /* Main.storyboard */,
-				1847184C1E6A64AC0090E9E3 /* Info.plist */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -228,6 +225,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -250,7 +248,6 @@
 				1847184F1E6A64AC0090E9E3 /* Main.storyboard in Resources */,
 				1847184E1E6A64AC0090E9E3 /* LaunchScreen.storyboard in Resources */,
 				DA6EE8371E8BFCE200EAF540 /* Cassini.storyboard in Resources */,
-				184718501E6A64AC0090E9E3 /* Info.plist in Resources */,
 				183A6AC11E8360C5004BB0DA /* FaceIt.storyboard in Resources */,
 				DAEB96891EA43679006F0084 /* Smashtag.storyboard in Resources */,
 				183B741C1E79323F0074A5C5 /* TestStoryboard.storyboard in Resources */,
@@ -345,7 +342,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -388,7 +385,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -404,13 +401,13 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "SwiftDemo/Supporting Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.myz.SwiftDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 6.0;
 			};
 			name = Debug;
 		};
@@ -422,12 +419,12 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "SwiftDemo/Supporting Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.myz.SwiftDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 6.0;
 			};
 			name = Release;
 		};
