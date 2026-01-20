@@ -13,6 +13,12 @@ struct CodeBreakerView: View {
     
     var body: some View {
         VStack {
+            Button("Restart") {
+                withAnimation(.restart) {
+                    game.restart()
+                    selection = 0
+                }
+            }
             CodeView(code: game.masterCode)
             ScrollView {
                 if !game.isOver {
@@ -28,16 +34,19 @@ struct CodeBreakerView: View {
                     }
                 }
             }
-            PegChooser(choices: game.pegChoices) { peg in
-                game.setGuessPeg(peg, at: selection)
-                selection = (selection + 1)%game.masterCode.pegs.count
-            }
+            PegChooser(choices: game.pegChoices, onChoose: changePegAction)
         }.padding()
+    }
+    
+    
+    func changePegAction(to peg: Peg) {
+        game.setGuessPeg(peg, at: selection)
+        selection = (selection + 1)%game.masterCode.pegs.count
     }
     
     var guessButton: some View {
         Button("Guess") {
-            withAnimation {
+            withAnimation(Animation.guess) {
                 game.attemptGuess()
                 selection = 0
             }
@@ -53,6 +62,12 @@ struct CodeBreakerView: View {
     }
     
     
+}
+
+extension Animation {
+    static let codeBreaker = Animation.easeInOut(duration: 3)
+    static let guess = Animation.codeBreaker
+    static let restart = Animation.codeBreaker
 }
 
 extension Color {

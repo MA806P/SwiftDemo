@@ -40,6 +40,11 @@ struct CodeView<AncillaryView>: View where AncillaryView : View {
                     }
                     .overlay {
                         Selection.shape.foregroundColor(code.isHidden ? Color.gray : .clear)
+                            .transaction { transaction in
+                                if code.isHidden {
+                                    transaction.animation = nil
+                                }
+                            }//.animation(nil, value: code.isHidden) // 重置 code 关闭动画 防止显示出要猜的密码
                     }
                     .onTapGesture {
                         if code.kind == .guess {
