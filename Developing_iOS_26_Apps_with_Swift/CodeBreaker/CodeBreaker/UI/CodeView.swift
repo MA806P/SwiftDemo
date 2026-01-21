@@ -14,6 +14,7 @@ struct CodeView<AncillaryView>: View where AncillaryView : View {
     
     // MARK: Data owned by me
     @Binding var selection: Int
+    @Namespace private var seletionNamespace
     
     //let ancillaryView: AncillaryView //泛型，从外面传进来的任何view显示在右侧，按钮、匹配结果、空白..
     @ViewBuilder let ancillaryView: () -> AncillaryView
@@ -34,9 +35,15 @@ struct CodeView<AncillaryView>: View where AncillaryView : View {
                 PegView(peg: code.pegs[index])
                     .padding(Selection.cornerRadius)
                     .background {
-                        if selection == index, code.kind == .guess {
-                            Selection.shape.foregroundColor(Selection.color)
+                        Group {
+                            if selection == index, code.kind == .guess {
+                                Selection.shape
+                                    .foregroundColor(Selection.color)
+                                    .matchedGeometryEffect(id: "selection", in: seletionNamespace)
+                                //在不同视图之间创建平滑的过渡动画
+                            }
                         }
+                        .animation(.selection, value: selection)
                     }
                     .overlay {
                         Selection.shape.foregroundColor(code.isHidden ? Color.gray : .clear)
