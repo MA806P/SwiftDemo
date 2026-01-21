@@ -12,7 +12,7 @@ struct PegChooser: View {
     let choices: [Peg]
     
     // MARK: Data out founction
-    let onChoose: (Peg) -> Void
+    var onChoose: ((Peg) -> Void)?
     
     // 数据传递只传该UI需要的数据，事件处理传递出去不需要UI考虑
     
@@ -20,7 +20,7 @@ struct PegChooser: View {
         HStack {
             ForEach(choices, id: \.self) { peg in
                 Button {
-                    onChoose(peg)
+                    onChoose?(peg)
                 } label: {
                     PegView(peg: peg)
                 }
