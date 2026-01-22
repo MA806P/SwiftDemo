@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct CodeBreakerView: View {
-    @State private var game = CodeBreaker(pegChoices: [.brown, .gray, .black, .cyan, .yellow, .red])
+    let game: CodeBreaker
+    
+    //@State private var game = CodeBreaker(pegChoices: [.brown, .gray, .black, .cyan, .yellow, .red])
     @State private var selection: Int = 0
     @State private var restarting = false
     @State private var hideMostRecentMarkers = false
@@ -46,6 +48,7 @@ struct CodeBreakerView: View {
             if !game.isOver {
                 PegChooser(choices: game.pegChoices, onChoose: changePegAction)
                     .transition(.pegChooser)
+                    .frame(maxHeight: 80)
                     //.transition(AnyTransition.move(edge: .bottom))
             }
         }.padding()
@@ -83,12 +86,13 @@ struct CodeBreakerView: View {
         }
     }
     
-    
-    
 }
 
 
 
 #Preview {
-    CodeBreakerView()
+    @Previewable var game = CodeBreaker(pegChoices: [.blue, .yellow, .red])
+    NavigationStack {
+        CodeBreakerView(game: game)
+    }
 }
