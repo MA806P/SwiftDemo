@@ -14,6 +14,8 @@ struct GameEditor: View {
     @Environment(\.dismiss) var dismiss
     let onChoose: () -> Void
     
+    @State private var showInvalidGameAlert = false
+    
     var body: some View {
         NavigationStack {
             Form {
@@ -39,14 +41,34 @@ struct GameEditor: View {
                     Button("Done") {
                         done()
                     }
+                    //.disabled(!game.isValid)
+                    .alert("Invalid Game", isPresented: $showInvalidGameAlert) {
+                        Button("OK") {
+                            showInvalidGameAlert = false
+                        }
+                    } message: {
+                        Text("A game must have a name and more than one unique peg.")
+                    }
                 }
             }
         }
     }
     
     func done() {
-        onChoose()
-        dismiss()
+        if game.isValid {
+            onChoose()
+            dismiss()
+        } else {
+            showInvalidGameAlert = true
+        }
+    }
+    
+    
+}
+
+extension CodeBreaker {
+    var isValid: Bool {
+        !name.isEmpty && Set(pegChoices).count >= 2
     }
 }
 

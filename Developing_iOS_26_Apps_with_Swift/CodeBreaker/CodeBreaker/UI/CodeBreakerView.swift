@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct CodeBreakerView: View {
+    
+    //@Environment(\.scenePhase) var scenePhase //所处场景，前台活跃 后台
     let game: CodeBreaker
     
     //@State private var game = CodeBreaker(pegChoices: [.brown, .gray, .black, .cyan, .yellow, .red])
@@ -17,14 +19,11 @@ struct CodeBreakerView: View {
     
     var body: some View {
         VStack {
-            Button("Restart", systemImage: "arrow.circlepath", action: restart)
+            //Button("Restart", systemImage: "arrow.circlepath", action: restart)
             
-            CodeView(code: game.masterCode) {
-//                ElapsedTime(startTime: game.startTime, endTime: game.endTime)
-//                    .flexibleSystemFont()
-//                    .monospaced()
-//                    .lineLimit(1)
-            }
+            CodeView(code: game.masterCode)
+            //{ElapsedTime(startTime: game.startTime, endTime: game.endTime)
+                    //.flexibleSystemFont() .monospaced() .lineLimit(1) }
             
             ScrollView {
                 if !game.isOver {
@@ -51,7 +50,19 @@ struct CodeBreakerView: View {
                     .frame(maxHeight: 80)
                     //.transition(AnyTransition.move(edge: .bottom))
             }
-        }.padding()
+        }
+        .trackElapsedTime(in: game)
+        //.modifier(ElapsedTimeTracker(game: game))
+        .toolbar {
+            ToolbarItem(placement: .primaryAction) {
+                Button("Restart", systemImage: "arrow.circlepath", action: restart)
+            }
+            ToolbarItem {
+                ElapsedTime(startTime: game.startTime, endTime: game.endTime, elapsedTime: game.elapsedTime)
+                    .monospaced().lineLimit(1)
+            }
+        }
+        .padding()
     }
     
     
@@ -88,6 +99,38 @@ struct CodeBreakerView: View {
     
 }
 
+
+extension View {
+    func trackElapsedTime(in game: CodeBreaker) -> some View {
+        self.modifier(ElapsedTimeTracker(game: game))
+    }
+}
+
+struct ElapsedTimeTracker: ViewModifier {
+    @Environment(\.scenePhase) var scenePhase //所处场景，前台活跃 后台
+    let game: CodeBreaker
+    
+    func body(content: Content) -> some View {
+        content
+            .onAppear {
+                game.startTimer()
+            }
+            .onDisappear {
+                game.pauseTimer()
+            }
+            .onChange(of: game) { oldGame, newGame in
+                oldGame.pauseTimer()
+                newGame.startTimer()
+            }
+            .onChange(of: scenePhase) {
+                switch scenePhase {
+                case .active: game.startTimer()
+                case .background: game.pauseTimer()
+                default: break
+                }
+            }
+    }
+}
 
 
 #Preview {
