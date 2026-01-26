@@ -21,7 +21,7 @@ struct GameSummary: View {
     }
 }
 
-#Preview {
+#Preview(traits: .swiftData) {
     List {
         Section("Game") {
             GameSummary(game: CodeBreaker(name: "Preview", pegChoices: [.red, .blue, .yellow]))

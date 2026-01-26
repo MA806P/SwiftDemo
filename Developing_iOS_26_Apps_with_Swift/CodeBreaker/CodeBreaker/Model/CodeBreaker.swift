@@ -14,11 +14,17 @@ typealias Peg = String
     var name: String
     @Relationship(deleteRule: .cascade) var masterCode: Code = Code(kind: .master(isHidden:true))
     @Relationship(deleteRule: .cascade) var guess: Code = Code(kind: .guess)
-    @Relationship(deleteRule: .cascade) var attempts: [Code] = []
+    @Relationship(deleteRule: .cascade) var _attempts: [Code] = []
     var pegChoices: [Peg]
     @Transient var startTime: Date?
     var endTime: Date?
     var elapsedTime: TimeInterval = 0
+    var lastAttemptDate: Date? = Date.now
+    
+    var attempts: [Code] { //每次重启获取到的按顺序显示
+        get { _attempts.sorted { $0.timestamp > $1.timestamp } }
+        set { _attempts = newValue }
+    }
     
     init(name: String = "Code Breaker", pegChoices: [Peg]) {
         self.name = name
@@ -67,6 +73,7 @@ typealias Peg = String
         )
         
         attempts.insert(attempt, at: 0)
+        lastAttemptDate = .now
         guess.reset()
         if isOver {
             masterCode.kind = .master(isHidden: false)
