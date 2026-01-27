@@ -10,6 +10,8 @@ import SwiftUI
 struct CodeBreakerView: View {
     
     //@Environment(\.scenePhase) var scenePhase //所处场景，前台活跃 后台
+    @Environment(\.sceneFrame) var sceneFrame
+    
     let game: CodeBreaker
     
     //@State private var game = CodeBreaker(pegChoices: [.brown, .gray, .black, .cyan, .yellow, .red])
@@ -44,13 +46,19 @@ struct CodeBreakerView: View {
                 }
             }
             
-            if !game.isOver {
-                PegChooser(choices: game.pegChoices, onChoose: changePegAction)
-                    .transition(.pegChooser)
-                    .frame(maxHeight: 80)
+            GeometryReader { geometry in
+                if !game.isOver {
+                    let offset = sceneFrame.maxY - geometry.frame(in: .global).minY
+                    PegChooser(choices: game.pegChoices, onChoose: changePegAction)
+                        .transition(.offset(x: 0, y: offset))
                     //.transition(AnyTransition.move(edge: .bottom))
+                }
             }
+            .aspectRatio(CGFloat(game.pegChoices.count), contentMode: .fit)
+            .frame(maxHeight: 80)
         }
+        //.gesture(pegChoosingDial)
+        .highPriorityGesture(pegChoosingDial)
         .trackElapsedTime(in: game)
         //.modifier(ElapsedTimeTracker(game: game))
         .toolbar {
@@ -65,6 +73,14 @@ struct CodeBreakerView: View {
         .padding()
     }
     
+    
+    var pegChoosingDial: some Gesture {
+        RotateGesture()
+            .onChanged { value in
+                let pegChoiceIndex = Int(abs(value.rotation.degrees) / 90) % game.pegChoices.count
+                game.guess.pegs[selection] = game.pegChoices[pegChoiceIndex]
+            }
+    }
     
     func changePegAction(to peg: Peg) {
         game.setGuessPeg(peg, at: selection)

@@ -51,12 +51,19 @@ struct GameList: View {
         }
     }
     
+    var summarySize: GameSummary.Size {
+        staticSummarySize * dynamicSummarySizeMagnification
+    }
+    
+    @State private var staticSummarySize: GameSummary.Size = .large
+    @State private var dynamicSummarySizeMagnification: CGFloat = 1.0
+    
     var body: some View {
         List(selection: $selection) {
             ForEach(games) { game in
                 //NavigationLink{CodeBreakerView(game:game)}label:{GameSummary(game: game)}
                 NavigationLink(value: game) {
-                    GameSummary(game: game)
+                    GameSummary(game: game, size: summarySize)
                 }
                 .contextMenu { //mac app 右键菜单按钮，iPhone app 长按菜单
                     editButton(for: game)
@@ -75,6 +82,7 @@ struct GameList: View {
             }
             //.onMove { offsets, destination in games.move(fromOffsets: offsets, toOffset: destination) }
         }
+        .highPriorityGesture(summarySizeMagnifier)
         //.navigationDestination(for: CodeBreaker.self) { game in CodeBreakerView(game: game).navigationTitle(game.name).navigationBarTitleDisplayMode(.inline)}
         //.navigationDestination(for: [Peg].self) { pegs in PegChooser(choices: pegs)}
         .onChange(of: games) {
@@ -90,6 +98,17 @@ struct GameList: View {
         .onAppear {
             addSampleGames()
         }
+    }
+    
+    var summarySizeMagnifier: some Gesture {
+        MagnifyGesture()
+            .onChanged { value in
+                dynamicSummarySizeMagnification = value.magnification
+            }
+            .onEnded { value in
+                staticSummarySize = staticSummarySize * value.magnification
+                dynamicSummarySizeMagnification = 1.0
+            }
     }
     
     var addButton: some View {
@@ -176,6 +195,18 @@ struct GameList: View {
     
 }
 
+
+extension GameSummary.Size {
+    static func *(lhs: Self, rhs: CGFloat) -> Self {
+        switch rhs {
+        case 2.0...: lhs.larger.larger
+        case 1.5...: lhs.larger
+        case ...0.35: lhs.smaller.smaller
+        case ...0.5: lhs.smaller
+        default: lhs
+        }
+    }
+}
 
 
 /**
