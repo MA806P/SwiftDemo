@@ -31,17 +31,18 @@ enum Kind: Equatable, CustomStringConvertible {
     }
     
     init(_ string: String) {
-        let newStr = string.trimmingCharacters(in:.whitespacesAndNewlines)
-        if newStr == "guess" {
+        if string == "guess" {
             self = .guess
+            return
         }
-        
-        if newStr == "unknown" {
+
+        if string == "unknown" {
             self = .unknown
+            return
         }
-        
-        if newStr.hasPrefix("master("), newStr.hasSuffix(")") {
-            let inner = String(newStr.dropFirst("master(".count).dropLast())
+
+        if string.hasPrefix("master("), string.hasSuffix(")") {
+            let inner = String(string.dropFirst("master(".count).dropLast())
             switch inner {
             case "true":
                 self = .master(isHidden: true)
@@ -53,11 +54,11 @@ enum Kind: Equatable, CustomStringConvertible {
                 break
             }
         }
-        
-        if newStr.hasPrefix("attempt("), newStr.hasSuffix(")") {
-            let inner = String(newStr.dropFirst("attempt(".count).dropLast())
-            let matchString = inner.split(separator: ",").map(String.init)
-            let matches = matchString.compactMap { Match(rawValue:$0) }
+
+        if string.hasPrefix("attempt("), string.hasSuffix(")") {
+            let inner = String(string.dropFirst("attempt(".count).dropLast())
+            let matchStrings = inner.split(separator: ",").map(String.init)
+            let matches = matchStrings.compactMap { Match(rawValue: $0) }
             self = .attempt(matches)
             return
         }
