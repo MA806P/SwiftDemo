@@ -63,6 +63,16 @@ struct CodeBreakerView: View {
         //.modifier(ElapsedTimeTracker(game: game))
         .toolbar {
             ToolbarItem(placement: .primaryAction) {
+                Button("Save", systemImage: "square.and.arrow.down") {
+                    if let json = try? JSONEncoder().encode(game) {
+                        let url = URL.documentsDirectory
+                            .appendingPathComponent(game.name)
+                            .appendingPathExtension("json")
+                        try? json.write(to: url)
+                    }
+                }
+            }
+            ToolbarItem(placement: .primaryAction) {
                 Button("Restart", systemImage: "arrow.circlepath", action: restart)
             }
             ToolbarItem {
